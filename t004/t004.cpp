@@ -11,6 +11,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	GLfloat cubePts[180];
 	tools::GetCubePts(cubePts);
 
+	tools::PrepareGlfw();
+
 
 	return 0;
 }

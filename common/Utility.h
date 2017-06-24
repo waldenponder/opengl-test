@@ -11,4 +11,6 @@ namespace tools
 
 	//获得180个浮点型的数组, 顶点加纹理
 	void COMMON_API GetCubePts(GLfloat* arr);
+
+	void COMMON_API PrepareGlfw(int w = 1200, int h = 900, const char* title = "learn opengl", GLFWkeyfun cbfun = nullptr);
 }
