@@ -1,5 +1,5 @@
 /*
- ÷°ª∫≥Â,  ‰÷»æµ∂Œ∆¿Ì
+ ÷°ª∫≥Â,  ‰÷»æµΩŒ∆¿Ì
 */
 #include "stdafx.h"
 #include "../common/com_include.h"

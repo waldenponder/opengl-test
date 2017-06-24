@@ -1,10 +1,16 @@
-// t004.cpp : 定义控制台应用程序的入口点。
-//
+
+/*
+选中效果
+*/
 
 #include "stdafx.h"
-
+#include "../common/com_include.h"
 
 int _tmain(int argc, _TCHAR* argv[])
 {
+	GLfloat cubePts[180];
+	tools::GetCubePts(cubePts);
+
+
 	return 0;
 }
