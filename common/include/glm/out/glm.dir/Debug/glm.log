@@ -1,0 +1,24 @@
+﻿生成启动时间为 2017/6/3 0:13:00。
+     1>项目“F:\BaiduYunDownload\OpenGL库\glm-0.9.4.3\glm\out\glm.vcxproj”在节点 2 上(Build 个目标)。
+     1>CustomBuild:
+         Building Custom Rule F:/BaiduYunDownload/OpenGL库/glm-0.9.4.3/glm/CMakeLists.txt
+         CMake does not need to re-run because F:/BaiduYunDownload/OpenGL搴?glm-0.9.4.3/glm/out/CMakeFiles/generate.stamp is up-to-date.
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"F:\BaiduYunDownload\OpenGL库\glm-0.9.4.3\glm\.." /Zi /nologo /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _WINDLL /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"glm.dir\Debug\\" /Fd"glm.dir\Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt "F:\BaiduYunDownload\OpenGL库\glm-0.9.4.3\glm\core\dummy.cpp"
+         dummy.cpp
+         GLM: Windows platform detected
+         GLM: Visual C++ compiler detected
+         GLM: 32 bits model
+         GLM: C++ with VC language extensions
+         GLM: Platform independent
+         GLM: x,y,z,w; r,g,b,a; s,t,p,q component names for all vector types
+         GLM: Swizzling operators enabled
+         GLM: Core library included
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"F:\BaiduYunDownload\OpenGL库\glm-0.9.4.3\glm\out\Debug\glm_d.dll" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"F:/BaiduYunDownload/OpenGL库/glm-0.9.4.3/glm/out/Debug/glm.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:/BaiduYunDownload/OpenGL库/glm-0.9.4.3/glm/out/Debug/glm_d.lib" /MACHINE:X86 /SAFESEH   /machine:X86 /DLL glm.dir\Debug\dummy.obj
+         glm.vcxproj -> F:\BaiduYunDownload\OpenGL库\glm-0.9.4.3\glm\out\Debug\glm_d.dll
+     1>已完成生成项目“F:\BaiduYunDownload\OpenGL库\glm-0.9.4.3\glm\out\glm.vcxproj”(Build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:00.34

@@ -1,0 +1,23 @@
+# CMake generation dependency list for this directory.
+F:/BaiduYunDownload/OpenGL库/glm-0.9.4.3/glm/CMakeLists.txt
+F:/BaiduYunDownload/OpenGL库/glm-0.9.4.3/glm/out/CMakeFiles/3.8.2/CMakeSystem.cmake
+C:/Program Files/CMake/share/cmake-3.8/Modules/CMakeSystemSpecificInitialize.cmake
+F:/BaiduYunDownload/OpenGL库/glm-0.9.4.3/glm/out/CMakeFiles/3.8.2/CMakeCCompiler.cmake
+F:/BaiduYunDownload/OpenGL库/glm-0.9.4.3/glm/out/CMakeFiles/3.8.2/CMakeCXXCompiler.cmake
+C:/Program Files/CMake/share/cmake-3.8/Modules/CMakeSystemSpecificInformation.cmake
+C:/Program Files/CMake/share/cmake-3.8/Modules/CMakeGenericSystem.cmake
+C:/Program Files/CMake/share/cmake-3.8/Modules/Platform/Windows.cmake
+C:/Program Files/CMake/share/cmake-3.8/Modules/Platform/WindowsPaths.cmake
+C:/Program Files/CMake/share/cmake-3.8/Modules/CMakeCInformation.cmake
+C:/Program Files/CMake/share/cmake-3.8/Modules/CMakeLanguageInformation.cmake
+C:/Program Files/CMake/share/cmake-3.8/Modules/Platform/Windows-MSVC-C.cmake
+C:/Program Files/CMake/share/cmake-3.8/Modules/Platform/Windows-MSVC.cmake
+F:/BaiduYunDownload/OpenGL库/glm-0.9.4.3/glm/out/CMakeFiles/3.8.2/CMakeRCCompiler.cmake
+C:/Program Files/CMake/share/cmake-3.8/Modules/CMakeRCInformation.cmake
+C:/Program Files/CMake/share/cmake-3.8/Modules/CMakeCommonLanguageInclude.cmake
+C:/Program Files/CMake/share/cmake-3.8/Modules/CMakeCXXInformation.cmake
+C:/Program Files/CMake/share/cmake-3.8/Modules/CMakeLanguageInformation.cmake
+C:/Program Files/CMake/share/cmake-3.8/Modules/Compiler/MSVC-CXX.cmake
+C:/Program Files/CMake/share/cmake-3.8/Modules/Platform/Windows-MSVC-CXX.cmake
+C:/Program Files/CMake/share/cmake-3.8/Modules/Platform/Windows-MSVC.cmake
+C:/Program Files/CMake/share/cmake-3.8/Modules/CMakeCommonLanguageInclude.cmake
