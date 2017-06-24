@@ -1,22 +1,20 @@
-﻿生成启动时间为 2017/6/4 9:40:07。
-     1>项目“F:\oglTest\common\common.vcxproj”在节点 2 上(Rebuild 个目标)。
+﻿生成启动时间为 2017/6/25 1:13:27。
+     1>项目“F:\github\opengl-test\common\common.vcxproj”在节点 3 上(Build 个目标)。
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D EXPORT_COMMON /D _WINDLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"stdafx.h" /Fp"Debug\common.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
          stdafx.cpp
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D EXPORT_COMMON /D _WINDLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\common.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt common.h Shader.cpp Utility.cpp
          Utility.cpp
+     1>f:\github\opengl-test\common\utility.cpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+     1>f:\github\opengl-test\common\utility.h(15): error C2059: 语法错误:“__declspec(dllexport)”
+     1>f:\github\opengl-test\common\utility.cpp(97): error C2059: 语法错误:“__declspec(dllexport)”
+     1>f:\github\opengl-test\common\utility.cpp(99): error C2143: 语法错误 : 缺少“;”(在“{”的前面)
+     1>f:\github\opengl-test\common\utility.cpp(99): error C2447: “{”: 缺少函数标题(是否是老式的形式表?)
          Shader.cpp
          common.h
          正在生成代码...
-       Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"F:\oglTest\Debug\common.dll" /INCREMENTAL /NOLOGO /LIBPATH:./lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"F:\oglTest\Debug\common.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"lib/common.lib" /MACHINE:X86 /DLL Debug\common.obj
-         Debug\Shader.obj
-         Debug\stdafx.obj
-         Debug\Utility.obj
-            正在创建库 lib/common.lib 和对象 lib/common.exp
-         common.vcxproj -> F:\oglTest\Debug\common.dll
-     1>已完成生成项目“F:\oglTest\common\common.vcxproj”(Rebuild 个目标)的操作。
+     1>已完成生成项目“F:\github\opengl-test\common\common.vcxproj”(Build 个目标)的操作 - 失败。
 
-生成成功。
+生成失败。
 
-已用时间 00:00:01.49
+已用时间 00:00:01.60

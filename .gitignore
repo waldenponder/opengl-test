@@ -43,3 +43,6 @@
 *.opensdf
 *.ipch
 *.ipch
+*.suo
+*.idb
+*.idb
