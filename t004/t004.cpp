@@ -11,7 +11,24 @@ int _tmain(int argc, _TCHAR* argv[])
 	GLfloat cubePts[180];
 	tools::GetCubePts(cubePts);
 
-	GLFWwindow* window = tools::PrepareGlfwWindow();
+	GLFWwindow* window; //= tools::PrepareGlfwWindow();
+	
+#if 1
+	glfwInit();
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+
+	window = glfwCreateWindow(1200, 900, "learn opengl", nullptr, nullptr);
+	glfwMakeContextCurrent(window);
+
+	glewInit();
+
+	int w, h;
+	glfwGetFramebufferSize(window, &w, &h);
+	glViewport(0, 0, w, h);
+#endif
 
 	GLuint VAO, VBO;
 	{
@@ -32,21 +49,22 @@ int _tmain(int argc, _TCHAR* argv[])
 	}
 
 	GLuint texture = tools::CreateTexture("../common/src/container.jpg");
-	Shader shader("vert004.f", "frag004.f");
+	Shader shader("vert004.v", "frag004.f");
 
 	while (!glfwWindowShouldClose(window))
 	{
 		glfwPollEvents();
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glClearColor(1, 1, 1, 1);
+		glClearColor(.5, .3, .6, 1);
+
 		shader.Use();
 		shader.setUniformTexture2D("SAMP", texture, 0);
 		glBindVertexArray(VAO);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 		glBindVertexArray(0);
 
-		glfwSwapBuffers(0);
+		glfwSwapBuffers(window);
 	}
 	
 	glfwSwapBuffers(window);

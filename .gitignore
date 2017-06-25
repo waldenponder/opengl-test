@@ -47,3 +47,10 @@
 *.idb
 *.idb
 *.log
+*.idb
+*.pdb
+*.sdf
+*.ilk
+*.tlog
+*.suo
+*.log

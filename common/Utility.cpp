@@ -94,16 +94,36 @@ namespace tools
 	GLFWwindow* PrepareGlfwWindow(int w /*= 1200*/, int h /*= 900*/,
 		const char* title /*= "learn opengl"*/, GLFWkeyfun cbfun /*= nullptr*/)
 	{
+#if 0
 		glfwInit();
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+		glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 		GLFWwindow* window = glfwCreateWindow(w, h, title, nullptr, nullptr);
 		glfwMakeContextCurrent(window);
+		
 		glewInit();
 
 		int nW, nH;
 		glfwGetFramebufferSize(window, &nW, &nH);
 		glViewport(0, 0, nW, nH);
+#else
+		glfwInit();
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+		glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+
+		GLFWwindow*window = glfwCreateWindow(1200, 900, "learn opengl", nullptr, nullptr);
+		glfwMakeContextCurrent(window);
+
+		glewInit();
+
+		int nw, nh;
+		glfwGetFramebufferSize(window, &nw, &nh);
+		glViewport(0, 0, nw, nh);
+#endif
 
 		if (cbfun)
 		   glfwSetKeyCallback(window, cbfun);

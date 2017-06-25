@@ -10,34 +10,36 @@ Shader::Shader(std::string vertPath, std::string fragPath)
 {
 	const char* sourceVert, *sourceFrag;
 	string streamVert, streamFrag;
+
+	try
 	{
-		fstream vertIF, fragIF;
-		vertIF.open(vertPath, ios::in);
-		fragIF.open(fragPath, ios::in);
-			
-		char buffer[256];
-		while (1)
 		{
-			vertIF.getline(buffer, 256, '\n');
-			streamVert += buffer; streamVert += '\n';
-
-			if (vertIF.eof())
-				break;
+			ifstream vertIF, fragIF;
+			vertIF.open(vertPath);
+			fragIF.open(fragPath);
+				
+			char buffer[256];
+			while (!vertIF.eof())
+			{
+				vertIF.getline(buffer, 256, '\n');
+				streamVert += buffer; streamVert += '\n';
+			}
+			streamVert += '\0';
+	
+			while (!fragIF.eof())
+			{
+				fragIF.getline(buffer, 256, '\n');
+				streamFrag += buffer; streamFrag += '\n';
+			}
+			streamFrag += '\0';
+	
+			sourceVert = streamVert.c_str();
+			sourceFrag = streamFrag.c_str();
 		}
-		streamVert += '\0';
-
-		while (1)
-		{
-			fragIF.getline(buffer, 256, '\n');
-			streamFrag += buffer; streamFrag += '\n';
-
-			if (fragIF.eof())
-				break;
-		}
-		streamFrag += '\0';
-
-		sourceVert = streamVert.c_str();
-		sourceFrag = streamFrag.c_str();
+	}
+	catch (const char* msg)
+	{
+		std::cout << " ¶ÁÈ¡shader Òì³£ "  << msg << std::endl;
 	}
 
 	GLint success;

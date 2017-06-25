@@ -1,4 +1,4 @@
-﻿生成启动时间为 2017/6/25 22:39:34。
+﻿生成启动时间为 2017/6/25 23:52:00。
      1>项目“F:\github\opengl-test\common\common.vcxproj”在节点 2 上(Rebuild 个目标)。
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D EXPORT_COMMON /D _WINDLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"stdafx.h" /Fp"Debug\common.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
@@ -20,4 +20,4 @@
 
 生成成功。
 
-已用时间 00:00:01.65
+已用时间 00:00:01.61
