@@ -9,8 +9,7 @@
 #include <sstream>
 
 #include "../common/Shader.h"
-#include "../common/include/SOIL/SOIL.h"
-
+#include "../common/include/FreeImage/FreeImage.h"
 #if 1
 #define use_glfw3
 
@@ -38,4 +37,4 @@
 #pragma comment(lib, "glfw3.lib")
 #endif
 
-#pragma comment(lib, "SOIL_s.lib")
+#pragma comment(lib, "FreeImaged.lib")

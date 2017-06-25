@@ -1,12 +1,11 @@
 #version 330 core
-out vec4 color;
+layout (location = 0) in vec3 position;
+layout (location = 1) in vec2 coor;
 
-in vec3 vert_color;
-in vec2 texCoor;
-
-uniform sampler2D SAMP;
+out vec2 texCoor;
 
 void main()
 {
-	color = texture(SAMP, texCoor);
+	gl_Position = vec4(position.x, position.y, position.z, 1.0);
+	texCoor = vec2(coor.x, coor.y);
 }

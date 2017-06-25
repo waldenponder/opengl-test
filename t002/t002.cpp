@@ -89,8 +89,8 @@ int main()
 		glBindVertexArray(0);
 	}
 
-	GLuint texture = tools::CreateTexture("../common/src/IMG_20170214_214939.jpg");
-	GLuint texture2 = tools::CreateTexture("../common/src/zgf.jpg");
+	GLuint texture = tools::CreateTexture("../common/src/tt.jpg");
+	GLuint texture2 = tools::CreateTexture("../common/src/container.jpg");
 	 
 	GLint nrAttributes;
 	glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &nrAttributes);

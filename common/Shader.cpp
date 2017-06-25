@@ -11,22 +11,28 @@ Shader::Shader(std::string vertPath, std::string fragPath)
 	const char* sourceVert, *sourceFrag;
 	string streamVert, streamFrag;
 	{
-		ifstream vertIF, fragIF;
-		vertIF.open(vertPath);
-		fragIF.open(fragPath);
+		fstream vertIF, fragIF;
+		vertIF.open(vertPath, ios::in);
+		fragIF.open(fragPath, ios::in);
 			
 		char buffer[256];
-		while (!vertIF.eof())
+		while (1)
 		{
 			vertIF.getline(buffer, 256, '\n');
 			streamVert += buffer; streamVert += '\n';
+
+			if (vertIF.eof())
+				break;
 		}
 		streamVert += '\0';
 
-		while (!fragIF.eof())
+		while (1)
 		{
 			fragIF.getline(buffer, 256, '\n');
 			streamFrag += buffer; streamFrag += '\n';
+
+			if (fragIF.eof())
+				break;
 		}
 		streamFrag += '\0';
 

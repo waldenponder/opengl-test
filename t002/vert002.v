@@ -10,5 +10,5 @@ void main()
 {
 	gl_Position = vec4(position.x, position.y, position.z, 1.0);
 	vert_color = col;
-	texCoor = vec2(coor.x, 1 - coor.y);
+	texCoor = vec2(coor.x, coor.y);
 }

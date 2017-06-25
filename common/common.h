@@ -23,7 +23,7 @@
 
 #pragma comment(lib, "glut32.lib")
 #pragma comment(lib, "glew32.lib")
-
+#pragma comment(lib, "FreeImaged.lib")
 #ifndef use_glfw3
 #pragma comment(lib, "GLFW.lib")
 #else
