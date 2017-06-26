@@ -37,7 +37,6 @@
 *.log
 *.tlog
 *.txt
-
 *.suo
 *.sdf
 *.opensdf
@@ -54,3 +53,10 @@
 *.tlog
 *.suo
 *.log
+*.tlog
+*.tlog
+*.idb
+*.pdb
+*.log
+*.suo
+*.ilk

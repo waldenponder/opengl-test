@@ -11,24 +11,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	GLfloat cubePts[180];
 	tools::GetCubePts(cubePts);
 
-	GLFWwindow* window; //= tools::PrepareGlfwWindow();
-	
-#if 1
-	glfwInit();
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-
-	window = glfwCreateWindow(1200, 900, "learn opengl", nullptr, nullptr);
-	glfwMakeContextCurrent(window);
-
-	glewInit();
-
-	int w, h;
-	glfwGetFramebufferSize(window, &w, &h);
-	glViewport(0, 0, w, h);
-#endif
+	GLFWwindow* window; 
+	PREPARE_GLFW_WINDOW(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME);
 
 	GLuint VAO, VBO;
 	{

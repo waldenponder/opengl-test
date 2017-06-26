@@ -1,5 +1,5 @@
-﻿生成启动时间为 2017/6/25 23:52:00。
-     1>项目“F:\github\opengl-test\common\common.vcxproj”在节点 2 上(Rebuild 个目标)。
+﻿Build started 2017/6/26 10:05:34.
+     1>Project "F:\Ogl Test\opengl-test\common\common.vcxproj" on node 2 (Rebuild target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D EXPORT_COMMON /D _WINDLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"stdafx.h" /Fp"Debug\common.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
          stdafx.cpp
@@ -7,17 +7,17 @@
          Utility.cpp
          Shader.cpp
          common.h
-         正在生成代码...
+         Generating Code...
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"F:\github\opengl-test\Debug\common.dll" /INCREMENTAL /NOLOGO /LIBPATH:./lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"F:\github\opengl-test\Debug\common.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"lib/common.lib" /MACHINE:X86 /DLL Debug\common.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"F:\Ogl Test\opengl-test\Debug\common.dll" /INCREMENTAL /NOLOGO /LIBPATH:./lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"F:\Ogl Test\opengl-test\Debug\common.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"lib/common.lib" /MACHINE:X86 /DLL Debug\common.obj
          Debug\Shader.obj
          Debug\stdafx.obj
          Debug\Utility.obj
-            正在创建库 lib/common.lib 和对象 lib/common.exp
-     1>LINK : warning LNK4098: 默认库“MSVCRT”与其他库的使用冲突；请使用 /NODEFAULTLIB:library
-         common.vcxproj -> F:\github\opengl-test\Debug\common.dll
-     1>已完成生成项目“F:\github\opengl-test\common\common.vcxproj”(Rebuild 个目标)的操作。
+            Creating library lib/common.lib and object lib/common.exp
+     1>LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+         common.vcxproj -> F:\Ogl Test\opengl-test\Debug\common.dll
+     1>Done Building Project "F:\Ogl Test\opengl-test\common\common.vcxproj" (Rebuild target(s)).
 
-生成成功。
+Build succeeded.
 
-已用时间 00:00:01.61
+Time Elapsed 00:00:02.08

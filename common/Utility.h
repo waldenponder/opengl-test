@@ -6,6 +6,33 @@
 #define FLOAT_SIZE (sizeof(GLfloat))
 #endif // !FLOAT_SIZE
 
+#ifndef PREPARE_GLFW_WINDOW
+#define PREPARE_GLFW_WINDOW(nW, nH, strName)\
+	glfwInit();\
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);\
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);\
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);\
+	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);\
+	window = glfwCreateWindow(nW, nH, strName, nullptr, nullptr); \
+	glfwMakeContextCurrent(window); \
+	glewInit(); \
+	int w, h; \
+	glfwGetFramebufferSize(window, &w, &h); \
+	glViewport(0, 0, w, h);
+#endif
+
+#ifndef WINDOW_WIDTH
+#define WINDOW_WIDTH 1200
+#endif
+
+#ifndef WINDOW_HEIGHT
+#define WINDOW_HEIGHT 1200
+#endif
+
+#ifndef WINDOW_NAME
+#define WINDOW_NAME "learn gl"
+#endif
+
 namespace tools
 {
 	GLuint COMMON_API CreateTexture(char* path, GLuint param1 = GL_REPEAT, GLuint param2 = GL_LINEAR);
