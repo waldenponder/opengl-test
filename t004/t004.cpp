@@ -48,7 +48,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		glfwPollEvents();
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-		glClearColor(.5, .3, .6, 1);
+		glClearColor(.2, .3, .6, 1);
 
 		//不调用结果奇怪
 		glEnable(GL_CULL_FACE);
@@ -58,6 +58,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		glEnable(GL_DEPTH_TEST);
 		glStencilFunc(GL_ALWAYS, 1, 0xFF);
 		glStencilMask(0xFF);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		shader.Use();
 		shader.setUniformMat4f("vert_mat", Mat1);
 		shader.setUniformTexture2D("SAMP", texture, 0);
@@ -66,11 +67,13 @@ int _tmain(int argc, _TCHAR* argv[])
 		glBindVertexArray(0);
 
 		//2
-		float s = 1.03f;
+		float s = 1.02f;
 		glm::mat4 Mat2 = glm::scale(g_mat, glm::vec3(s, s, s));		
 		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
 		glStencilMask(0x00);
 		glDisable(GL_DEPTH_TEST);
+		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		glLineWidth(3);
 		shader2.Use();
 		shader2.setUniformMat4f("vert_mat", Mat2);
 		glBindVertexArray(VAO);
