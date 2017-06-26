@@ -35,23 +35,50 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	GLuint texture = tools::CreateTexture("../common/src/container.jpg");
 	Shader shader("vert004.v", "frag004.f");
+	Shader shader2("vert004_2.v", "frag004_2.f");
+
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LESS);
+	glEnable(GL_STENCIL_TEST);
+	glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+	glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
 
 	while (!glfwWindowShouldClose(window))
 	{
 		glfwPollEvents();
 
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 		glClearColor(.5, .3, .6, 1);
 
 		//不调用结果奇怪
 		glEnable(GL_CULL_FACE);
 
+		//1
+		glm::mat4 Mat1 = g_mat;
+		glEnable(GL_DEPTH_TEST);
+		glStencilFunc(GL_ALWAYS, 1, 0xFF);
+		glStencilMask(0xFF);
 		shader.Use();
-		shader.setUniformMat4f("vert_mat", g_mat);
+		shader.setUniformMat4f("vert_mat", Mat1);
 		shader.setUniformTexture2D("SAMP", texture, 0);
 		glBindVertexArray(VAO);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 		glBindVertexArray(0);
+
+		//2
+		float s = 1.03f;
+		glm::mat4 Mat2 = glm::scale(g_mat, glm::vec3(s, s, s));		
+		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+		glStencilMask(0x00);
+		glDisable(GL_DEPTH_TEST);
+		shader2.Use();
+		shader2.setUniformMat4f("vert_mat", Mat2);
+		glBindVertexArray(VAO);
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+	
+		glBindVertexArray(0);
+		glStencilMask(0xFF);
+		glEnable(GL_DEPTH_TEST);
 
 		glfwSwapBuffers(window);
 	}

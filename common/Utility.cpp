@@ -169,6 +169,10 @@ namespace tools
 			glm::vec3 axis(0, 0, flag * .1);
 			g_mat = glm::translate(g_mat, axis);
 		}
+		else if (key == GLFW_KEY_SPACE)
+		{
+			g_mat = glm::mat4(1.0);
+		}
 	}
 
 
