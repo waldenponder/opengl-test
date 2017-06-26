@@ -12,7 +12,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	tools::GetCubePts(cubePts);
 
 	GLFWwindow* window; 
-	PREPARE_GLFW_WINDOW(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME);
+	PREPARE_GLFW_WINDOW(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME, tools::default_key_callback);
+	g_mat = glm::mat4(1.0);
 
 	GLuint VAO, VBO;
 	{
@@ -42,7 +43,11 @@ int _tmain(int argc, _TCHAR* argv[])
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(.5, .3, .6, 1);
 
+		//不调用结果奇怪
+		glEnable(GL_CULL_FACE);
+
 		shader.Use();
+		shader.setUniformMat4f("vert_mat", g_mat);
 		shader.setUniformTexture2D("SAMP", texture, 0);
 		glBindVertexArray(VAO);
 		glDrawArrays(GL_TRIANGLES, 0, 36);

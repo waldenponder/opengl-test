@@ -130,4 +130,46 @@ namespace tools
 
 		return window;
 	}
+
+	void default_key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
+	{
+		int flag = 1;
+		if (mode == GLFW_MOD_SHIFT)
+		{
+			flag = -1;
+		}
+
+		if (key == GLFW_KEY_Q)
+		{
+			glm::vec3 axis(0, 0, flag);
+			g_mat = glm::rotate(g_mat, 3.0f, axis);
+		}
+		else if (key == GLFW_KEY_W)
+		{
+			glm::vec3 axis(0, flag, 0);
+			g_mat = glm::rotate(g_mat, 3.0f, axis);
+		}
+		else if (key == GLFW_KEY_E)
+		{
+			glm::vec3 axis(flag, 0, 0);
+			g_mat = glm::rotate(g_mat, 3.0f, axis);
+		}
+		else if (key == GLFW_KEY_A)
+		{
+			glm::vec3 axis(flag * .1, 0, 0);
+			g_mat = glm::translate(g_mat, axis);
+		}
+		else if (key == GLFW_KEY_S)
+		{
+			glm::vec3 axis(0, flag * .1, 0);
+			g_mat = glm::translate(g_mat, axis);
+		}
+		else if (key == GLFW_KEY_D)
+		{
+			glm::vec3 axis(0, 0, flag * .1);
+			g_mat = glm::translate(g_mat, axis);
+		}
+	}
+
+
 }
