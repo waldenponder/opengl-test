@@ -31,19 +31,15 @@
 *.out
 *.app
 
-#my
+# my
 *.lik
 *.pdb
 *.log
 *.tlog
 *.txt
-*.suo
 *.sdf
 *.opensdf
 *.ipch
-*.ipch
-*.suo
-*.idb
 *.idb
 *.log
 *.idb
@@ -51,12 +47,11 @@
 *.sdf
 *.ilk
 *.tlog
-*.suo
 *.log
 *.tlog
 *.tlog
 *.idb
 *.pdb
 *.log
-*.suo
 *.ilk
+*.suo
