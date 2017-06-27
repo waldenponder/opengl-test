@@ -36,8 +36,6 @@
 *.pdb
 *.log
 *.tlog
-*.txt
-*.sdf
 *.opensdf
 *.ipch
 *.idb
@@ -54,7 +52,6 @@
 *.pdb
 *.log
 *.ilk
-*.suo
 *.exp
 *.idb
 *.idb
