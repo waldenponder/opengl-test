@@ -112,6 +112,7 @@ void Shader::setUniformMat4f(char* name, glm::mat4 mat4)
 
 void Shader::setUniformTexture2D(char* name, GLuint texture, int index)
 {
+#if 0
 	GLuint arr[] =
 	{ 
 		GL_TEXTURE0, GL_TEXTURE1, GL_TEXTURE2,
@@ -120,8 +121,9 @@ void Shader::setUniformTexture2D(char* name, GLuint texture, int index)
 
 	if (index >= sizeof(arr) / sizeof(arr[0]))
 		std::cout << "Shader::setUniform(char* name, GLuint texture, int index)  index Ô½½ç " << std::endl;
+#endif
 
-	glActiveTexture(arr[index]);
+	glActiveTexture(GL_TEXTURE0 + index);
 	glBindTexture(GL_TEXTURE_2D, texture);
 
 	GLuint loc = glGetUniformLocation(program, name);
