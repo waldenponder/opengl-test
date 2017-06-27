@@ -56,3 +56,6 @@
 *.ilk
 *.suo
 *.exp
+*.idb
+*.idb
+*.pdb

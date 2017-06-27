@@ -40,7 +40,6 @@ int _tmain(int argc, _TCHAR* argv[])
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 	glEnable(GL_STENCIL_TEST);
-	glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
 	glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
 
 	while (!glfwWindowShouldClose(window))
@@ -49,6 +48,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 		glClearColor(.2, .3, .6, 1);
+		glClearStencil(123);
 
 		//不调用结果奇怪
 		glEnable(GL_CULL_FACE);
@@ -73,7 +73,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		glStencilMask(0x00);
 		glDisable(GL_DEPTH_TEST);
 		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-		glLineWidth(3);
+		//glLineWidth(3);
 		shader2.Use();
 		shader2.setUniformMat4f("vert_mat", Mat2);
 		glBindVertexArray(VAO);
