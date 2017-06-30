@@ -7,39 +7,45 @@
 using namespace std;
 
 Shader::Shader(std::string vertPath, std::string fragPath)
-{
-	const char* sourceVert, *sourceFrag;
-	string streamVert, streamFrag;
-
-	try
+{		
+	const char* source_vert; string str_vert;
 	{
+		try
 		{
-			ifstream vertIF, fragIF;
-			vertIF.open(vertPath);
-			fragIF.open(fragPath);
-				
-			char buffer[256];
-			while (!vertIF.eof())
-			{
-				vertIF.getline(buffer, 256, '\n');
-				streamVert += buffer; streamVert += '\n';
-			}
-			streamVert += '\0';
-	
-			while (!fragIF.eof())
-			{
-				fragIF.getline(buffer, 256, '\n');
-				streamFrag += buffer; streamFrag += '\n';
-			}
-			streamFrag += '\0';
-	
-			sourceVert = streamVert.c_str();
-			sourceFrag = streamFrag.c_str();
+			ifstream if_vert;
+			stringstream  fstr_vert;
+
+			if_vert.open(vertPath);
+			if_vert.exceptions(std::ifstream::failbit | std::ifstream::badbit | std::ifstream::eofbit);
+			
+			fstr_vert << if_vert.rdbuf();
+			str_vert = fstr_vert.str();
+			source_vert = str_vert.c_str();
+		}
+		catch (std::ifstream::failure& e)
+		{
+			std::cout << " 读取shader " << vertPath << " 异常 " << e.what() << std::endl;
 		}
 	}
-	catch (const char* msg)
+
+	const char* source_frag;  string str_frag;
 	{
-		std::cout << " 读取shader 异常 "  << msg << std::endl;
+		try
+		{
+			ifstream if_frag;
+			stringstream  fstr_frag;
+
+			if_frag.open(fragPath);
+			if_frag.exceptions(std::ifstream::failbit | std::ifstream::badbit | std::ifstream::eofbit);
+
+			fstr_frag << if_frag.rdbuf();
+			str_frag = fstr_frag.str();
+			source_frag = str_frag.c_str();
+		}
+		catch (std::ifstream::failure& e)
+		{
+			std::cout << " 读取shader " << fragPath << " 异常 " << e.what() << std::endl;
+		}
 	}
 
 	GLint success;
@@ -47,7 +53,7 @@ Shader::Shader(std::string vertPath, std::string fragPath)
 
 	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
 	{
-		glShaderSource(vertexShader, 1, &sourceVert, NULL);
+		glShaderSource(vertexShader, 1, &source_vert, NULL);
 		glCompileShader(vertexShader);
 		glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
 		if (!success)
@@ -59,7 +65,7 @@ Shader::Shader(std::string vertPath, std::string fragPath)
 
 	GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 	{
-		glShaderSource(fragmentShader, 1, &sourceFrag, NULL);
+		glShaderSource(fragmentShader, 1, &source_frag, NULL);
 		glCompileShader(fragmentShader);
 		glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
 		if (!success)

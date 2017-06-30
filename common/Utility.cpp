@@ -102,36 +102,36 @@ namespace tools
 		if (key == GLFW_KEY_Q)
 		{
 			glm::vec3 axis(0, 0, flag);
-			g_mat = glm::rotate(g_mat, 3.0f, axis);
+			g_Mat4 = glm::rotate(g_Mat4, 3.0f, axis);
 		}
 		else if (key == GLFW_KEY_W)
 		{
 			glm::vec3 axis(0, flag, 0);
-			g_mat = glm::rotate(g_mat, 3.0f, axis);
+			g_Mat4 = glm::rotate(g_Mat4, 3.0f, axis);
 		}
 		else if (key == GLFW_KEY_E)
 		{
 			glm::vec3 axis(flag, 0, 0);
-			g_mat = glm::rotate(g_mat, 3.0f, axis);
+			g_Mat4 = glm::rotate(g_Mat4, 3.0f, axis);
 		}
 		else if (key == GLFW_KEY_A)
 		{
 			glm::vec3 axis(flag * .1, 0, 0);
-			g_mat = glm::translate(g_mat, axis);
+			g_Mat4 = glm::translate(g_Mat4, axis);
 		}
 		else if (key == GLFW_KEY_S)
 		{
 			glm::vec3 axis(0, flag * .1, 0);
-			g_mat = glm::translate(g_mat, axis);
+			g_Mat4 = glm::translate(g_Mat4, axis);
 		}
 		else if (key == GLFW_KEY_D)
 		{
 			glm::vec3 axis(0, 0, flag * .1);
-			g_mat = glm::translate(g_mat, axis);
+			g_Mat4 = glm::translate(g_Mat4, axis);
 		}
 		else if (key == GLFW_KEY_SPACE)
 		{
-			g_mat = glm::mat4(1.0);
+			g_Mat4 = glm::mat4(1.0);
 		}
 	}
 

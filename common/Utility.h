@@ -34,7 +34,7 @@
 #define WINDOW_NAME "learn gl"
 #endif
 
-COMMON_API glm::mat4 g_mat;
+COMMON_API glm::mat4 g_Mat4;
 
 namespace tools
 {

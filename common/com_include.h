@@ -7,6 +7,15 @@
 #include <stdlib.h>
 #include <iostream>
 #include <sstream>
+#include <vector>
+#include <map>
+#include <list>
+
+using std::vector;
+using std::map;
+using std::list;
+using std::cout;
+using std::cin;
 
 #include "../common/Shader.h"
 #include "../common/include/FreeImage/FreeImage.h"

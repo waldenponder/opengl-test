@@ -33,4 +33,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="vert005.v">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="frag005.f">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>

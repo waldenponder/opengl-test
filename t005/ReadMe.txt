@@ -1,1 +1,1 @@
-﻿光照
+﻿光照     Gouraud着色   Phong光照

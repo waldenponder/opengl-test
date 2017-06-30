@@ -13,7 +13,6 @@ float color1 = 0.1;
 float color2 = 0.3;
 float color3 = 0.4;
 
-glm::mat4 g_mat;
 bool g_b_line = false;
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
