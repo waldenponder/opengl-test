@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "../common/com_include.h"
+#include "../common/common.out.h"
 
 using namespace std;
 

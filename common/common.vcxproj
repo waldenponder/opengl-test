@@ -82,7 +82,9 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="com_include.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="common.inner.h" />
+    <ClInclude Include="common.out.h" />
     <ClInclude Include="macro.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="stdafx.h" />
@@ -90,7 +92,7 @@
     <ClInclude Include="Utility.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="common.h" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

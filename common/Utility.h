@@ -1,38 +1,6 @@
 #pragma once
-#include "common.h"
+#include "common.inner.h"
 #include "include/FreeImage/FreeImage.h"
-
-#ifndef FLOAT_SIZE
-#define FLOAT_SIZE (sizeof(GLfloat))
-#endif // !FLOAT_SIZE
-
-#ifndef PREPARE_GLFW_WINDOW
-#define PREPARE_GLFW_WINDOW(nW, nH, strName, key_callback)\
-	glfwInit();\
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);\
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);\
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);\
-	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);\
-	window = glfwCreateWindow(nW, nH, strName, nullptr, nullptr); \
-	glfwMakeContextCurrent(window); \
-	glewInit(); \
-	int w, h; \
-	glfwGetFramebufferSize(window, &w, &h); \
-	glViewport(0, 0, w, h);\
-    if(key_callback) glfwSetKeyCallback(window, key_callback);
-#endif
-
-#ifndef WINDOW_WIDTH
-#define WINDOW_WIDTH 1200
-#endif
-
-#ifndef WINDOW_HEIGHT
-#define WINDOW_HEIGHT 1200
-#endif
-
-#ifndef WINDOW_NAME
-#define WINDOW_NAME "learn gl"
-#endif
 
 COMMON_API glm::mat4 g_Mat4;
 

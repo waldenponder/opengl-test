@@ -30,10 +30,16 @@
     <ClInclude Include="macro.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="com_include.h">
-      <Filter>源文件</Filter>
-    </ClInclude>
     <ClInclude Include="Utility.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="common.inner.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="common.out.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -41,13 +47,13 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="common.h">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Shader.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Utility.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

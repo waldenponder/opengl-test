@@ -12,14 +12,14 @@ Shader::Shader(std::string vertPath, std::string fragPath)
 	{
 		try
 		{
-			ifstream if_vert;
-			stringstream  fstr_vert;
+			ifstream IF;
+			stringstream  fstream;
 
-			if_vert.open(vertPath);
-			if_vert.exceptions(std::ifstream::failbit | std::ifstream::badbit | std::ifstream::eofbit);
+			IF.open(vertPath);
+			IF.exceptions(std::ifstream::failbit | std::ifstream::badbit | std::ifstream::eofbit);
 			
-			fstr_vert << if_vert.rdbuf();
-			str_vert = fstr_vert.str();
+			fstream << IF.rdbuf();
+			str_vert = fstream.str();
 			source_vert = str_vert.c_str();
 		}
 		catch (std::ifstream::failure& e)
@@ -32,14 +32,14 @@ Shader::Shader(std::string vertPath, std::string fragPath)
 	{
 		try
 		{
-			ifstream if_frag;
-			stringstream  fstr_frag;
+			ifstream IF;
+			stringstream  fstream;
 
-			if_frag.open(fragPath);
-			if_frag.exceptions(std::ifstream::failbit | std::ifstream::badbit | std::ifstream::eofbit);
+			IF.open(fragPath);
+			IF.exceptions(std::ifstream::failbit | std::ifstream::badbit | std::ifstream::eofbit);
 
-			fstr_frag << if_frag.rdbuf();
-			str_frag = fstr_frag.str();
+			fstream << IF.rdbuf();
+			str_frag = fstream.str();
 			source_frag = str_frag.c_str();
 		}
 		catch (std::ifstream::failure& e)

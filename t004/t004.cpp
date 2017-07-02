@@ -4,7 +4,7 @@
 */
 
 #include "stdafx.h"
-#include "../common/com_include.h"
+#include "../common/common.out.h"
 
 int _tmain(int argc, _TCHAR* argv[])
 {
@@ -13,7 +13,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	GLFWwindow* window; 
 	PREPARE_GLFW_WINDOW(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME, tools::default_key_callback);
-	g_mat = glm::mat4(1.0);
+	g_Mat4 = glm::mat4(1.0);
 
 	GLuint VAO, VBO;
 	{
@@ -54,7 +54,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		glEnable(GL_CULL_FACE);
 
 		//1
-		glm::mat4 Mat1 = g_mat;
+		glm::mat4 Mat1 = g_Mat4;
 		glEnable(GL_DEPTH_TEST);
 		glStencilFunc(GL_ALWAYS, 1, 0xFF);
 		glStencilMask(0xFF);
@@ -68,7 +68,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		//2
 		float s = 1.02f;
-		glm::mat4 Mat2 = glm::scale(g_mat, glm::vec3(s, s, s));		
+		glm::mat4 Mat2 = glm::scale(g_Mat4, glm::vec3(s, s, s));		
 		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
 		glStencilMask(0x00);
 		glDisable(GL_DEPTH_TEST);

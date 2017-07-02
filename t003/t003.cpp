@@ -2,7 +2,7 @@
  ÷°ª∫≥Â,  ‰÷»æµΩŒ∆¿Ì
 */
 #include "stdafx.h"
-#include "../common/com_include.h"
+#include "../common/common.out.h"
 
 /*
 VAO VBO EBO   Œ∆¿Ì
@@ -32,32 +32,32 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	else if (key == GLFW_KEY_A)
 	{
 		glm::vec3 axis(0, 0, 1);
-		g_mat = glm::rotate(g_mat, 3.0f, axis);
+		g_Mat4 = glm::rotate(g_Mat4, 3.0f, axis);
 	}
 	else if (key == GLFW_KEY_B)
 	{
 		glm::vec3 axis(0, 1, 0);
-		g_mat = glm::rotate(g_mat, 3.0f, axis);
+		g_Mat4 = glm::rotate(g_Mat4, 3.0f, axis);
 	}
 	else if (key == GLFW_KEY_C)
 	{
 		glm::vec3 axis(1, 0, 0);
-		g_mat = glm::rotate(g_mat, 3.0f, axis);
+		g_Mat4 = glm::rotate(g_Mat4, 3.0f, axis);
 	}
 	else if (key == GLFW_KEY_D)
 	{
 		glm::vec3 axis(1, 0, 0);
-		g_mat = glm::translate(g_mat, axis);
+		g_Mat4 = glm::translate(g_Mat4, axis);
 	}
 	else if (key == GLFW_KEY_E)
 	{
 		glm::vec3 axis(0, 1, 0);
-		g_mat = glm::translate(g_mat, axis);
+		g_Mat4 = glm::translate(g_Mat4, axis);
 	}
 	else if (key == GLFW_KEY_F)
 	{
 		glm::vec3 axis(0, 0, 1);
-		g_mat = glm::translate(g_mat, axis);
+		g_Mat4 = glm::translate(g_Mat4, axis);
 	}
 	else if (key == GLFW_KEY_W && action == 1)
 	{
@@ -169,7 +169,7 @@ int main()
 	Shader shader("vert003.v", "frag003.f");
 	Shader shaderNew("vert003new.v", "frag003new.f");
 
-	g_mat = glm::mat4(1.0);
+	g_Mat4 = glm::mat4(1.0);
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -185,9 +185,9 @@ int main()
 		glEnable(GL_CULL_FACE);
 		glFrontFace(GL_CCW);
 		glCullFace(GL_BACK);
-			 
+		
 		shader.Use();
-		shader.setUniformMat4f("vert_mat", g_mat);
+		shader.setUniformMat4f("vert_mat", g_Mat4);
 		shader.setUniformTexture2D("samp", texture, 0);
 		glBindVertexArray(VAO);
 		glDrawArrays(GL_TRIANGLES, 0, 36);

@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "../common/com_include.h"
+#include "../common/common.out.h"
 
 #define WINDOW_WIDTH  800  
 #define WINDOW_HEIGHT 600  
