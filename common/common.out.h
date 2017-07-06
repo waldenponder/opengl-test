@@ -16,6 +16,7 @@ using std::map;
 using std::list;
 using std::cout;
 using std::cin;
+using std::endl;
 
 #include "../common/Shader.h"
 #include "../common/include/FreeImage/FreeImage.h"

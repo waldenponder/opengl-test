@@ -4,6 +4,8 @@
 
 static Camera* g_sCamera = nullptr;
 
+static const TVec3 g_defaultPos = TVec3(40, 50, 50);
+
 Camera* Camera::Instance()
 {
 	if (g_sCamera == nullptr)
@@ -21,12 +23,12 @@ Camera::Camera()
 	_nearClip = 0.1;
 	_farClip = 10000;
 	_up = Y_AXIS;
-	_lookAt = Z_AXIS;
+	_lookAt = TVec3();
 	_rotation = TVec3();
 	_dirtyRotation = true;
-	_moveFactor = 0.1;
+	_moveFactor = 1;
 
-	_pos = TVec3(0, 0, 10);
+	_pos = g_defaultPos;
 	_pMoveVale = &_pos;
 }
 
@@ -53,7 +55,7 @@ TMat4 Camera::GetViewMatrix()
 		TMat4 tran(1);
 		tran = glm::translate(tran, _pos);
 		_up = ToVec3(rot * ToVec4(Y_AXIS));
-		_lookAt = ToVec3(tran * rot * ToVec4(-Z_AXIS));
+		//_lookAt = ToVec3(tran * rot * ToVec4(-Z_AXIS));
 		
 	//	_up = ToVec3(rot * ToVec4(Y_AXIS));
 	//	_lookAt = ToVec3(-tran * rot  * ToVec4(Z_AXIS));
@@ -119,7 +121,7 @@ void OnKeyDown(GLFWwindow* window, int key, int scancode, int action, int mode)
 	}
 	else if (key == GLFW_KEY_SPACE)
 	{
-		camera->_pos = TVec3(0, 0, 10);
+		camera->_pos = g_defaultPos;
 		camera->_rotation = TVec3();
 	}
 	else if (key == GLFW_KEY_X)

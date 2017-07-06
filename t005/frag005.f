@@ -13,11 +13,11 @@ in vec3 vPos;
 
 void main()
 {
-	//vec4 color = texture(uSAMP, vTexCoor);
-	vec4 color = vec4(0.3, 0.4, 0.3, 1);
+	vec4 color = texture(uSAMP, vTexCoor);
+	//vec4 color = vec4(0.3, 0.3, 0.3, 1);
 
 	//ambient
-	float factor = 0.4f;
+	float factor = 0.7f;
 	vec3 ambient = factor *  uLightColor;
 
 	//diffuse
@@ -30,12 +30,13 @@ void main()
 	float strength = 0.3f;
 	vec3 viewDir = normalize(uViewPos - vPos);
 	vec3 reflectDir = reflect(-lightDir, n);
-	float factor4 =pow(max(dot(reflectDir, viewDir), 0), 4);
+	float factor4 =pow(max(dot(reflectDir, viewDir), 0), 128);
 
 	vec3 specular = factor4 * strength * uLightColor;
 
 
 	vec3 result = (ambient + diffuse + specular) * color;
 	
+	//fColor = color;
 	fColor = vec4(result, 1.0);
 }
