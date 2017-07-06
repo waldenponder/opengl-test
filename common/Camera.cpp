@@ -21,11 +21,13 @@ Camera::Camera()
 	_nearClip = 0.1;
 	_farClip = 10000;
 	_up = Y_AXIS;
-	_lookAt = TVec3(0, 0, 0);
+	_lookAt = Z_AXIS;
 	_rotation = TVec3();
 	_dirtyRotation = true;
+	_moveFactor = 0.1;
 
 	_pos = TVec3(0, 0, 10);
+	_pMoveVale = &_pos;
 }
 
 
@@ -35,7 +37,7 @@ Camera::~Camera()
 
 TMat4 Camera::GetViewMatrix()
 {
-	if (_dirtyRotation && 0)
+	//if (_dirtyRotation && 0)
 	{
 		_dirtyRotation = false;
 		
@@ -52,6 +54,10 @@ TMat4 Camera::GetViewMatrix()
 		tran = glm::translate(tran, _pos);
 		_up = ToVec3(rot * ToVec4(Y_AXIS));
 		_lookAt = ToVec3(tran * rot * ToVec4(-Z_AXIS));
+		
+	//	_up = ToVec3(rot * ToVec4(Y_AXIS));
+	//	_lookAt = ToVec3(-tran * rot  * ToVec4(Z_AXIS));
+
 	}
 
 	return glm::lookAt(_pos, _lookAt, _up);
@@ -79,31 +85,53 @@ void OnKeyDown(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
 	Camera* camera = g_sCamera;
 
-	float delta = (mode == GLFW_MOD_SHIFT) ? -3 : 3;
+	float delta = (mode == GLFW_MOD_SHIFT) ? -camera->_moveFactor : camera->_moveFactor;
 
 	if (key == GLFW_KEY_UP)
 	{
-		glm::vec3 v(0, delta, 0);
-		camera->_pos += v;
+		glm::vec3 v(0, -delta, 0);
+		*camera->_pMoveVale += v;
 	}
 	else if (key == GLFW_KEY_DOWN)
 	{
-		glm::vec3 v(0, -delta, 0);
-		camera->_pos += v;
+		glm::vec3 v(0, delta, 0);
+		*camera->_pMoveVale += v;
 	}
 	else if (key == GLFW_KEY_LEFT)
 	{
 		glm::vec3 v(delta, 0, 0);
-		camera->_pos += v;
+		*camera->_pMoveVale += v;
 	}
 	else if (key == GLFW_KEY_RIGHT)
 	{
 		glm::vec3 v(-delta, 0, 0);
-		camera->_pos += v;
+		*camera->_pMoveVale += v;
+	}
+	else if (key == GLFW_KEY_N)
+	{
+		glm::vec3 v(0, 0, -delta);
+		*camera->_pMoveVale += v;
+	}
+	else if (key == GLFW_KEY_F)
+	{
+		glm::vec3 v(0, 0, delta);
+		*camera->_pMoveVale += v;
 	}
 	else if (key == GLFW_KEY_SPACE)
 	{
 		camera->_pos = TVec3(0, 0, 10);
+		camera->_rotation = TVec3();
 	}
-
+	else if (key == GLFW_KEY_X)
+	{
+		camera->_rotation += 30 * delta * X_AXIS;
+	}
+	else if (key == GLFW_KEY_Y)
+	{
+		camera->_rotation += 30 * delta * Y_AXIS;
+	}
+	else if (key == GLFW_KEY_Z)
+	{
+		camera->_rotation += 30 * delta * Z_AXIS;
+	}
 }

@@ -80,7 +80,7 @@ GLfloat quadVertices[] =
 int main()
 {
 	GLfloat cubePts[180];
-	tools::GetCubePts(cubePts);
+	tools::GetCubePts_withTexture(cubePts);
 
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);

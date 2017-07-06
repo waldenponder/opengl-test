@@ -9,7 +9,7 @@
 int _tmain(int argc, _TCHAR* argv[])
 {
 	GLfloat cubePts[180];
-	tools::GetCubePts(cubePts);
+	tools::GetCubePts_withTexture(cubePts);
 
 	GLFWwindow* window; 
 	PREPARE_GLFW_WINDOW(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME, tools::default_key_callback);

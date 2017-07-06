@@ -109,6 +109,22 @@ void Shader::setUniformVec4f(char* name, float x, float y, float z, float w)
 	glUniform4f(loc, x, y, z, w);
 }
 
+void Shader::setUniformVec4f(char* name, TVec4 vec4)
+{
+	setUniformVec4f(name, vec4[0], vec4[1], vec4[2], vec4[3]);
+}
+
+
+void Shader::setUniformVec3f(char* name, float x, float y, float z)
+{
+	GLint loc = glGetUniformLocation(program, name);
+	glUniform3f(loc, x, y, z);
+}
+
+void Shader::setUniformVec3f(char* name, TVec3 vec3)
+{
+	setUniformVec3f(name, vec3[0], vec3[1], vec3[2]);
+}
 
 void Shader::setUniformMat4f(char* name, glm::mat4 mat4)
 {

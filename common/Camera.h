@@ -1,6 +1,8 @@
 #pragma once
 #include "common.inner.h"
 
+#define CameraPos   (Camera::Instance()->_pos)
+
 void  COMMON_API OnKeyDown(GLFWwindow* window, int key, int scancode, int action, int mode);
 
 class COMMON_API Camera
@@ -22,6 +24,9 @@ public:
 	void   DirtyRotation() { _dirtyRotation = true; }
 
 public:
+
+	TVec3* _pMoveVale;
+	float  _moveFactor;
 
 	/*
 	glm::lookAtµÄ²ÎÊý
