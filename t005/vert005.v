@@ -17,5 +17,5 @@ void main()
 	//gl_Position = model * vec4(aPosition.x, aPosition.y, aPosition.z, 1.0);
 	vTexCoor = vec2(aCoor.x, aCoor.y);
 	vNormal = mat3(transpose(inverse(uModel))) * aNormal;
-	vPos = vec3(uModel * vec4(aPosition, 1.0f));
+	vPos = (uModel * vec4(aPosition, 1.0f)).xyz;
 }

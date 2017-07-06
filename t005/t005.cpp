@@ -92,7 +92,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		TMat4 projection = Camera::Instance()->GetProjectionMatrix();
 		//Camera::Instance()->_pMoveVale = &lightPos;
 		//Camera::Instance()->_moveFactor = 50;
-		lightPos = TMat3(glm::rotate(glm::mat4(1.0), 0.1f, Y_AXIS)) * lightPos;
+		lightPos = TMat3(glm::rotate(glm::mat4(1.0), 0.4f, Y_AXIS)) * lightPos;
 
 		for (auto Mat : modelMats)
 		{
@@ -104,7 +104,7 @@ int _tmain(int argc, _TCHAR* argv[])
 			shader.setUniformMat4f("uProjection", projection);
 		
 			shader.setUniformTexture2D("uSAMP", texture, 0);
-			shader.setUniformVec3f("uLightColor", 0.8, 0.8, 0.8);
+			shader.setUniformVec3f("uLightColor", 1, 1, 1);
 			shader.setUniformVec3f("uLightPos", lightPos);
 			shader.setUniformVec3f("uViewPos", CameraPos);
 

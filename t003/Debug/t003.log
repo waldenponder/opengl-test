@@ -1,21 +1,21 @@
-﻿Build started 2017/7/6 15:37:01.
-     1>Project "F:\Ogl Test\opengl-test\t003\t003.vcxproj" on node 4 (Rebuild target(s)).
+﻿生成启动时间为 2017/7/6 21:36:41。
+     1>项目“F:\github\opengl-test\t003\t003.vcxproj”在节点 2 上(Build 个目标)。
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"stdafx.h" /Fp"Debug\t003.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
          stdafx.cpp
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt t003.cpp
          t003.cpp
-     1>f:\ogl test\opengl-test\common\camera.h(34): warning C4251: 'Camera::_pos' : struct 'glm::detail::tvec3<glm::mediump_float>' needs to have dll-interface to be used by clients of class 'Camera'
-     1>f:\ogl test\opengl-test\common\camera.h(35): warning C4251: 'Camera::_rotation' : struct 'glm::detail::tvec3<glm::mediump_float>' needs to have dll-interface to be used by clients of class 'Camera'
-     1>f:\ogl test\opengl-test\common\camera.h(36): warning C4251: 'Camera::_up' : struct 'glm::detail::tvec3<glm::mediump_float>' needs to have dll-interface to be used by clients of class 'Camera'
-     1>f:\ogl test\opengl-test\common\camera.h(37): warning C4251: 'Camera::_lookAt' : struct 'glm::detail::tvec3<glm::mediump_float>' needs to have dll-interface to be used by clients of class 'Camera'
+     1>f:\github\opengl-test\common\camera.h(34): warning C4251: “Camera::_pos”: struct“glm::detail::tvec3<glm::mediump_float>”需要有 dll 接口由 class“Camera”的客户端使用
+     1>f:\github\opengl-test\common\camera.h(35): warning C4251: “Camera::_rotation”: struct“glm::detail::tvec3<glm::mediump_float>”需要有 dll 接口由 class“Camera”的客户端使用
+     1>f:\github\opengl-test\common\camera.h(36): warning C4251: “Camera::_up”: struct“glm::detail::tvec3<glm::mediump_float>”需要有 dll 接口由 class“Camera”的客户端使用
+     1>f:\github\opengl-test\common\camera.h(37): warning C4251: “Camera::_lookAt”: struct“glm::detail::tvec3<glm::mediump_float>”需要有 dll 接口由 class“Camera”的客户端使用
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"F:\Ogl Test\opengl-test\Debug\t003.exe" /INCREMENTAL /NOLOGO /LIBPATH:../common/lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"F:\Ogl Test\opengl-test\Debug\t003.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:\Ogl Test\opengl-test\Debug\t003.lib" /MACHINE:X86 Debug\stdafx.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"F:\github\opengl-test\Debug\t003.exe" /INCREMENTAL /NOLOGO /LIBPATH:../common/lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"F:\github\opengl-test\Debug\t003.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:\github\opengl-test\Debug\t003.lib" /MACHINE:X86 Debug\stdafx.obj
          Debug\t003.obj
-     1>MSVCRTD.lib(cinitexe.obj) : warning LNK4098: defaultlib 'msvcrt.lib' conflicts with use of other libs; use /NODEFAULTLIB:library
-         t003.vcxproj -> F:\Ogl Test\opengl-test\Debug\t003.exe
-     1>Done Building Project "F:\Ogl Test\opengl-test\t003\t003.vcxproj" (Rebuild target(s)).
+     1>MSVCRTD.lib(cinitexe.obj) : warning LNK4098: 默认库“msvcrt.lib”与其他库的使用冲突；请使用 /NODEFAULTLIB:library
+         t003.vcxproj -> F:\github\opengl-test\Debug\t003.exe
+     1>已完成生成项目“F:\github\opengl-test\t003\t003.vcxproj”(Build 个目标)的操作。
 
-Build succeeded.
+生成成功。
 
-Time Elapsed 00:00:01.36
+已用时间 00:00:02.69
