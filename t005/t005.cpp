@@ -92,7 +92,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		TMat4 projection = Camera::Instance()->GetProjectionMatrix();
 		//Camera::Instance()->_pMoveVale = &lightPos;
 		//Camera::Instance()->_moveFactor = 50;
-		lightPos = TMat3(glm::rotate(glm::mat4(1.0), 0.4f, Y_AXIS)) * lightPos;
+		lightPos = TMat3(glm::rotate(glm::mat4(1.0), 0.1f, Y_AXIS)) * lightPos;
 
 		for (auto Mat : modelMats)
 		{
