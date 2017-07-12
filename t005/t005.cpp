@@ -17,7 +17,7 @@ void setUpScene(OUT vector<glm::mat4>& modelMats)
 	TMP = glm::rotate(TMP, 60.0f, X_AXIS);
 	modelMats.push_back(TMP);
 
-	TMP = glm::translate(identy, TVec3(10, 12, 0));
+	TMP = glm::translate(identy, TVec3(20, 20, 0));
 	modelMats.push_back(TMP);
 
 	TMP = glm::translate(identy, TVec3(5, 3, 1));
