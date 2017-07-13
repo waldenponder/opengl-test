@@ -54,7 +54,6 @@
 *.ilk
 *.exp
 *.idb
-*.idb
 *.pdb
 *.tlog
 *.tlog
