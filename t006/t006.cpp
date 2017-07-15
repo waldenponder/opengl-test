@@ -159,6 +159,8 @@ int _tmain(int argc, _TCHAR* argv[])
 			shader.setUniformMat4f("uProjection", projection);
 
 			shader.setUniformTexture2D("uSAMP", tex, 0);
+			shader.setUniformTexture2D("uDepthTexture", depthTexture, -1);
+
 			shader.setUniformVec3f("uLightColor", 1, 1, 1);
 			shader.setUniformVec3f("uLightPos", lightPos);
 			shader.setUniformVec3f("uViewPos", CameraPos);

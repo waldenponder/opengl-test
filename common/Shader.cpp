@@ -145,8 +145,11 @@ void Shader::setUniformTexture2D(char* name, GLuint texture, int index)
 		std::cout << "Shader::setUniform(char* name, GLuint texture, int index)  index Ô½½ç " << std::endl;
 #endif
 
-	glActiveTexture(GL_TEXTURE0 + index);
-	glBindTexture(GL_TEXTURE_2D, texture);
+	if (index != -1)
+	{
+		glActiveTexture(GL_TEXTURE0 + index);
+		glBindTexture(GL_TEXTURE_2D, texture);
+	}
 
 	GLuint loc = glGetUniformLocation(program, name);
 	glUniform1i(loc, index);
