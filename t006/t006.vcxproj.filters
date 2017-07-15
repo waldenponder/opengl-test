@@ -40,5 +40,11 @@
     <None Include="vert006.v">
       <Filter>资源文件</Filter>
     </None>
+    <None Include="frag006_2.f">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="vert006_2.v">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
 </Project>

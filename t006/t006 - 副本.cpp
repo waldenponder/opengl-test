@@ -25,7 +25,7 @@ void setUpScene(OUT vector<glm::mat4>& modelMats)
 	TMP = glm::translate(identy, TVec3(6, 4, 8));
 	modelMats.push_back(TMP);
 
-	TMP = glm::translate(identy, TVec3(9, 14, 24));
+	TMP = glm::translate(identy, TVec3(9, 4, 4));
 	TMP = glm::scale(TMP, TVec3(10, 10, 10));
 	modelMats.push_back(TMP);
 }
@@ -89,10 +89,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	GLuint depthTexture, depthFbo;
 	createShadowMap(depthTexture, depthFbo);
 
-	GLuint tex = tools::CreateTexture("../common/src/floor.jpg");
-	
+	GLuint texture = tools::CreateTexture("../common/src/floor.jpg");
 	Shader shader("vert006.v", "frag006.f");
-	Shader shaderDepth("vert006_2.v", "frag006_2.f");
 
 	vector<glm::mat4> modelMats;
 	setUpScene(modelMats);
@@ -110,68 +108,28 @@ int _tmain(int argc, _TCHAR* argv[])
 		glFrontFace(GL_CCW);
 		glCullFace(GL_BACK);
 
-		float value = 100;
-		TMat4 lightSpace;
+		TMat4 view = Camera::Instance()->GetViewMatrix();
+		TMat4 projection = Camera::Instance()->GetProjectionMatrix();
 		lightPos = TMat3(glm::rotate(glm::mat4(1.0), .4f, Y_AXIS)) * lightPos;
-		TMat4 projection = glm::ortho(-value, value, -value, value, 0.1f, 1000.f);
-
-		//1
-		glBindFramebuffer(GL_FRAMEBUFFER, depthFbo);
+		
+		for (auto Mat : modelMats)
 		{
-			lightSpace = glm::lookAt(lightPos, glm::vec3(0), Y_AXIS);
 			glEnable(GL_DEPTH_TEST);
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
-			shaderDepth.Use();
-			shaderDepth.setUniformMat4f("uView", lightSpace);
-			shaderDepth.setUniformMat4f("uProjection", projection);
-			shaderDepth.setUniformTexture2D("uSAMP", depthTexture, 0);
-
-			for (auto Mat : modelMats)
-			{
-				shaderDepth.setUniformMat4f("uModel", Mat);
-
-				glBindVertexArray(VAO);
-				glDrawArrays(GL_TRIANGLES, 0, 36);
-				glBindVertexArray(0);
-			}
-		}
-		  
-		//2
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		{
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			glClearColor(0, 0, 0, 1);
-
-			glEnable(GL_CULL_FACE);
-			glFrontFace(GL_CCW);
-			glCullFace(GL_BACK);
-
-			TMat4 view = Camera::Instance()->GetViewMatrix();
-			//TMat4 projection = Camera::Instance()->GetProjectionMatrix();
-
-			glEnable(GL_DEPTH_TEST);
-			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
 			shader.Use();
 
+			shader.setUniformMat4f("uModel", Mat);
 			shader.setUniformMat4f("uView", view);
 			shader.setUniformMat4f("uProjection", projection);
 
-			shader.setUniformTexture2D("uSAMP", tex, 0);
+			shader.setUniformTexture2D("uSAMP", texture, 0);
 			shader.setUniformVec3f("uLightColor", 1, 1, 1);
 			shader.setUniformVec3f("uLightPos", lightPos);
 			shader.setUniformVec3f("uViewPos", CameraPos);
-			shader.setUniformMat4f("uLightSpace", lightSpace);
 
-			for (auto Mat : modelMats)
-			{
-				shader.setUniformMat4f("uModel", Mat);
-
-				glBindVertexArray(VAO);
-				glDrawArrays(GL_TRIANGLES, 0, 36);
-				glBindVertexArray(0);
-			}
+			glBindVertexArray(VAO);
+			glDrawArrays(GL_TRIANGLES, 0, 36);
+			glBindVertexArray(0);
 		}
 
 		glfwSwapBuffers(window);

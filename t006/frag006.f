@@ -33,7 +33,7 @@ void main()
 		vec3 eyeDir = normalize(uViewPos - vPosition);
 		vec3 middle = normalize(lightDir + eyeDir);
 		float strength = max(dot(middle, Normal), 0);
-		specular = .5 * pow(strength, 32) * uLightColor;
+		specular = .5 * pow(strength, 132) * uLightColor;
 	}
 	else
 	{
