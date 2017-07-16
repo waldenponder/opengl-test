@@ -1,6 +1,6 @@
 #version 330 core
 
-uniform sampler2D uSAMP;
+//uniform sampler2D uSAMP;
 uniform sampler2D uDepthTexture;
 uniform vec3 uLightColor;
 uniform vec3 uLightPos;
@@ -15,7 +15,7 @@ in vec4 vPosInLightSpace;
 
 void main()
 {
-	vec3 color = texture(uSAMP, vTexCoor).rgb;
+	//vec3 color = texture(uSAMP, vTexCoor).rgb;
 
 	//vec3 color = vec3(0.5, 0.5, 0.5);
 
@@ -45,7 +45,7 @@ void main()
 		specular = .5 * pow(strength, 128) * uLightColor;
 	}
 
-	float shadow = 0.f;// ShadowCalculation(vPosInLightSpace);
+	float shadow = 0.f;
 	{
 		vec3 projCoords = vPosInLightSpace.xyz / vPosInLightSpace.w;
 		// Transform to [0,1] range
@@ -56,10 +56,10 @@ void main()
 		float currentDepth = projCoords.z;
 		// Check whether current frag pos is in shadow
 		shadow = currentDepth > closestDepth ? 1.0 : 0.0;
-		fColor = texture(uDepthTexture, projCoords.xy);
+		//fColor = texture(uDepthTexture, projCoords.xy);
 	}
 
-	//fColor = vec4((ambient + (1 - shadow) * (diffuse + specular)) * color, 1);
+	fColor = vec4((ambient + (1 - shadow) * (diffuse + specular)) /** color*/, 1);
 	//fColor = vec4(shadow);
-	//fColor = texture(uDepthTexture, vTexCoor);
+	fColor = texture(uDepthTexture, vTexCoor);
 }
