@@ -54,8 +54,7 @@ void createVAO(OUT GLuint& VAO, OUT GLuint& VBO)
 void createShadowMap(OUT GLuint& tex, OUT GLuint& fbo)
 {
 	glGenFramebuffers(1, &fbo);
-	glBindFramebuffer(GL_FRAMEBUFFER, fbo);
-
+	
 	glGenTextures(1, &tex);
 	glBindTexture(GL_TEXTURE_2D, tex);
 
@@ -67,33 +66,25 @@ void createShadowMap(OUT GLuint& tex, OUT GLuint& fbo)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	
+	glBindFramebuffer(GL_FRAMEBUFFER, fbo);
 
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, tex, 0);
 
 	glDrawBuffer(GL_NONE);
 	glReadBuffer(GL_NONE);
 
+	GLenum Status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+
+	if (Status != GL_FRAMEBUFFER_COMPLETE)
+	{
+		printf("FB error, status: 0x%x\n", Status);
+	}
+
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glBindTexture(GL_TEXTURE_2D, 0);
-
-	//GLuint depthMap;
-	//glGenTextures(1, &depthMap);
-	//glBindTexture(GL_TEXTURE_2D, depthMap);
-
-	//glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, SHADOW_WIDTH, SHADOW_HEIGHT, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-	//glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
-	//glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthMap, 0);
-	//glDrawBuffer(GL_NONE);
-	//glReadBuffer(GL_NONE);
-	//glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 int _tmain(int argc, _TCHAR* argv[])
@@ -136,14 +127,16 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		//1
 		glBindFramebuffer(GL_FRAMEBUFFER, depthFbo);
+		//glBindFramebuffer(GL_DRAW_FRAMEBUFFER, depthFbo);
 		{
-			glEnable(GL_DEPTH_TEST);
+			//glEnable(GL_DEPTH_TEST);
 
-			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, depthTexture);
+			//glActiveTexture(GL_TEXTURE0);
+			//glBindTexture(GL_TEXTURE_2D, depthTexture);
 
 			lightSpace = projection * glm::lookAt(lightPos, glm::vec3(0), Y_AXIS);
 
+#if 1
 			shaderDepth.Use();
 			shaderDepth.setUniformMat4f("uLightSpace", lightSpace);
 
@@ -155,6 +148,30 @@ int _tmain(int argc, _TCHAR* argv[])
 				glDrawArrays(GL_TRIANGLES, 0, 36);
 				glBindVertexArray(0);
 			}
+#else
+			shader.Use();
+			TMat4 view = Camera::Instance()->GetViewMatrix();
+
+			shader.setUniformMat4f("uView", view);
+			shader.setUniformMat4f("uProjection", projection);
+
+			//shader.setUniformTexture2D("uSAMP", tex, 0);
+			shader.setUniformTexture2D("uDepthTexture", depthTexture, 0);
+
+			shader.setUniformVec3f("uLightColor", 1, 1, 1);
+			shader.setUniformVec3f("uLightPos", lightPos);
+			shader.setUniformVec3f("uViewPos", CameraPos);
+			shader.setUniformMat4f("uLightSpace", lightSpace);
+
+			for (auto Mat : modelMats)
+			{
+				shader.setUniformMat4f("uModel", Mat);
+
+				glBindVertexArray(VAO);
+				glDrawArrays(GL_TRIANGLES, 0, 36);
+				glBindVertexArray(0);
+			}
+#endif
 		}
 		  
 		//2
@@ -163,9 +180,12 @@ int _tmain(int argc, _TCHAR* argv[])
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			glClearColor(0, 0, 0, 1);
 
-			glEnable(GL_CULL_FACE);
-			glFrontFace(GL_CCW);
-			glCullFace(GL_BACK);
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, depthTexture);
+
+			//glEnable(GL_CULL_FACE);
+			//glFrontFace(GL_CCW);
+			//glCullFace(GL_BACK);
 
 			TMat4 view = Camera::Instance()->GetViewMatrix();
 			//TMat4 projection = Camera::Instance()->GetProjectionMatrix();

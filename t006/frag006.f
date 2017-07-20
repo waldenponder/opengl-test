@@ -61,5 +61,9 @@ void main()
 
 	fColor = vec4((ambient + (1 - shadow) * (diffuse + specular)) /** color*/, 1);
 	//fColor = vec4(shadow);
-	fColor = texture(uDepthTexture, vTexCoor);
+	float d = texture(uDepthTexture, vTexCoor).r;
+	d = 1.0 - (1.0 - d) * 25.0;
+	fColor = vec4(d);
+
+	//
 }
