@@ -30,6 +30,7 @@ Camera::Camera()
 
 	_pos = g_defaultPos;
 	_pMoveVale = &_pos;
+	_bNeedRotation = true;
 }
 
 
@@ -83,11 +84,19 @@ void  Camera::ConfigProjectionMatrix(float fovy, float aspect, float near, float
 	_nearClip = near; _farClip = far;
 }
 
+/*
+按键回调函数接受一个GLFWwindow指针作为它的第一个参数；
+第二个整形参数用来表示按下的按键；
+action参数表示这个按键是被按下还是释放；	  1	为按下, 0为释放
+最后一个整形参数表示是否有Ctrl、Shift、Alt、Super等按钮的操作
+*/
 void OnKeyDown(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
 	Camera* camera = g_sCamera;
 
 	float delta = (mode == GLFW_MOD_SHIFT) ? -camera->_moveFactor : camera->_moveFactor;
+
+	if (action == 0) return;
 
 	if (key == GLFW_KEY_UP)
 	{
@@ -135,5 +144,9 @@ void OnKeyDown(GLFWwindow* window, int key, int scancode, int action, int mode)
 	else if (key == GLFW_KEY_Z)
 	{
 		camera->_rotation += 30 * delta * Z_AXIS;
+	}
+	else if (key == GLFW_KEY_R)
+	{
+		camera->_bNeedRotation = !camera->_bNeedRotation;
 	}
 }

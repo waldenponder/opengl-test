@@ -45,4 +45,7 @@ public:
 	float  _farClip;
 	float  _fovy;
 	float  _aspect;
+
+public:
+	bool _bNeedRotation;
 };

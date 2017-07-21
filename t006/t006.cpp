@@ -108,7 +108,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	vector<glm::mat4> modelMats;
 	setUpScene(modelMats);
 
-	TVec3 lightPos(59, 30, 0);
+	TVec3 lightPos(30, 30, 0);
 	
 	glEnable(GL_DEPTH_TEST);
 
@@ -118,8 +118,10 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		float value = 20;
 		TMat4 lightSpace;
-		lightPos = TMat3(glm::rotate(glm::mat4(1.0), .4f, Y_AXIS)) * lightPos;
 		TMat4 projection = glm::ortho(-value, value, -value, value, 0.1f, 600.f);
+
+		if (Camera::Instance()->_bNeedRotation)
+		   lightPos = TMat3(glm::rotate(glm::mat4(1.0), .4f, Y_AXIS)) * lightPos;
 
 		//1
 		glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
