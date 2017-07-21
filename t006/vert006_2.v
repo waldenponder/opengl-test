@@ -9,5 +9,5 @@ uniform mat4 uLightSpace;
 
 void main()
 {
-	gl_Position = uLightSpace * uModel * vec4(aPosition.x, aPosition.y, aPosition.z, 1.0);
+	gl_Position = uLightSpace * uModel * vec4(aPosition, 1.0);
 }

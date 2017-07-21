@@ -16,9 +16,10 @@ out vec4 vPosInLightSpace;
 
 void main()
 {
-	gl_Position = uProjection * uView * uModel * vec4(aPosition.x, aPosition.y, aPosition.z, 1.0);
-	vTexCoor = vec2(aCoor.x, aCoor.y);
+	gl_Position = uProjection * uView * uModel * vec4(aPosition, 1.0);
+	vTexCoor = aCoor;
 	vNormal = (uModel * vec4(aNormal, 1)).xyz;
 	vPosition = (uModel * vec4(aPosition, 1)).xyz;
-	vPosInLightSpace = uLightSpace * vec4(vPosition, 1);
+	//vPosInLightSpace = uLightSpace * vec4(vPosition, 1);
+	vPosInLightSpace = uLightSpace * uModel * vec4(aPosition, 1);
 }

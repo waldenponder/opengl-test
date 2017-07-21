@@ -6,6 +6,7 @@
 #include "../common/common.out.h"
 
 GLfloat cubePts[288];
+const GLuint SHADOW_WIDTH = 1024, SHADOW_HEIGHT = 1024;
 
 void setUpScene(OUT vector<glm::mat4>& modelMats)
 {
@@ -54,23 +55,22 @@ void createVAO(OUT GLuint& VAO, OUT GLuint& VBO)
 void createShadowMap(OUT GLuint& tex, OUT GLuint& fbo)
 {
 	glGenFramebuffers(1, &fbo);
-	
+	glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+
 	glGenTextures(1, &tex);
 	glBindTexture(GL_TEXTURE_2D, tex);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, WINDOW_WIDTH,
-		WINDOW_HEIGHT, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, SHADOW_WIDTH,
+		SHADOW_HEIGHT, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-	
-	glBindFramebuffer(GL_FRAMEBUFFER, fbo);
-
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+			  
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, tex, 0);
 
 	glDrawBuffer(GL_NONE);
@@ -100,7 +100,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	GLuint depthTexture, depthFbo;
 	createShadowMap(depthTexture, depthFbo);
 
-	//GLuint tex = tools::CreateTexture("../common/src/floor.jpg");
+	GLuint tex = tools::CreateTexture("../common/src/floor.jpg");
 	
 	Shader shader("vert006.v", "frag006.f");
 	Shader shaderDepth("vert006_2.v", "frag006_2.f");
@@ -109,34 +109,26 @@ int _tmain(int argc, _TCHAR* argv[])
 	setUpScene(modelMats);
 
 	TVec3 lightPos(59, 30, 0);
+	
+	glEnable(GL_DEPTH_TEST);
 
 	while (!glfwWindowShouldClose(window))
 	{
 		glfwPollEvents();
 
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-		glEnable(GL_CULL_FACE);
-		glFrontFace(GL_CCW);
-		glCullFace(GL_BACK);
-
-		float value = 30;
+		float value = 20;
 		TMat4 lightSpace;
 		lightPos = TMat3(glm::rotate(glm::mat4(1.0), .4f, Y_AXIS)) * lightPos;
-		TMat4 projection = glm::ortho(-value, value, -value, value, 0.1f, 1000.f);
+		TMat4 projection = glm::ortho(-value, value, -value, value, 0.1f, 600.f);
 
 		//1
+		glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
 		glBindFramebuffer(GL_FRAMEBUFFER, depthFbo);
-		//glBindFramebuffer(GL_DRAW_FRAMEBUFFER, depthFbo);
 		{
-			//glEnable(GL_DEPTH_TEST);
-
-			//glActiveTexture(GL_TEXTURE0);
-			//glBindTexture(GL_TEXTURE_2D, depthTexture);
+			glClear(GL_DEPTH_BUFFER_BIT);
 
 			lightSpace = projection * glm::lookAt(lightPos, glm::vec3(0), Y_AXIS);
 
-#if 1
 			shaderDepth.Use();
 			shaderDepth.setUniformMat4f("uLightSpace", lightSpace);
 
@@ -148,33 +140,10 @@ int _tmain(int argc, _TCHAR* argv[])
 				glDrawArrays(GL_TRIANGLES, 0, 36);
 				glBindVertexArray(0);
 			}
-#else
-			shader.Use();
-			TMat4 view = Camera::Instance()->GetViewMatrix();
-
-			shader.setUniformMat4f("uView", view);
-			shader.setUniformMat4f("uProjection", projection);
-
-			//shader.setUniformTexture2D("uSAMP", tex, 0);
-			shader.setUniformTexture2D("uDepthTexture", depthTexture, 0);
-
-			shader.setUniformVec3f("uLightColor", 1, 1, 1);
-			shader.setUniformVec3f("uLightPos", lightPos);
-			shader.setUniformVec3f("uViewPos", CameraPos);
-			shader.setUniformMat4f("uLightSpace", lightSpace);
-
-			for (auto Mat : modelMats)
-			{
-				shader.setUniformMat4f("uModel", Mat);
-
-				glBindVertexArray(VAO);
-				glDrawArrays(GL_TRIANGLES, 0, 36);
-				glBindVertexArray(0);
-			}
-#endif
 		}
 		  
 		//2
+		glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		{
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -183,24 +152,16 @@ int _tmain(int argc, _TCHAR* argv[])
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, depthTexture);
 
-			//glEnable(GL_CULL_FACE);
-			//glFrontFace(GL_CCW);
-			//glCullFace(GL_BACK);
-
 			TMat4 view = Camera::Instance()->GetViewMatrix();
-			//TMat4 projection = Camera::Instance()->GetProjectionMatrix();
-
-			//glEnable(GL_DEPTH_TEST);
-			//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+			TMat4 projection = Camera::Instance()->GetProjectionMatrix();
 
 			shader.Use();
 
 			shader.setUniformMat4f("uView", view);
 			shader.setUniformMat4f("uProjection", projection);
 
-			//shader.setUniformTexture2D("uSAMP", tex, 0);
 			shader.setUniformTexture2D("uDepthTexture", depthTexture, 0);
-
+			shader.setUniformTexture2D("uSAMP", tex, 1);
 			shader.setUniformVec3f("uLightColor", 1, 1, 1);
 			shader.setUniformVec3f("uLightPos", lightPos);
 			shader.setUniformVec3f("uViewPos", CameraPos);

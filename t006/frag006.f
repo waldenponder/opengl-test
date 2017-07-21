@@ -1,6 +1,6 @@
 #version 330 core
 
-//uniform sampler2D uSAMP;
+uniform sampler2D uSAMP;
 uniform sampler2D uDepthTexture;
 uniform vec3 uLightColor;
 uniform vec3 uLightPos;
@@ -15,7 +15,7 @@ in vec4 vPosInLightSpace;
 
 void main()
 {
-	//vec3 color = texture(uSAMP, vTexCoor).rgb;
+	vec3 color = texture(uSAMP, vTexCoor).rgb;
 
 	//vec3 color = vec3(0.5, 0.5, 0.5);
 
@@ -54,16 +54,9 @@ void main()
 		float closestDepth = texture(uDepthTexture, projCoords.xy).r;
 		// Get depth of current fragment from light's perspective
 		float currentDepth = projCoords.z;
-		// Check whether current frag pos is in shadow
-		shadow = currentDepth > closestDepth ? 1.0 : 0.0;
-		//fColor = texture(uDepthTexture, projCoords.xy);
+		
+		float bias = 0.005;
+		shadow = currentDepth > closestDepth + bias ? 1.0 : 0.0;
 	}
-
-	fColor = vec4((ambient + (1 - shadow) * (diffuse + specular)) /** color*/, 1);
-	//fColor = vec4(shadow);
-	float d = texture(uDepthTexture, vTexCoor).r;
-	d = 1.0 - (1.0 - d) * 25.0;
-	fColor = vec4(d);
-
-	//
+	fColor = vec4((ambient + (1 - shadow) * (diffuse + specular)) * color, 1);
 }

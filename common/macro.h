@@ -30,8 +30,8 @@
 	glViewport(0, 0, w, h);\
     if(key_callback) glfwSetKeyCallback(window, key_callback);
 
-#define   WINDOW_WIDTH   1200
-#define   WINDOW_HEIGHT  1200
+#define   WINDOW_WIDTH   1024
+#define   WINDOW_HEIGHT  1024
 #define   WINDOW_NAME    "learn gl"
 
 #define   OUT
