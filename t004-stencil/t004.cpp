@@ -41,6 +41,9 @@ int _tmain(int argc, _TCHAR* argv[])
 	glDepthFunc(GL_LESS);
 	glEnable(GL_STENCIL_TEST);
 	glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+	//不调用结果奇怪
+	glEnable(GL_CULL_FACE);
+	glBindVertexArray(VAO);
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -49,39 +52,31 @@ int _tmain(int argc, _TCHAR* argv[])
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 		glClearColor(.2, .3, .6, 1);
 		glClearStencil(123);
-
-		//不调用结果奇怪
-		glEnable(GL_CULL_FACE);
-
-		//1
+				  
+		//1	 正常渲染
 		glm::mat4 Mat1 = g_Mat4;
-		glEnable(GL_DEPTH_TEST);
+		//调用后模板缓存区值为1
 		glStencilFunc(GL_ALWAYS, 1, 0xFF);
+		//允许写入模板缓存
 		glStencilMask(0xFF);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		shader.Use();
 		shader.setUniformMat4f("vert_mat", Mat1);
 		shader.setUniformTexture2D("SAMP", texture, 0);
-		glBindVertexArray(VAO);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
-		glBindVertexArray(0);
 
-		//2
+		//2	 渲染边框
 		float s = 1.02f;
-		glm::mat4 Mat2 = glm::scale(g_Mat4, glm::vec3(s, s, s));		
+		glm::mat4 Mat2 = glm::scale(g_Mat4, glm::vec3(s, s, s));
 		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+		//禁止模板缓存
 		glStencilMask(0x00);
-		glDisable(GL_DEPTH_TEST);
 		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		//glLineWidth(3);
 		shader2.Use();
 		shader2.setUniformMat4f("vert_mat", Mat2);
-		glBindVertexArray(VAO);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
-	
-		glBindVertexArray(0);
 		glStencilMask(0xFF);
-		glEnable(GL_DEPTH_TEST);
 
 		glfwSwapBuffers(window);
 	}

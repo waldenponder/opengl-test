@@ -20,6 +20,6 @@ void main()
 	vTexCoor = aCoor;
 	vNormal = (uModel * vec4(aNormal, 1)).xyz;
 	vPosition = (uModel * vec4(aPosition, 1)).xyz;
-	//vPosInLightSpace = uLightSpace * vec4(vPosition, 1);
-	vPosInLightSpace = uLightSpace * uModel * vec4(aPosition, 1);
+	vPosInLightSpace = uLightSpace * vec4(vPosition, 1);
+	//vPosInLightSpace = uLightSpace * uModel * vec4(aPosition, 1);
 }

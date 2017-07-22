@@ -3,34 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "t001", "t001\t001.vcxproj", "{9D27A884-61FB-4252-A38C-31BADD6ADBB7}"
-	ProjectSection(ProjectDependencies) = postProject
-		{A86D4152-F15E-4A05-AD78-4D74F70A5B82} = {A86D4152-F15E-4A05-AD78-4D74F70A5B82}
-	EndProjectSection
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "common", "common\common.vcxproj", "{A86D4152-F15E-4A05-AD78-4D74F70A5B82}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "t002", "t002\t002.vcxproj", "{74CE578C-A954-4583-8E3D-B9A03B6137C6}"
-	ProjectSection(ProjectDependencies) = postProject
-		{A86D4152-F15E-4A05-AD78-4D74F70A5B82} = {A86D4152-F15E-4A05-AD78-4D74F70A5B82}
-	EndProjectSection
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "t001-rectangle", "t001-rectangle\t001.vcxproj", "{9D27A884-61FB-4252-A38C-31BADD6ADBB7}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "t003", "t003\t003.vcxproj", "{9702784A-4637-4880-A822-4596BEED8B1C}"
-	ProjectSection(ProjectDependencies) = postProject
-		{A86D4152-F15E-4A05-AD78-4D74F70A5B82} = {A86D4152-F15E-4A05-AD78-4D74F70A5B82}
-	EndProjectSection
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "t002-texture", "t002-texture\t002.vcxproj", "{74CE578C-A954-4583-8E3D-B9A03B6137C6}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "t004", "t004\t004.vcxproj", "{AE29A4DE-3B59-47B4-8AA1-B8801FADB501}"
-	ProjectSection(ProjectDependencies) = postProject
-		{A86D4152-F15E-4A05-AD78-4D74F70A5B82} = {A86D4152-F15E-4A05-AD78-4D74F70A5B82}
-	EndProjectSection
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "t003-rtt", "t003-rtt\t003.vcxproj", "{9702784A-4637-4880-A822-4596BEED8B1C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "t005", "t005\t005.vcxproj", "{5889CBDF-B016-42D1-B070-C9E491D5B5D9}"
-	ProjectSection(ProjectDependencies) = postProject
-		{A86D4152-F15E-4A05-AD78-4D74F70A5B82} = {A86D4152-F15E-4A05-AD78-4D74F70A5B82}
-	EndProjectSection
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "t004-stencil", "t004-stencil\t004.vcxproj", "{AE29A4DE-3B59-47B4-8AA1-B8801FADB501}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "t006", "t006\t006.vcxproj", "{E0C54999-28E4-4E25-9725-64B70707AC39}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "t005-Phong", "t005-Phong\t005.vcxproj", "{5889CBDF-B016-42D1-B070-C9E491D5B5D9}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "t006-shadowmap", "t006-shadowmap\t006.vcxproj", "{E0C54999-28E4-4E25-9725-64B70707AC39}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "t007-bloom", "t007-bloom\t007-bloom.vcxproj", "{2A383327-DB52-4FAA-8C64-8769183BFDCB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,14 +25,14 @@ Global
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9D27A884-61FB-4252-A38C-31BADD6ADBB7}.Debug|Win32.ActiveCfg = Debug|Win32
-		{9D27A884-61FB-4252-A38C-31BADD6ADBB7}.Debug|Win32.Build.0 = Debug|Win32
-		{9D27A884-61FB-4252-A38C-31BADD6ADBB7}.Release|Win32.ActiveCfg = Release|Win32
-		{9D27A884-61FB-4252-A38C-31BADD6ADBB7}.Release|Win32.Build.0 = Release|Win32
 		{A86D4152-F15E-4A05-AD78-4D74F70A5B82}.Debug|Win32.ActiveCfg = Debug|Win32
 		{A86D4152-F15E-4A05-AD78-4D74F70A5B82}.Debug|Win32.Build.0 = Debug|Win32
 		{A86D4152-F15E-4A05-AD78-4D74F70A5B82}.Release|Win32.ActiveCfg = Release|Win32
 		{A86D4152-F15E-4A05-AD78-4D74F70A5B82}.Release|Win32.Build.0 = Release|Win32
+		{9D27A884-61FB-4252-A38C-31BADD6ADBB7}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9D27A884-61FB-4252-A38C-31BADD6ADBB7}.Debug|Win32.Build.0 = Debug|Win32
+		{9D27A884-61FB-4252-A38C-31BADD6ADBB7}.Release|Win32.ActiveCfg = Release|Win32
+		{9D27A884-61FB-4252-A38C-31BADD6ADBB7}.Release|Win32.Build.0 = Release|Win32
 		{74CE578C-A954-4583-8E3D-B9A03B6137C6}.Debug|Win32.ActiveCfg = Debug|Win32
 		{74CE578C-A954-4583-8E3D-B9A03B6137C6}.Debug|Win32.Build.0 = Debug|Win32
 		{74CE578C-A954-4583-8E3D-B9A03B6137C6}.Release|Win32.ActiveCfg = Release|Win32
@@ -66,6 +53,10 @@ Global
 		{E0C54999-28E4-4E25-9725-64B70707AC39}.Debug|Win32.Build.0 = Debug|Win32
 		{E0C54999-28E4-4E25-9725-64B70707AC39}.Release|Win32.ActiveCfg = Release|Win32
 		{E0C54999-28E4-4E25-9725-64B70707AC39}.Release|Win32.Build.0 = Release|Win32
+		{2A383327-DB52-4FAA-8C64-8769183BFDCB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2A383327-DB52-4FAA-8C64-8769183BFDCB}.Debug|Win32.Build.0 = Debug|Win32
+		{2A383327-DB52-4FAA-8C64-8769183BFDCB}.Release|Win32.ActiveCfg = Release|Win32
+		{2A383327-DB52-4FAA-8C64-8769183BFDCB}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -56,7 +56,12 @@ void main()
 		float currentDepth = projCoords.z;
 		
 		float bias = 0.005;
-		shadow = currentDepth > closestDepth + bias ? 1.0 : 0.0;
+		//float bias = max(0.05 * (1.0 - dot(Normal, lightDir)), 0.005);
+		shadow = currentDepth > (closestDepth + bias) ? 1.0 : 0.0;
+
+		if (projCoords.z > 1.0)
+			shadow = 0.0;
+
 	}
 	fColor = vec4((ambient + (1 - shadow) * (diffuse + specular)) * color, 1);
 }

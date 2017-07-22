@@ -6,7 +6,7 @@
 #include "../common/common.out.h"
 
 GLfloat cubePts[288];
-const GLuint SHADOW_WIDTH = 1024, SHADOW_HEIGHT = 1024;
+const GLuint SHADOW_WIDTH = 2048, SHADOW_HEIGHT = 2048;
 
 void setUpScene(OUT vector<glm::mat4>& modelMats)
 {
@@ -26,7 +26,7 @@ void setUpScene(OUT vector<glm::mat4>& modelMats)
 	TMP = glm::translate(identy, TVec3(6, 4, 8));
 	modelMats.push_back(TMP);
 
-	TMP = glm::translate(identy, TVec3(9, 14, 24));
+	TMP = glm::translate(identy, TVec3(9, 4, 24));
 	TMP = glm::scale(TMP, TVec3(10, 10, 10));
 	modelMats.push_back(TMP);
 }
@@ -68,8 +68,8 @@ void createShadowMap(OUT GLuint& tex, OUT GLuint& fbo)
 	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE);
 	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 			  
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, tex, 0);
 
@@ -111,6 +111,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	TVec3 lightPos(30, 30, 11);
 	
 	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_CULL_FACE);
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -119,7 +120,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		float value = 20;
 		TMat4 lightSpace;
 		TMat4 projection = glm::ortho(-value, value, -value, value, 0.1f, 600.f);
-
+								 
 		if (Camera::Instance()->_bNeedRotation)
 			lightPos = TMat3(glm::rotate(glm::mat4(1.0), .4f, Y_AXIS)) * lightPos;
 
@@ -128,7 +129,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		glBindFramebuffer(GL_FRAMEBUFFER, depthFbo);
 		{
 			glClear(GL_DEPTH_BUFFER_BIT);
-
+			glCullFace(GL_FRONT);
 			lightSpace = projection * glm::lookAt(lightPos, glm::vec3(0), Y_AXIS);
 
 			shaderDepth.Use();
@@ -142,6 +143,7 @@ int _tmain(int argc, _TCHAR* argv[])
 				glDrawArrays(GL_TRIANGLES, 0, 36);
 				glBindVertexArray(0);
 			}
+			glCullFace(GL_BACK);
 		}
 		  
 		//2
