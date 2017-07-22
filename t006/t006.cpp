@@ -108,7 +108,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	vector<glm::mat4> modelMats;
 	setUpScene(modelMats);
 
-	TVec3 lightPos(30, 30, 0);
+	TVec3 lightPos(30, 30, 11);
 	
 	glEnable(GL_DEPTH_TEST);
 
@@ -121,7 +121,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		TMat4 projection = glm::ortho(-value, value, -value, value, 0.1f, 600.f);
 
 		if (Camera::Instance()->_bNeedRotation)
-		   lightPos = TMat3(glm::rotate(glm::mat4(1.0), .4f, Y_AXIS)) * lightPos;
+			lightPos = TMat3(glm::rotate(glm::mat4(1.0), .4f, Y_AXIS)) * lightPos;
 
 		//1
 		glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
@@ -150,9 +150,6 @@ int _tmain(int argc, _TCHAR* argv[])
 		{
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			glClearColor(0, 0, 0, 1);
-
-			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, depthTexture);
 
 			TMat4 view = Camera::Instance()->GetViewMatrix();
 			TMat4 projection = Camera::Instance()->GetProjectionMatrix();
