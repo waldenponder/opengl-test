@@ -33,4 +33,18 @@
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="frag007.f">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="frag007_2.f">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="vert007.v">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="vert007_2.v">
+      <Filter>资源文件</Filter>
+    </None>
+  </ItemGroup>
 </Project>
