@@ -52,12 +52,13 @@ int main()
 
 	GLuint VBO, VAO, EBO;
 	{
+		float val = 0.95f;
 		GLfloat pts[] =
 		{
-			0.5f, 0.5f, 0.0f, 1, 0, 0,     1.0f, 1.0f,  // срио╫г
-			0.5f, -0.5f, 0.0f, 0, 1, 0,    1.0f, 0.0f,  // сроб╫г
-			-0.5f, -0.5f, 0.0f, 0, 0, 1,   0.0f, 0.0f,  // вСоб╫г
-			-0.5f, 0.5f, 0.0f, 1, 1, 0,    0.0f, 1.0f  // вСио╫г
+			val, val, 0.0f, 1, 0, 0, 1.0f, 1.0f,  // срио╫г
+			val, -val, 0.0f, 0, 1, 0, 1.0f, 0.0f,  // сроб╫г
+			-val, -val, 0.0f, 0, 0, 1,   0.0f, 0.0f,  // вСоб╫г
+			-val, val, 0.0f, 1, 1, 0,    0.0f, 1.0f  // вСио╫г
 		};
 
 		GLuint indices[] =
@@ -74,8 +75,8 @@ int main()
 		glBindBuffer(GL_ARRAY_BUFFER, VBO);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(pts), pts, GL_STATIC_DRAW);
 
-		//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-		//glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * FLOAT_SIZE, (void*)0);
 		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * FLOAT_SIZE, (void*)(3 * FLOAT_SIZE));
@@ -89,8 +90,8 @@ int main()
 		glBindVertexArray(0);
 	}
 
-	GLuint texture = tools::CreateTexture("../common/src/tt.jpg");
-	GLuint texture2 = tools::CreateTexture("../common/src/container.jpg");
+	GLuint tex = tools::CreateTexture("../common/src/tt.jpg");
+	GLuint tex2 = tools::CreateTexture("../common/src/container.jpg");
 	 
 	GLint nrAttributes;
 	glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &nrAttributes);
@@ -108,8 +109,8 @@ int main()
 		GLfloat color_b = sin(time) / 2.0 + 0.4;
 	
 		shader.setUniformVec4f("myColor", 0.0f, color_g, color_b, 1.0f);
-		shader.setUniformTexture2D("sampler", texture, 0);
-		shader.setUniformTexture2D("sampler2", texture2, 1);
+		shader.setUniformTexture2D("sampler", tex, 0);
+		shader.setUniformTexture2D("sampler2", tex2, 1);
 		shader.Use();
 
 		glBindVertexArray(VAO);

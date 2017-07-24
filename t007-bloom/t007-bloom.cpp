@@ -24,8 +24,11 @@ int _tmain(int argc, _TCHAR* argv[])
 	GLuint VAO, VBO;
 	CreateVAO(VAO, VBO);
 
-	GLuint hdrFBO;
-	CreateFBO(hdrFBO);
+	GLuint sperateFBO;
+	CreateFBO(sperateFBO);
+
+	GLuint combineFBO, combineTex;
+	tools::CreateFBO(combineFBO, combineTex);
 
 	GLuint text = tools::CreateTexture("../common/src/container.jpg");
 	Shader shader("vert007.v", "frag007.f");
@@ -38,6 +41,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	
 	glEnable(GL_CULL_FACE);
 	glBindVertexArray(VAO);
+	Rectangle rect("../common/src/container.jpg");
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -47,13 +51,17 @@ int _tmain(int argc, _TCHAR* argv[])
 		glClearColor(.2, .3, .6, 1);
 		glClearStencil(123);
 		
-		glBindFramebuffer(GL_FRAMEBUFFER, hdrFBO);
-		GLuint attachments[2] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1 };
-		glDrawBuffers(2, attachments);
+		//glBindFramebuffer(GL_FRAMEBUFFER, sperateFBO);
+		//GLuint attachments[2] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1 };
+		//glDrawBuffers(2, attachments);
+		//glBindFramebuffer(GL_FRAMEBUFFER, combineFBO);
 		RenderScene(shader, shader2, text);
 
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		RenderScene(shader, shader2, text);
+		//glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		//RenderScene(shader, shader2, text);
+		
+		//rect.SetTexture(combineTex);
+		//rect.Draw();
 
 		glfwSwapBuffers(window);
 	}
@@ -118,7 +126,7 @@ void CreateFBO(GLuint& hdrFBO)
 	{
 		glBindTexture(GL_TEXTURE_2D, g_colorBuffers[i]);
 		glTexImage2D(
-			GL_TEXTURE_2D, 0, GL_RGB16F, SCR_WIDTH, SCR_HEIGHT, 0, GL_RGB, GL_FLOAT, NULL
+			GL_TEXTURE_2D, 0, GL_RGB16F, WINDOW_WIDTH, WINDOW_HEIGHT, 0, GL_RGB, GL_FLOAT, NULL
 			);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -130,3 +138,4 @@ void CreateFBO(GLuint& hdrFBO)
 			);
 	}
 }
+

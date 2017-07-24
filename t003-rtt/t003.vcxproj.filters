@@ -38,9 +38,6 @@
     <ClCompile Include="frag003.f">
       <Filter>资源文件</Filter>
     </ClCompile>
-    <ClCompile Include="tt.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="frag003new.f">
