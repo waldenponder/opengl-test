@@ -40,8 +40,9 @@ int _tmain(int argc, _TCHAR* argv[])
 	glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
 	
 	glEnable(GL_CULL_FACE);
+
 	glBindVertexArray(VAO);
-	Rectangle rect("../common/src/container.jpg");
+	Rectangle rect;
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -49,19 +50,19 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 		glClearColor(.2, .3, .6, 1);
-		glClearStencil(123);
+		glClearStencil(11);
 		
 		//glBindFramebuffer(GL_FRAMEBUFFER, sperateFBO);
 		//GLuint attachments[2] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1 };
 		//glDrawBuffers(2, attachments);
 		//glBindFramebuffer(GL_FRAMEBUFFER, combineFBO);
-		RenderScene(shader, shader2, text);
+		//RenderScene(shader, shader2, text);
 
 		//glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		//RenderScene(shader, shader2, text);
+		RenderScene(shader, shader2, text);
 		
-		//rect.SetTexture(combineTex);
-		//rect.Draw();
+		rect.SetTexture(combineTex);
+		rect.Draw();
 
 		glfwSwapBuffers(window);
 	}
