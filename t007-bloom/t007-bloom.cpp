@@ -8,8 +8,10 @@
 
 void RenderScene(Shader& shader, Shader& shader2, GLuint texture);
 void CreateVAO(GLuint& VAO, GLuint& VBO);
+void CreateFBO(GLuint& hdrFBO);
 
 GLfloat cubePts[180];
+GLuint g_colorBuffers[2];
 
 int _tmain(int argc, _TCHAR* argv[])
 {
@@ -22,9 +24,12 @@ int _tmain(int argc, _TCHAR* argv[])
 	GLuint VAO, VBO;
 	CreateVAO(VAO, VBO);
 
+	GLuint hdrFBO;
+	CreateFBO(hdrFBO);
+
 	GLuint text = tools::CreateTexture("../common/src/container.jpg");
-	Shader shader("vert004.v", "frag004.f");
-	Shader shader2("vert004_2.v", "frag004_2.f");
+	Shader shader("vert007.v", "frag007.f");
+	Shader shader2("vert007_2.v", "frag007_2.f");
 
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
@@ -41,7 +46,13 @@ int _tmain(int argc, _TCHAR* argv[])
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 		glClearColor(.2, .3, .6, 1);
 		glClearStencil(123);
-		 
+		
+		glBindFramebuffer(GL_FRAMEBUFFER, hdrFBO);
+		GLuint attachments[2] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1 };
+		glDrawBuffers(2, attachments);
+		RenderScene(shader, shader2, text);
+
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		RenderScene(shader, shader2, text);
 
 		glfwSwapBuffers(window);
@@ -96,4 +107,26 @@ void CreateVAO(GLuint& VAO, GLuint& VBO)
 
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
+void CreateFBO(GLuint& hdrFBO)
+{
+	glGenFramebuffers(1, &hdrFBO);
+	glBindFramebuffer(GL_FRAMEBUFFER, hdrFBO);
+	glGenTextures(2, g_colorBuffers);
+	for (GLuint i = 0; i < 2; i++)
+	{
+		glBindTexture(GL_TEXTURE_2D, g_colorBuffers[i]);
+		glTexImage2D(
+			GL_TEXTURE_2D, 0, GL_RGB16F, SCR_WIDTH, SCR_HEIGHT, 0, GL_RGB, GL_FLOAT, NULL
+			);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+		// attach texture to framebuffer
+		glFramebufferTexture2D(
+			GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, GL_TEXTURE_2D, g_colorBuffers[i], 0
+			);
+	}
 }
