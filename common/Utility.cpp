@@ -6,15 +6,15 @@ COMMON_API glm::mat4 g_Mat4;
 
 namespace tools
 {
-	GLuint CreateTexture(char* path, GLuint param1, GLuint param2)
+	GLuint CreateTexture(char* path, GLuint wrapModel, GLuint filterModel)
 	{
 		GLuint  texture;
 		glGenTextures(1, &texture);
 		glBindTexture(GL_TEXTURE_2D, texture);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, param1);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, param1);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, param2);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, param2);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrapModel);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrapModel);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filterModel);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filterModel);
 		
 		FREE_IMAGE_FORMAT format = FreeImage_GetFIFFromFilename(path);
 		FIBITMAP* fib = FreeImage_Load(format, path);
