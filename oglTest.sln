@@ -18,6 +18,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "t006-shadowmap", "t006-shadowmap\t006.vcxproj", "{E0C54999-28E4-4E25-9725-64B70707AC39}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "t007-bloom", "t007-bloom\t007-bloom.vcxproj", "{2A383327-DB52-4FAA-8C64-8769183BFDCB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A86D4152-F15E-4A05-AD78-4D74F70A5B82} = {A86D4152-F15E-4A05-AD78-4D74F70A5B82}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

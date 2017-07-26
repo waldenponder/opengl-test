@@ -1,8 +1,3 @@
-
-/*
-
-*/
-
 #include "stdafx.h"
 #include "../common/common.out.h"
 
@@ -30,44 +25,51 @@ int _tmain(int argc, _TCHAR* argv[])
 	GLuint combineFBO, combineTex;
 	tools::CreateFBO(combineFBO, combineTex);
 
-	GLuint text = tools::CreateTexture("../common/src/container.jpg");
+	GLuint containerTex = tools::CreateTexture("../common/src/container.jpg");
 	Shader shader("vert007.v", "frag007.f");
 	Shader shader2("vert007_2.v", "frag007_2.f");
-
+		   	
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 	glEnable(GL_STENCIL_TEST);
 	glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
-	
+
 	glEnable(GL_CULL_FACE);
+	glFrontFace(GL_CCW);
+	glCullFace(GL_BACK);
 
 	glBindVertexArray(VAO);
-	Rectangle rect;
-
+	 
 	while (!glfwWindowShouldClose(window))
 	{
 		glfwPollEvents();
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 		glClearColor(.2, .3, .6, 1);
-		glClearStencil(11);
+		glClearStencil(0);
 		
 		//glBindFramebuffer(GL_FRAMEBUFFER, sperateFBO);
 		//GLuint attachments[2] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1 };
 		//glDrawBuffers(2, attachments);
 		//glBindFramebuffer(GL_FRAMEBUFFER, combineFBO);
-		//RenderScene(shader, shader2, text);
 
-		//glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		RenderScene(shader, shader2, text);
+		glBindFramebuffer(GL_FRAMEBUFFER, combineFBO);
+		RenderScene(shader, shader2, containerTex);
 		
+		//glClear(GL_STENCIL_BUFFER_BIT);
+		//glClearStencil(0);
+		//glStencilFunc(GL_ALWAYS, 1, 0xFF);
+		//glStencilMask(0x00);
+
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		Rectangle rect;
 		rect.SetTexture(combineTex);
 		rect.Draw();
 
 		glfwSwapBuffers(window);
 	}
 
-	glfwSwapBuffers(window);
+	glfwTerminate();
 
 	return 0;
 }
@@ -87,17 +89,15 @@ void RenderScene(Shader& shader, Shader& shader2, GLuint text)
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 
 	//2	 äÖÈ¾±ß¿ò
-	float s = 1.02f;
-	glm::mat4 Mat2 = glm::scale(g_Mat4, glm::vec3(s, s, s));
-	glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
-	//½ûÖ¹Ä£°å»º´æ
-	glStencilMask(0x00);
-	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	//glLineWidth(3);
-	shader2.Use();
-	shader2.setUniformMat4f("vert_mat", Mat2);
-	glDrawArrays(GL_TRIANGLES, 0, 36);
-	glStencilMask(0xFF);
+	//float s = 1.02f;
+	//glm::mat4 Mat2 = glm::scale(g_Mat4, glm::vec3(s, s, s));
+	//glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+	////½ûÖ¹Ä£°å»º´æ
+	//glStencilMask(0x00);
+	//shader2.Use();
+	//shader2.setUniformMat4f("vert_mat", Mat2);
+	//glDrawArrays(GL_TRIANGLES, 0, 36);
+	//glStencilMask(0xFF);
 }
 
 void CreateVAO(GLuint& VAO, GLuint& VBO)

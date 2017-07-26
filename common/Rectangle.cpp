@@ -41,10 +41,10 @@ void Rectangle::Init()
 	GLuint VBO, EBO;
 
 	static GLfloat pts[] =
-	{
-		g_size, g_size, 0.0f, 1, 0, 0, 1.0f, 1.0f,  // срио╫г
-		g_size, -g_size, 0.0f, 0, 1, 0, 1.0f, 0.0f,  // сроб╫г
+	{	
 		-g_size, -g_size, 0.0f, 0, 0, 1, 0.0f, 0.0f,  // вСоб╫г
+		g_size, -g_size, 0.0f, 0, 1, 0, 1.0f, 0.0f,  // сроб╫г
+		g_size, g_size, 0.0f, 1, 0, 0, 1.0f, 1.0f,  // срио╫г
 		-g_size, g_size, 0.0f, 1, 1, 0, 0.0f, 1.0f  // вСио╫г
 	};
 
