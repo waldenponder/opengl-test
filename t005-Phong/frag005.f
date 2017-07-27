@@ -13,8 +13,8 @@ in vec3 vPos;
 
 void main()
 {
-	//vec4 color = texture(uSAMP, vTexCoor);
-	vec4 color = vec4(0.3, 0.3, 0.3, 1);
+	vec4 color = texture(uSAMP, vTexCoor);
+	//vec4 color = vec4(0.3, 0.3, 0.3, 1);
 
 	//ambient
 	float factor = 0.4f;

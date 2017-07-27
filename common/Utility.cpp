@@ -39,6 +39,20 @@ namespace tools
 		glGenFramebuffers(1, &frambuffer);
 		glBindFramebuffer(GL_FRAMEBUFFER, frambuffer);
 
+		//// Add depth buffer as a renderbuffer to fbo
+		//// create depth buffer id
+
+		//glGenRenderbuffers(1, &m_DepthBuffer);
+		//glBindRenderbuffer(GL_RENDERBUFFER, m_DepthBuffer);
+
+		//// allocate space to render buffer for depth buffer
+		//glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, m_FBOWidth, m_FBOHeight);
+
+		//// attaching renderBuffer to FBO
+		//// attach depth buffer to FBO at depth_attachment
+		//glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, m_DepthBuffer);
+
+
 		glGenTextures(1, &texColorBuffer);
 		glBindTexture(GL_TEXTURE_2D, texColorBuffer);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);

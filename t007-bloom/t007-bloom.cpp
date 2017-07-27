@@ -54,6 +54,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		//glBindFramebuffer(GL_FRAMEBUFFER, combineFBO);
 
 		glBindFramebuffer(GL_FRAMEBUFFER, combineFBO);
+
 		RenderScene(shader, shader2, containerTex);
 		
 		//glClear(GL_STENCIL_BUFFER_BIT);
@@ -79,9 +80,9 @@ void RenderScene(Shader& shader, Shader& shader2, GLuint text)
 	//1	 正常渲染
 	glm::mat4 Mat1 = g_Mat4;
 	//调用后模板缓存区值为1
-	glStencilFunc(GL_ALWAYS, 1, 0xFF);
+	//glStencilFunc(GL_ALWAYS, 1, 0xFF);
 	//允许写入模板缓存
-	glStencilMask(0xFF);
+	//glStencilMask(0xFF);
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	shader.Use();
 	shader.setUniformMat4f("vert_mat", Mat1);
@@ -91,9 +92,9 @@ void RenderScene(Shader& shader, Shader& shader2, GLuint text)
 	//2	 渲染边框
 	//float s = 1.02f;
 	//glm::mat4 Mat2 = glm::scale(g_Mat4, glm::vec3(s, s, s));
-	//glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+	////glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
 	////禁止模板缓存
-	//glStencilMask(0x00);
+	////glStencilMask(0x00);
 	//shader2.Use();
 	//shader2.setUniformMat4f("vert_mat", Mat2);
 	//glDrawArrays(GL_TRIANGLES, 0, 36);
