@@ -100,7 +100,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	GLuint depthTexture, depthFbo;
 	createShadowMap(depthTexture, depthFbo);
 
-	GLuint tex = tools::CreateTexture("../common/src/floor.jpg");
+	GLuint floorTex = tools::CreateTexture("../common/src/floor.jpg");
 	
 	Shader shader("vert006.v", "frag006.f");
 	Shader shaderDepth("vert006_2.v", "frag006_2.f");
@@ -162,7 +162,7 @@ int _tmain(int argc, _TCHAR* argv[])
 			shader.setUniformMat4f("uProjection", projection);
 
 			shader.setUniformTexture2D("uDepthTexture", depthTexture, 0);
-			shader.setUniformTexture2D("uSAMP", tex, 1);
+			shader.setUniformTexture2D("uSAMP", floorTex, 1);
 			shader.setUniformVec3f("uLightColor", 1, 1, 1);
 			shader.setUniformVec3f("uLightPos", lightPos);
 			shader.setUniformVec3f("uViewPos", CameraPos);

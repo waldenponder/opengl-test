@@ -19,7 +19,7 @@ namespace tools
 		FREE_IMAGE_FORMAT format = FreeImage_GetFIFFromFilename(path);
 		FIBITMAP* fib = FreeImage_Load(format, path);
 		int width = FreeImage_GetWidth(fib);
-		int height = FreeImage_GetWidth(fib);
+		int height = FreeImage_GetHeight(fib);
 		unsigned char* image = FreeImage_GetBits(fib);
 	  		
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
