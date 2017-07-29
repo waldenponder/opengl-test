@@ -1,8 +1,6 @@
 #include "stdafx.h"
 #include "../common/common.out.h"
-/*
 
-*/
 void RenderScene(Shader& shader, Shader& shader2, GLuint texture);
 void CreateVAO(GLuint& VAO, GLuint& VBO);
 void CreateFBO(GLuint& hdrFBO);
