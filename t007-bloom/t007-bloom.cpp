@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "../common/common.out.h"
+/*
 
+*/
 void RenderScene(Shader& shader, Shader& shader2, GLuint texture);
 void CreateVAO(GLuint& VAO, GLuint& VBO);
 void CreateFBO(GLuint& hdrFBO);
@@ -13,7 +15,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	tools::GetCubePts_withTexture(cubePts);
 
 	GLFWwindow* window;
-	PREPARE_GLFW_WINDOW(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME, tools::default_key_callback);
+	PREPARE_GLFW_WINDOW(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME, tools::DefaultKeyCallback);
 	g_Mat4 = glm::mat4(1.0);
 
 	GLuint VAO, VBO;
@@ -22,7 +24,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	GLuint sperateFBO;
 	CreateFBO(sperateFBO);
 
-	GLuint combineFBO, combineTex;
+	GLuint combineFBO, combineTex, rbo;
 	tools::CreateFBO(combineFBO, combineTex);
 
 	GLuint containerTex = tools::CreateTexture("../common/src/container.jpg");
@@ -39,31 +41,23 @@ int _tmain(int argc, _TCHAR* argv[])
 	glCullFace(GL_BACK);
 
 	glBindVertexArray(VAO);
-	 
+		
 	while (!glfwWindowShouldClose(window))
 	{
 		glfwPollEvents();
-
+												 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 		glClearColor(.2, .3, .6, 1);
 		glClearStencil(0);
-		
-		//glBindFramebuffer(GL_FRAMEBUFFER, sperateFBO);
-		//GLuint attachments[2] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1 };
-		//glDrawBuffers(2, attachments);
-		//glBindFramebuffer(GL_FRAMEBUFFER, combineFBO);
 
 		glBindFramebuffer(GL_FRAMEBUFFER, combineFBO);
-
+						   
 		RenderScene(shader, shader2, containerTex);
 		
-		//glClear(GL_STENCIL_BUFFER_BIT);
-		//glClearStencil(0);
-		//glStencilFunc(GL_ALWAYS, 1, 0xFF);
-		//glStencilMask(0x00);
-
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
 		Rectangle rect;
+		//rect.SetShader(shader);
 		rect.SetTexture(combineTex);
 		rect.Draw();
 
@@ -77,28 +71,28 @@ int _tmain(int argc, _TCHAR* argv[])
 
 void RenderScene(Shader& shader, Shader& shader2, GLuint text)
 {
+	//2	 渲染边框
+	float s = 1.02f;
+	glm::mat4 Mat2 = glm::scale(g_Mat4, glm::vec3(s, s, s));
+	//glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+	////禁止模板缓存
+	//glStencilMask(0x00);
+	shader2.Use();
+	shader2.setUniformMat4f("vert_mat", Mat2);
+	glDrawArrays(GL_TRIANGLES, 0, 36);
+	glStencilMask(0xFF);
+
 	//1	 正常渲染
 	glm::mat4 Mat1 = g_Mat4;
-	//调用后模板缓存区值为1
+	////调用后模板缓存区值为1
 	//glStencilFunc(GL_ALWAYS, 1, 0xFF);
-	//允许写入模板缓存
+	////允许写入模板缓存
 	//glStencilMask(0xFF);
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	shader.Use();
 	shader.setUniformMat4f("vert_mat", Mat1);
 	shader.setUniformTexture2D("SAMP", text, 0);
 	glDrawArrays(GL_TRIANGLES, 0, 36);
-
-	//2	 渲染边框
-	//float s = 1.02f;
-	//glm::mat4 Mat2 = glm::scale(g_Mat4, glm::vec3(s, s, s));
-	////glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
-	////禁止模板缓存
-	////glStencilMask(0x00);
-	//shader2.Use();
-	//shader2.setUniformMat4f("vert_mat", Mat2);
-	//glDrawArrays(GL_TRIANGLES, 0, 36);
-	//glStencilMask(0xFF);
 }
 
 void CreateVAO(GLuint& VAO, GLuint& VBO)

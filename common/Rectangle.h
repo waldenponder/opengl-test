@@ -8,6 +8,7 @@ public:
 	~Rectangle();
 	void Draw();
 	void SetTexture(GLuint tex);
+	void SetShader(const Shader& sd) { _shader = sd; }
 
 private:
 	void Init();

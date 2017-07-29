@@ -18,5 +18,5 @@ namespace tools
 	//获得288个浮点型的数组, 顶点/纹理/法线
 	COMMON_API void  GetCubePts_withTextureNormal(GLfloat* arr);
 
-	COMMON_API void  default_key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
+	COMMON_API void  DefaultKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mode);
 }

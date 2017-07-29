@@ -12,7 +12,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	tools::GetCubePts_withTexture(cubePts);
 
 	GLFWwindow* window; 
-	PREPARE_GLFW_WINDOW(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME, tools::default_key_callback);
+	PREPARE_GLFW_WINDOW(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME, tools::DefaultKeyCallback);
 	g_Mat4 = glm::mat4(1.0);
 
 	GLuint VAO, VBO;
