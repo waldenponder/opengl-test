@@ -1,21 +1,38 @@
 #version 330 core
-layout (location = 0) in vec3 aPosition;
-layout (location = 1) in vec2 aCoor;
-layout (location = 1) in vec3 aNormal;
+layout(location = 0) in vec3 position;
+layout(location = 1) in vec3 normal;
+layout(location = 2) in vec2 texCoords;
+layout(location = 3) in vec3 tangent;
+layout(location = 4) in vec3 bitangent;
 
-uniform mat4 uModel;
-uniform mat4 uView;
-uniform mat4 uProjection;
+out VS_OUT{
+	vec3 FragPos;
+	vec2 TexCoords;
+	vec3 TangentLightPos;
+	vec3 TangentViewPos;
+	vec3 TangentFragPos;
+} vs_out;
 
-out vec2 vTexCoor;
-out vec3 vNormal;
-out vec3 vPos;
+uniform mat4 projection;
+uniform mat4 view;
+uniform mat4 model;
+
+uniform vec3 lightPos;
+uniform vec3 viewPos;
 
 void main()
 {
-	gl_Position = uProjection * uView * uModel * vec4(aPosition.x, aPosition.y, aPosition.z, 1.0);
-	//gl_Position = model * vec4(aPosition.x, aPosition.y, aPosition.z, 1.0);
-	vTexCoor = vec2(aCoor.x, aCoor.y);
-	vNormal = mat3(transpose(inverse(uModel))) * aNormal;
-	vPos = (uModel * vec4(aPosition, 1.0f)).xyz;
+	gl_Position = projection * view * model * vec4(position, 1.0f);
+	vs_out.FragPos = vec3(model * vec4(position, 1.0));
+	vs_out.TexCoords = texCoords;
+
+	mat3 normalMatrix = transpose(inverse(mat3(model)));
+	vec3 T = normalize(normalMatrix * tangent);
+	vec3 B = normalize(normalMatrix * bitangent);
+	vec3 N = normalize(normalMatrix * normal);
+
+	mat3 TBN = transpose(mat3(T, B, N));
+	vs_out.TangentLightPos = TBN * lightPos;
+	vs_out.TangentViewPos = TBN * viewPos;
+	vs_out.TangentFragPos = TBN * vs_out.FragPos;
 }

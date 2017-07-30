@@ -1,42 +1,41 @@
 #version 330 core
+out vec4 FragColor;
 
-uniform sampler2D uSAMP;
-uniform vec3  uLightPos;
-uniform vec3  uViewPos;
-uniform vec3  uLightColor;
+in VS_OUT{
+	vec3 FragPos;
+	vec2 TexCoords;
+	vec3 TangentLightPos;
+	vec3 TangentViewPos;
+	vec3 TangentFragPos;
+} fs_in;
 
-out vec4 fColor;
+uniform sampler2D Map;
+uniform sampler2D normalMap;
 
-in vec2 vTexCoor;
-in vec3 vNormal;
-in vec3 vPos;
+//uniform bool normalMapping;
 
 void main()
 {
-	vec4 color = texture(uSAMP, vTexCoor);
-	//vec4 color = vec4(0.3, 0.3, 0.3, 1);
+	// Obtain normal from normal map in range [0,1]
+	vec3 normal = texture(normalMap, fs_in.TexCoords).rgb;
+	// Transform normal vector to range [-1,1]
+	normal = normalize(normal * 2.0 - 1.0);  // this normal is in tangent space
 
-	//ambient
-	float factor = 0.4f;
-	vec3 ambient = factor *  uLightColor;
+	// Get diffuse color
+	vec3 color = texture(Map, fs_in.TexCoords).rgb;
+	// Ambient
+	vec3 ambient = .3 * color;
+	// Diffuse
+	vec3 lightDir = normalize(fs_in.TangentLightPos - fs_in.TangentFragPos);
+	float diff = max(dot(lightDir, normal), 0.0);
+	vec3 diffuse = diff * color;
+	// Specular
+	vec3 viewDir = normalize(fs_in.TangentViewPos - fs_in.TangentFragPos);
+	vec3 reflectDir = reflect(-lightDir, normal);
+	vec3 halfwayDir = normalize(lightDir + viewDir);
+	float spec = pow(max(dot(normal, halfwayDir), 0.0), 32.0);
+	vec3 specular = vec3(0.2) * spec;
 
-	//diffuse
-	vec3 n = normalize(vNormal);
-	vec3 lightDir = normalize(uLightPos - vPos);
-	float factor2 = max(dot(n, lightDir), 0);
-	vec3 diffuse = factor2 * uLightColor;
-
-	//specular
-	float strength = 0.6f;
-	vec3 viewDir = normalize(uViewPos - vPos);
-	vec3 reflectDir = reflect(-lightDir, n);
-	float factor4 =pow(max(dot(reflectDir, viewDir), 0), 128);
-
-	vec3 specular = factor4 * strength * uLightColor;
-
-
-	vec3 result = (ambient + diffuse + specular) * color.xyz;
-	
-	//fColor = color;
-	fColor = vec4(result, 1.0);
+	FragColor = vec4(ambient + diffuse + specular, 1.0f);
+	//FragColor = vec4(normal, 1);
 }

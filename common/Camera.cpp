@@ -4,7 +4,7 @@
 
 static Camera* g_sCamera = nullptr;
 
-static const TVec3 g_defaultPos = TVec3(40, 50, 50);
+static TVec3 g_defaultPos = TVec3(40, 50, 50);
 
 Camera* Camera::Instance()
 {
@@ -73,7 +73,7 @@ TMat4 Camera::GetProjectionMatrix()
 
 void Camera::ConfigViewMatrix(TVec3 pos, TVec3 rotation, TVec3 up)
 {
-	_pos = pos;
+	g_defaultPos = _pos = pos;
 	_rotation = rotation;
 	_up = up;
 }
