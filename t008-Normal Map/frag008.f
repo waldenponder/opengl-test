@@ -1,7 +1,8 @@
 #version 330 core
 out vec4 FragColor;
 
-in VS_OUT{
+in VS_OUT
+{
 	vec3 FragPos;
 	vec2 TexCoords;
 	vec3 TangentLightPos;
@@ -11,8 +12,6 @@ in VS_OUT{
 
 uniform sampler2D Map;
 uniform sampler2D normalMap;
-
-//uniform bool normalMapping;
 
 void main()
 {

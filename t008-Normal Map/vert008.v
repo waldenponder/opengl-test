@@ -5,7 +5,8 @@ layout(location = 2) in vec2 texCoords;
 layout(location = 3) in vec3 tangent;
 layout(location = 4) in vec3 bitangent;
 
-out VS_OUT{
+out VS_OUT
+{
 	vec3 FragPos;
 	vec2 TexCoords;
 	vec3 TangentLightPos;
