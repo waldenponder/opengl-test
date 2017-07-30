@@ -22,17 +22,22 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "t003-rtt", "t003-rtt\t003.v
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "t004-stencil", "t004-stencil\t004.vcxproj", "{AE29A4DE-3B59-47B4-8AA1-B8801FADB501}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "t005-Phong", "t005-Phong\t005.vcxproj", "{5889CBDF-B016-42D1-B070-C9E491D5B5D9}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "t005-phong", "t005-Phong\t005.vcxproj", "{5889CBDF-B016-42D1-B070-C9E491D5B5D9}"
 	ProjectSection(ProjectDependencies) = postProject
 		{A86D4152-F15E-4A05-AD78-4D74F70A5B82} = {A86D4152-F15E-4A05-AD78-4D74F70A5B82}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "t006-shadowmap", "t006-shadowmap\t006.vcxproj", "{E0C54999-28E4-4E25-9725-64B70707AC39}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "t006-shadow map", "t006-shadowmap\t006.vcxproj", "{E0C54999-28E4-4E25-9725-64B70707AC39}"
 	ProjectSection(ProjectDependencies) = postProject
 		{A86D4152-F15E-4A05-AD78-4D74F70A5B82} = {A86D4152-F15E-4A05-AD78-4D74F70A5B82}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "t007-bloom", "t007-bloom\t007-bloom.vcxproj", "{2A383327-DB52-4FAA-8C64-8769183BFDCB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "-t007-bloom", "t007-bloom\t007-bloom.vcxproj", "{2A383327-DB52-4FAA-8C64-8769183BFDCB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A86D4152-F15E-4A05-AD78-4D74F70A5B82} = {A86D4152-F15E-4A05-AD78-4D74F70A5B82}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "t008-normal map", "t008-Normal Map\t008-Normal Map.vcxproj", "{60A75078-12DF-4FDD-B58A-8E57A132EFAD}"
 	ProjectSection(ProjectDependencies) = postProject
 		{A86D4152-F15E-4A05-AD78-4D74F70A5B82} = {A86D4152-F15E-4A05-AD78-4D74F70A5B82}
 	EndProjectSection
@@ -75,6 +80,10 @@ Global
 		{2A383327-DB52-4FAA-8C64-8769183BFDCB}.Debug|Win32.Build.0 = Debug|Win32
 		{2A383327-DB52-4FAA-8C64-8769183BFDCB}.Release|Win32.ActiveCfg = Release|Win32
 		{2A383327-DB52-4FAA-8C64-8769183BFDCB}.Release|Win32.Build.0 = Release|Win32
+		{60A75078-12DF-4FDD-B58A-8E57A132EFAD}.Debug|Win32.ActiveCfg = Debug|Win32
+		{60A75078-12DF-4FDD-B58A-8E57A132EFAD}.Debug|Win32.Build.0 = Debug|Win32
+		{60A75078-12DF-4FDD-B58A-8E57A132EFAD}.Release|Win32.ActiveCfg = Release|Win32
+		{60A75078-12DF-4FDD-B58A-8E57A132EFAD}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

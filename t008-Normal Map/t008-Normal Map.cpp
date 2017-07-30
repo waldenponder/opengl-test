@@ -1,6 +1,6 @@
 
 /*
-Phong¹âÕÕ
+·¨ÏßÌùÍ¼
 */
 
 #include "stdafx.h"
@@ -64,8 +64,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	GLuint VAO, VBO;
 	createVAO(VAO, VBO);
 
-	GLuint texture = tools::CreateTexture("../common/src/floor.jpg");
-	Shader shader("vert005.v", "frag005.f");
+	GLuint texture = tools::CreateTexture("../common/src/brick.jpg");
+	Shader shader("vert008.v", "frag008.f");
 
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
@@ -90,10 +90,9 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		TMat4 view = Camera::Instance()->GetViewMatrix();
 		TMat4 projection = Camera::Instance()->GetProjectionMatrix();
-		//Camera::Instance()->_pMoveVale = &lightPos;
-		//Camera::Instance()->_moveFactor = 50;
+
 		if (Camera::Instance()->_bNeedRotation)
-		    lightPos = TMat3(glm::rotate(glm::mat4(1.0), 0.5f, Y_AXIS)) * lightPos;
+			lightPos = TMat3(glm::rotate(glm::mat4(1.0), 0.5f, Y_AXIS)) * lightPos;
 
 		for (auto Mat : modelMats)
 		{
@@ -103,7 +102,7 @@ int _tmain(int argc, _TCHAR* argv[])
 			shader.setUniformMat4f("uModel", Mat);
 			shader.setUniformMat4f("uView", view);
 			shader.setUniformMat4f("uProjection", projection);
-		
+
 			shader.setUniformTexture2D("uSAMP", texture, 0);
 			shader.setUniformVec3f("uLightColor", 1, 1, 1);
 			shader.setUniformVec3f("uLightPos", lightPos);

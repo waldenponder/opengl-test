@@ -14,7 +14,7 @@
     <ProjectGuid>{E0C54999-28E4-4E25-9725-64B70707AC39}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>t006</RootNamespace>
-    <ProjectName>t006-shadowmap</ProjectName>
+    <ProjectName>t006-shadow map</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

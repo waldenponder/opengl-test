@@ -22,8 +22,12 @@ namespace tools
 		int height = FreeImage_GetHeight(fib);
 		unsigned char* image = FreeImage_GetBits(fib);
 	  		
+		unsigned int bpp = FreeImage_GetBPP(fib);
+
 		//	倒数第三个参数为 GL_RGB 则得不得到正确的结果
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, image);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, 
+			bpp == 32 ? GL_BGRA : GL_BGR, GL_UNSIGNED_BYTE, image);
+
 		glGenerateMipmap(GL_TEXTURE_2D);
 		
 		FreeImage_Unload(fib);
