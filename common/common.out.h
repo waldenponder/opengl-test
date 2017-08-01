@@ -37,7 +37,7 @@ using std::endl;
 #include "../common/include/glm/gtc/type_ptr.hpp"
 #include "../common/Utility.h"
 #include "../common/Camera.h"
-#include "../common/Rectangle.h"
+#include "../common/Rectangle2D.h"
 
 #pragma comment(lib, "glut32.lib")
 #pragma comment(lib, "glew32.lib")

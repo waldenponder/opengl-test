@@ -1,42 +1,45 @@
 #include "stdafx.h"
-#include "Rectangle.h"
+#include "Rectangle2D.h"
 #include "Utility.h"
 
 static float g_size;
 		
-Rectangle::Rectangle(char* img /*= ""*/, float sz /*= 1.0f*/)
-	: _shader("../common/shader/Rectangle.v", "../common/shader/Rectangle.f")
+Rectangle2D::Rectangle2D(char* img /*= ""*/, float sz /*= 1.0f*/)
+	: _shader("../common/shader/Rectangle2D.v", "../common/shader/Rectangle2D.f")
 {
 	g_size = sz;
 
 	Init();
 
 	if (img != "")
-	{
-		GLuint tex = tools::CreateTexture(img);
-		_shader.setUniformTexture2D("sampler", tex, 0);
-	}
+		_textureID = tools::CreateTexture(img, GL_CLAMP_TO_EDGE);
+	else
+		std::cout << " Rectangle::Rectangle img ЮЊПе " << std::endl;
 }
 
-Rectangle::~Rectangle()
+Rectangle2D::~Rectangle2D()
 {
 }
 
-void Rectangle::Draw()
+void Rectangle2D::Draw()
 {
 	_shader.Use();
+
+	_shader.setUniformTexture2D("sampler", _textureID, 1);
 
 	glBindVertexArray(_VAO);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
 }
 
-void Rectangle::SetTexture(GLuint tex)
+
+void Rectangle2D::SetTexture(GLuint tex)
 {
 	_shader.setUniformTexture2D("sampler", tex, 0);
 }
 
-void Rectangle::Init()
+
+void Rectangle2D::Init()
 {
 	GLuint VBO, EBO;
 

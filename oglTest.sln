@@ -42,6 +42,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "t008-normal map", "t008-Nor
 		{A86D4152-F15E-4A05-AD78-4D74F70A5B82} = {A86D4152-F15E-4A05-AD78-4D74F70A5B82}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "t009-blending", "t009-blending\t009-blending.vcxproj", "{C56F7378-C001-4637-B82D-D12ECAA86646}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A86D4152-F15E-4A05-AD78-4D74F70A5B82} = {A86D4152-F15E-4A05-AD78-4D74F70A5B82}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -84,6 +89,10 @@ Global
 		{60A75078-12DF-4FDD-B58A-8E57A132EFAD}.Debug|Win32.Build.0 = Debug|Win32
 		{60A75078-12DF-4FDD-B58A-8E57A132EFAD}.Release|Win32.ActiveCfg = Release|Win32
 		{60A75078-12DF-4FDD-B58A-8E57A132EFAD}.Release|Win32.Build.0 = Release|Win32
+		{C56F7378-C001-4637-B82D-D12ECAA86646}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C56F7378-C001-4637-B82D-D12ECAA86646}.Debug|Win32.Build.0 = Debug|Win32
+		{C56F7378-C001-4637-B82D-D12ECAA86646}.Release|Win32.ActiveCfg = Release|Win32
+		{C56F7378-C001-4637-B82D-D12ECAA86646}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

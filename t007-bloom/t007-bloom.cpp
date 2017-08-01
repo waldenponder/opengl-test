@@ -54,7 +54,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-		Rectangle rect;
+		Rectangle2D rect;
 		//rect.SetShader(shader);
 		rect.SetTexture(combineTex);
 		rect.Draw();

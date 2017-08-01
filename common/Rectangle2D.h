@@ -1,18 +1,19 @@
 #pragma once
 #include "Shader.h"
 
-class COMMON_API Rectangle
+class COMMON_API Rectangle2D
 {
 public:
-	Rectangle(char* img = "", float sz = 1.0f);
-	~Rectangle();
+	Rectangle2D(char* img = "", float sz = 1.0f);
+	~Rectangle2D();
+
 	void Draw();
 	void SetTexture(GLuint tex);
-	void SetShader(const Shader& sd) { _shader = sd; }
 
 private:
 	void Init();
 
+	GLuint _textureID;
 	Shader _shader;
 	GLuint _VAO;
 };

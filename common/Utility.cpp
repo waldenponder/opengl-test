@@ -25,7 +25,7 @@ namespace tools
 		unsigned int bpp = FreeImage_GetBPP(fib);
 
 		//	倒数第三个参数为 GL_RGB 则得不得到正确的结果
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, 
+		glTexImage2D(GL_TEXTURE_2D, 0, bpp == 32 ? GL_RGBA : GL_RGB, width, height, 0,
 			bpp == 32 ? GL_BGRA : GL_BGR, GL_UNSIGNED_BYTE, image);
 
 		glGenerateMipmap(GL_TEXTURE_2D);
