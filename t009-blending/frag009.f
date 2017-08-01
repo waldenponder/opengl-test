@@ -16,6 +16,8 @@ void main()
 	vec4 color = texture(uSAMP, vTexCoor);
 	//vec4 color = vec4(0.3, 0.3, 0.3, 1);
 
+	//if (color.a < 0.1) discard;
+
 	//ambient
 	float factor = 0.4f;
 	vec3 ambient = factor *  uLightColor;

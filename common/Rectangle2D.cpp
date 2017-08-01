@@ -2,14 +2,10 @@
 #include "Rectangle2D.h"
 #include "Utility.h"
 
-static float g_size;
-		
-Rectangle2D::Rectangle2D(char* img /*= ""*/, float sz /*= 1.0f*/)
+Rectangle2D::Rectangle2D(char* img /*= ""*/, GLfloat x1 /*= -1*/, GLfloat y1 /*= -1*/, GLfloat x2 /*= 1*/, GLfloat y2 /*= 1*/)
 	: _shader("../common/shader/Rectangle2D.v", "../common/shader/Rectangle2D.f")
 {
-	g_size = sz;
-
-	Init();
+	Init(x1, y1, x2, y2);
 
 	if (img != "")
 		_textureID = tools::CreateTexture(img, GL_CLAMP_TO_EDGE);
@@ -39,16 +35,16 @@ void Rectangle2D::SetTexture(GLuint tex)
 }
 
 
-void Rectangle2D::Init()
+void Rectangle2D::Init(GLfloat x1, GLfloat y1, GLfloat x2, GLfloat y2)
 {
 	GLuint VBO, EBO;
 
 	static GLfloat pts[] =
 	{	
-		-g_size, -g_size, 0.0f, 0, 0, 1, 0.0f, 0.0f,  // вСоб╫г
-		g_size, -g_size, 0.0f, 0, 1, 0, 1.0f, 0.0f,  // сроб╫г
-		g_size, g_size, 0.0f, 1, 0, 0, 1.0f, 1.0f,  // срио╫г
-		-g_size, g_size, 0.0f, 1, 1, 0, 0.0f, 1.0f  // вСио╫г
+		x1, y1, 0.0f, 0, 0, 1, 0.0f, 0.0f,  // вСоб╫г
+		x2, y1, 0.0f, 0, 1, 0, 1.0f, 0.0f,  // сроб╫г
+		x2, y2, 0.0f, 1, 0, 0, 1.0f, 1.0f,  // срио╫г
+		x1, y2, 0.0f, 1, 1, 0, 0.0f, 1.0f  // вСио╫г
 	};
 
 	static GLuint indices[] =
