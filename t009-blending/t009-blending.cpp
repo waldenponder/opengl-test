@@ -136,10 +136,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	glEnable(GL_DEPTH_TEST);
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
+			  
 	vector<TMat4> modelMats;
 	setUpScene(modelMats);
 
@@ -183,6 +180,8 @@ int _tmain(int argc, _TCHAR* argv[])
 		}
 
 		glBindVertexArray(squareVAO);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		for (auto Mat : modelMats2)
 		{
