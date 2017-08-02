@@ -23,6 +23,9 @@ public:
 
 	void   DirtyRotation() { _dirtyRotation = true; }
 
+	TMat4  GetCameraSpaceMatrix();
+	TMat4  GetWorldSpaceMatrix();
+
 public:
 
 	TVec3* _pMoveVale;
@@ -32,6 +35,7 @@ public:
 	glm::lookAt的参数
 	*/
 	TVec3  _pos;
+	//世界坐标系
 	TVec3  _rotation;
 	TVec3  _up;
 	TVec3  _lookAt;

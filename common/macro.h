@@ -38,5 +38,5 @@
 #define   IN
 #define   OPTIONAL
 
-#define   ToVec4(v3)  TVec4((v3)[0], (v3)[1], (v3)[2], 1)
+#define   ToVec4(v3)  TVec4((v3)[0], (v3)[1], (v3)[2], 0)
 #define   ToVec3(v4)  TVec3((v4)[0], (v4)[1], (v4)[2]) 
