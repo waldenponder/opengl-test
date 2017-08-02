@@ -1,8 +1,6 @@
 #include "stdafx.h"
 #include "../common/common.out.h"
-
-
-
+											  
 void setUpScene(OUT vector<glm::mat4>& modelMats)
 {
 	TMat4 identy(1.0);
@@ -67,7 +65,12 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	glEnable(GL_DEPTH_TEST);
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-			  
+	
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	glDisable(GL_CULL_FACE);
+
 	vector<TMat4> modelMats;
 	setUpScene(modelMats);
 
@@ -84,51 +87,40 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(0, 0, 0, 1);
-
-		glDisable(GL_CULL_FACE);
-
+						 
 		TMat4 view = Camera::Instance()->GetViewMatrix();
 		TMat4 projection = Camera::Instance()->GetProjectionMatrix();
 
 		if (Camera::Instance()->_bNeedRotation)
 			lightPos = TMat3(glm::rotate(glm::mat4(1.0), 0.05f, Y_AXIS)) * lightPos;
 		
-		glBindVertexArray(cubeVAO);
 		shader.Use();
+		shader.setUniformVec3f("uLightColor", 1, 1, 1);
+		shader.setUniformVec3f("uLightPos", lightPos);
+		shader.setUniformVec3f("uViewPos", CameraPos);
+		shader.setUniformMat4f("uView", view);
+		shader.setUniformMat4f("uProjection", projection);
+
+		glBindVertexArray(cubeVAO);
+		shader.setUniformTexture2D("uSAMP", floor, 0);
 
 		for (auto Mat : modelMats)
 		{
 			shader.setUniformMat4f("uModel", Mat);
-			shader.setUniformMat4f("uView", view);
-			shader.setUniformMat4f("uProjection", projection);
-
-			shader.setUniformTexture2D("uSAMP", floor, 0);
-			shader.setUniformVec3f("uLightColor", 1, 1, 1);
-			shader.setUniformVec3f("uLightPos", lightPos);
-			shader.setUniformVec3f("uViewPos", CameraPos);
 			
 			glDrawArrays(GL_TRIANGLES, 0, 36);
 		}
 
 		glBindVertexArray(planeVAO);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		shader.setUniformTexture2D("uSAMP", grass, 1);
 
 		for (auto Mat : modelMats2)
 		{
 			shader.setUniformMat4f("uModel", Mat);
-			shader.setUniformMat4f("uView", view);
-			shader.setUniformMat4f("uProjection", projection);
-
-			shader.setUniformTexture2D("uSAMP", grass, 1);
-			shader.setUniformVec3f("uLightColor", 1, 1, 1);
-			shader.setUniformVec3f("uLightPos", lightPos);
-			shader.setUniformVec3f("uViewPos", CameraPos);
 				
 			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		}
-
-
+		  
 		glfwSwapBuffers(window);
 	}
 
