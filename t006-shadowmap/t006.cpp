@@ -89,7 +89,7 @@ void createShadowMap(OUT GLuint& tex, OUT GLuint& fbo)
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	tools::GetCubePts_withTextureNormal(cubePts);
+	Utility::GetCubePts_withTextureNormal(cubePts);
 	GLFWwindow* window;
 	PREPARE_GLFW_WINDOW(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME, OnKeyDown);
 	g_Mat4 = glm::mat4(1.0);
@@ -100,7 +100,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	GLuint depthTexture, depthFbo;
 	createShadowMap(depthTexture, depthFbo);
 
-	GLuint floorTex = tools::CreateTexture("../common/src/floor.jpg");
+	GLuint floorTex = Utility::CreateTexture("../common/src/floor.jpg");
 	
 	Shader shader("vert006.v", "frag006.f");
 	Shader shaderDepth("vert006_2.v", "frag006_2.f");

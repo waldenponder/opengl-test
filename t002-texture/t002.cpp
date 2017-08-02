@@ -90,8 +90,8 @@ int main()
 		glBindVertexArray(0);
 	}
 
-	GLuint tex = tools::CreateTexture("../common/src/tt.jpg");
-	GLuint tex2 = tools::CreateTexture("../common/src/container.jpg");
+	GLuint tex = Utility::CreateTexture("../common/src/tt.jpg");
+	GLuint tex2 = Utility::CreateTexture("../common/src/container.jpg");
 	 
 	GLint nrAttributes;
 	glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &nrAttributes);

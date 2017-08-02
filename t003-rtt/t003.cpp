@@ -80,7 +80,7 @@ GLfloat quadVertices[] =
 int main()
 {
 	GLfloat cubePts[180];
-	tools::GetCubePts_withTexture(cubePts);
+	Utility::GetCubePts_withTexture(cubePts);
 
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -164,7 +164,7 @@ int main()
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
 
-	GLuint texture = tools::CreateTexture("../common/src/container.jpg", GL_REPEAT, GL_LINEAR);
+	GLuint texture = Utility::CreateTexture("../common/src/container.jpg", GL_REPEAT, GL_LINEAR);
 	
 	Shader shader("vert003.v", "frag003.f");
 	Shader shaderNew("vert003new.v", "frag003new.f");

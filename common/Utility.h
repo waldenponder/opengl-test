@@ -4,7 +4,7 @@
 
 COMMON_API extern glm::mat4 g_Mat4;
 
-namespace tools
+namespace Utility
 {
 	COMMON_API GLuint  CreateTexture(char* path, GLuint wrapModel = GL_REPEAT, GLuint filterModel = GL_LINEAR);
 
@@ -19,4 +19,9 @@ namespace tools
 	COMMON_API void  GetCubePts_withTextureNormal(GLfloat* arr);
 
 	COMMON_API void  DefaultKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mode);
+
+
+	COMMON_API void CreatePlaneVAO(OUT GLuint& VAO);
+
+	COMMON_API void CreateCubeVAO(OUT GLuint& VAO);
 }

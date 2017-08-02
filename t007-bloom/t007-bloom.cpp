@@ -10,10 +10,10 @@ GLuint g_colorBuffers[2];
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	tools::GetCubePts_withTexture(cubePts);
+	Utility::GetCubePts_withTexture(cubePts);
 
 	GLFWwindow* window;
-	PREPARE_GLFW_WINDOW(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME, tools::DefaultKeyCallback);
+	PREPARE_GLFW_WINDOW(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME, Utility::DefaultKeyCallback);
 	g_Mat4 = glm::mat4(1.0);
 
 	GLuint VAO, VBO;
@@ -23,9 +23,9 @@ int _tmain(int argc, _TCHAR* argv[])
 	CreateFBO(sperateFBO);
 
 	GLuint combineFBO, combineTex, rbo;
-	tools::CreateFBO(combineFBO, combineTex);
+	Utility::CreateFBO(combineFBO, combineTex);
 
-	GLuint containerTex = tools::CreateTexture("../common/src/container.jpg");
+	GLuint containerTex = Utility::CreateTexture("../common/src/container.jpg");
 	Shader shader("vert007.v", "frag007.f");
 	Shader shader2("vert007_2.v", "frag007_2.f");
 		   	

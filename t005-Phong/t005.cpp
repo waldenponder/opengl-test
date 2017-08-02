@@ -55,7 +55,7 @@ void createVAO(OUT GLuint& VAO, OUT GLuint& VBO)
 int _tmain(int argc, _TCHAR* argv[])
 {
 
-	tools::GetCubePts_withTextureNormal(cubePts);
+	Utility::GetCubePts_withTextureNormal(cubePts);
 
 	GLFWwindow* window;
 	PREPARE_GLFW_WINDOW(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME, OnKeyDown);
@@ -64,7 +64,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	GLuint VAO, VBO;
 	createVAO(VAO, VBO);
 
-	GLuint texture = tools::CreateTexture("../common/src/floor.jpg");
+	GLuint texture = Utility::CreateTexture("../common/src/floor.jpg");
 	Shader shader("vert005.v", "frag005.f");
 
 	glEnable(GL_DEPTH_TEST);

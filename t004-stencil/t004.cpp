@@ -9,10 +9,10 @@
 int _tmain(int argc, _TCHAR* argv[])
 {
 	GLfloat cubePts[180];
-	tools::GetCubePts_withTexture(cubePts);
+	Utility::GetCubePts_withTexture(cubePts);
 
 	GLFWwindow* window; 
-	PREPARE_GLFW_WINDOW(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME, tools::DefaultKeyCallback);
+	PREPARE_GLFW_WINDOW(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME, Utility::DefaultKeyCallback);
 	g_Mat4 = glm::mat4(1.0);
 
 	GLuint VAO, VBO;
@@ -33,7 +33,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
 
-	GLuint texture = tools::CreateTexture("../common/src/container.jpg");
+	GLuint texture = Utility::CreateTexture("../common/src/container.jpg");
 	Shader shader("vert004.v", "frag004.f");
 	Shader shader2("vert004_2.v", "frag004_2.f");
 

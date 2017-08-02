@@ -8,7 +8,7 @@ Rectangle2D::Rectangle2D(char* img /*= ""*/, GLfloat x1 /*= -1*/, GLfloat y1 /*=
 	Init(x1, y1, x2, y2);
 
 	if (img != "")
-		_textureID = tools::CreateTexture(img, GL_CLAMP_TO_EDGE);
+		_textureID = Utility::CreateTexture(img, GL_CLAMP_TO_EDGE);
 	else
 		std::cout << " Rectangle::Rectangle img ЮЊПе " << std::endl;
 }

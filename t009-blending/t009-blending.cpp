@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "../common/common.out.h"
 
-GLfloat cubePts[288];
+
 
 void setUpScene(OUT vector<glm::mat4>& modelMats)
 {
@@ -45,88 +45,18 @@ void setUpScene2(OUT vector<glm::mat4>& modelMats)
 	modelMats.push_back(TMP);
 }
 
-void createCube(OUT GLuint& VAO)
-{
-	GLuint VBO;
-	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VBO);
-
-	glBindVertexArray(VAO);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(cubePts), cubePts, GL_STATIC_DRAW);
-
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * FLOAT_SIZE, (void*)0);
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8 * FLOAT_SIZE, (void*)(3 * FLOAT_SIZE));
-	glEnableVertexAttribArray(1);
-
-	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 8 * FLOAT_SIZE, (void*)(5 * FLOAT_SIZE));
-	glEnableVertexAttribArray(2);
-
-	glBindVertexArray(0);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-}
-
-void createSquare(OUT GLuint& VAO)
-{
-	GLuint VBO, EBO;
-
-	GLfloat x1,  y1; GLfloat x2, y2;
-
-	x1 = y1 = 0;
-	x2 = y2 = 1;
-	static GLfloat pts[] =
-	{
-		x1, y1, 0.0f, 0, 0, 1, 0.0f, 0.0f,  // 左下角
-		x2, y1, 0.0f, 0, 1, 0, 1.0f, 0.0f,  // 右下角
-		x2, y2, 0.0f, 1, 0, 0, 1.0f, 1.0f,  // 右上角
-		x1, y2, 0.0f, 1, 1, 0, 0.0f, 1.0f  // 左上角
-	};
-
-	static GLuint indices[] =
-	{ // 注意索引从0开始!
-		0, 1, 2, // 第一个三角形
-		0, 2, 3  // 第二个三角形
-	};
-
-	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VBO);
-	glGenBuffers(1, &EBO);
-
-	glBindVertexArray(VAO);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(pts), pts, GL_STATIC_DRAW);
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * FLOAT_SIZE, (void*)0);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * FLOAT_SIZE, (void*)(3 * FLOAT_SIZE));
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * FLOAT_SIZE, (void*)(6 * FLOAT_SIZE));
-
-	glEnableVertexAttribArray(0);
-	glEnableVertexAttribArray(1);
-	glEnableVertexAttribArray(2);
-
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindVertexArray(0);
-}
-
 int _tmain(int argc, _TCHAR* argv[])
 {
-
-	tools::GetCubePts_withTextureNormal(cubePts);
-
 	GLFWwindow* window;
 	PREPARE_GLFW_WINDOW(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME, OnKeyDown);
 	g_Mat4 = glm::mat4(1.0);
 
-	GLuint cubeVAO, squareVAO;
-	createCube(cubeVAO);
-	createSquare(squareVAO);
+	GLuint cubeVAO, planeVAO;
+	Utility::CreateCubeVAO(cubeVAO);
+	Utility::CreatePlaneVAO(planeVAO);
 
-	GLuint floor = tools::CreateTexture("../common/src/floor.jpg");
-	GLuint grass = tools::CreateTexture("../common/src/grass.png");
+	GLuint floor = Utility::CreateTexture("../common/src/floor.jpg");
+	GLuint grass = Utility::CreateTexture("../common/src/grass.png");
 	Shader shader("vert009.v", "frag009.f");
 
 	glEnable(GL_DEPTH_TEST);
@@ -179,7 +109,7 @@ int _tmain(int argc, _TCHAR* argv[])
 			glDrawArrays(GL_TRIANGLES, 0, 36);
 		}
 
-		glBindVertexArray(squareVAO);
+		glBindVertexArray(planeVAO);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
