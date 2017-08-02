@@ -45,6 +45,7 @@ TMat4 Camera::GetViewMatrix()
 	auto mat = GetWorldSpaceMatrix();
 	_up = ToVec3(mat * ToVec4(Y_AXIS));
 	_lookAt = ToVec3(mat * TVec4(0, 0, 0, 0));
+	//_pos = ToVec3(mat * ToVec4(_pos));
 
 	return glm::lookAt(_pos, _lookAt, _up);
 }
@@ -180,18 +181,22 @@ void OnKeyDown(GLFWwindow* window, int key, int scancode, int action, int mode)
 
 	if (key == GLFW_KEY_X || key == GLFW_KEY_Y || key == GLFW_KEY_Z)
 	{
-		TMat4 rot(1);
-		rot = glm::rotate(rot, camera->_rotation[0], X_AXIS);
-		rot = glm::rotate(rot, camera->_rotation[1], Y_AXIS);
-		rot = glm::rotate(rot, camera->_rotation[2], Z_AXIS);
+		//TMat4 rot(1);
+		//rot = glm::rotate(rot, camera->_rotation[0], X_AXIS);
+		//rot = glm::rotate(rot, camera->_rotation[1], Y_AXIS);
+		//rot = glm::rotate(rot, camera->_rotation[2], Z_AXIS);
 
-		auto pos = rot * ToVec4(camera->_pos);
-		camera->_pos = ToVec3(pos);
+		//auto pos = rot * ToVec4(camera->_pos);
+		//camera->_pos = ToVec3(pos);
 
-		auto up = rot * ToVec4(camera->_up);
-		camera->_up = ToVec3(up);
+		//auto up = rot * ToVec4(camera->_up);
+		//camera->_up = ToVec3(up);
 
-		auto lookAt = rot * ToVec4(camera->_lookAt);
-		camera->_lookAt = ToVec3(lookAt);
+		//auto lookAt = rot * ToVec4(camera->_lookAt);
+		//camera->_lookAt = ToVec3(lookAt);
+
+		//mat = glm::inverse(mat);
+
+		camera->_pos = ToVec3(mat * ToVec4(camera->_pos));
 	}
 }
