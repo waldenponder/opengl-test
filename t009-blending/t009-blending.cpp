@@ -45,6 +45,7 @@ void setUpScene2(OUT vector<glm::mat4>& modelMats)
 	modelMats.push_back(TMP);
 }
 
+
 int _tmain(int argc, _TCHAR* argv[])
 {
 	GLFWwindow* window;
