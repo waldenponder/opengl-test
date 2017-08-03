@@ -47,6 +47,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "t009-blending", "t009-blend
 		{A86D4152-F15E-4A05-AD78-4D74F70A5B82} = {A86D4152-F15E-4A05-AD78-4D74F70A5B82}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "t010-sky box", "t010-sky box\t010-sky box.vcxproj", "{E42E29EE-C6E3-4033-90BD-27C972B854B7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -93,6 +95,10 @@ Global
 		{C56F7378-C001-4637-B82D-D12ECAA86646}.Debug|Win32.Build.0 = Debug|Win32
 		{C56F7378-C001-4637-B82D-D12ECAA86646}.Release|Win32.ActiveCfg = Release|Win32
 		{C56F7378-C001-4637-B82D-D12ECAA86646}.Release|Win32.Build.0 = Release|Win32
+		{E42E29EE-C6E3-4033-90BD-27C972B854B7}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E42E29EE-C6E3-4033-90BD-27C972B854B7}.Debug|Win32.Build.0 = Debug|Win32
+		{E42E29EE-C6E3-4033-90BD-27C972B854B7}.Release|Win32.ActiveCfg = Release|Win32
+		{E42E29EE-C6E3-4033-90BD-27C972B854B7}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

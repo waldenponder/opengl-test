@@ -8,6 +8,8 @@ namespace Utility
 {
 	COMMON_API GLuint  CreateTexture(char* path, GLuint wrapModel = GL_REPEAT, GLuint filterModel = GL_LINEAR);
 
+	COMMON_API GLuint  CreateCubemap(const vector<const char*> faces);
+
 	COMMON_API void CreateFBO(GLuint& frambuffer, GLuint& texColorBuffer,
 		GLuint filterModel = GL_LINEAR, GLuint wrapModel = GL_CLAMP_TO_EDGE, 
 		GLuint width = WINDOW_WIDTH, GLuint height = WINDOW_HEIGHT);

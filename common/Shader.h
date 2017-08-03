@@ -17,6 +17,7 @@ public:
 
 	void setUniformMat4f(char* name, glm::mat4 mat4);
 	void setUniformTexture2D(char* name, GLuint texture, int index);
+	void setUniformTextureCube(char* name, GLuint texture, int index);
 
 private:
 	GLuint program;

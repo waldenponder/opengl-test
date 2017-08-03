@@ -8,9 +8,9 @@ namespace Utility
 {
 	GLuint CreateTexture(char* path, GLuint wrapModel, GLuint filterModel)
 	{
-		GLuint  texture;
-		glGenTextures(1, &texture);
-		glBindTexture(GL_TEXTURE_2D, texture);
+		GLuint  ID;
+		glGenTextures(1, &ID);
+		glBindTexture(GL_TEXTURE_2D, ID);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrapModel);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrapModel);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filterModel);
@@ -33,8 +33,48 @@ namespace Utility
 		FreeImage_Unload(fib);
 		glBindTexture(GL_TEXTURE_2D, 0);
 
-		return texture;
+		return ID;
 	}
+
+
+	GLuint CreateCubemap(const vector<const char*> faceVec)
+	{
+		GLuint ID;
+		glGenTextures(1, &ID);
+		glActiveTexture(GL_TEXTURE0);
+
+		glBindTexture(GL_TEXTURE_CUBE_MAP, ID);
+		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+
+		for (int i = 0; i < faceVec.size(); i++)
+		{
+			auto face = faceVec[i];
+			FREE_IMAGE_FORMAT format = FreeImage_GetFIFFromFilename(face);
+			FIBITMAP* fib = FreeImage_Load(format, face);
+			int width = FreeImage_GetWidth(fib);
+			int height = FreeImage_GetHeight(fib);
+			unsigned char* image = FreeImage_GetBits(fib);
+
+			unsigned int bpp = FreeImage_GetBPP(fib);
+
+			//	倒数第三个参数为 GL_RGB 则得不得到正确的结果
+			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, bpp == 32 ? GL_RGBA : GL_RGB,
+				width, height, 0, bpp == 32 ? GL_BGRA : GL_BGR, GL_UNSIGNED_BYTE, image);
+
+			glGenerateMipmap(GL_TEXTURE_2D);
+
+			FreeImage_Unload(fib);
+		}
+
+		glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+
+		return ID;
+	}
+
 	
 	void CreateFBO(GLuint& frambuffer, GLuint& texColorBuffer,
 		GLuint filterModel /*= GL_LINEAR*/, GLuint wrapModel /*= GL_CLAMP_TO_EDGE*/,
@@ -209,6 +249,7 @@ namespace Utility
 			-0.5, 0.5, 0.5, 0, 1,    0, 0, 1,
 			0.5, -0.5, 0.5, 1, 0,    0, 0, 1,
 			0.5, 0.5, 0.5, 1, 1,     0, 0, 1,
+
 			-0.5, 0.5, 0.5, 0, 1,    0, 0, 1,
 			-0.5, -0.5, 0.5, 0, 0,   0, 0, 1,
 			0.5, -0.5, 0.5, 1, 0,    0, 0, 1,

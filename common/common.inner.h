@@ -8,6 +8,10 @@
 #include <iostream>
 #include <sstream>
 #include "macro.h"
+	
+#include <vector>
+#include <map>
+#include <list>
 
 #if 1
 #define use_glfw3
@@ -33,3 +37,10 @@
 #include "include/glm/glm.hpp"
 #include "include/glm/gtc/matrix_transform.hpp"
 #include "include/glm/gtc/type_ptr.hpp"
+
+using std::vector;
+using std::map;
+using std::list;
+using std::cout;
+using std::cin;
+using std::endl;

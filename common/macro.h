@@ -13,6 +13,7 @@
 #define   X_AXIS      TVec3(1, 0, 0)
 #define   Y_AXIS      TVec3(0, 1, 0)
 #define   Z_AXIS      TVec3(0, 0, 1)
+#define   CLEAR_COLOR 0.1, 0.5, 0.8, 1
 
 #define   FLOAT_SIZE  (sizeof(GLfloat))
 
