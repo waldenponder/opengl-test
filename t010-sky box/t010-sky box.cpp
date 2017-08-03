@@ -39,29 +39,14 @@ int _tmain(int argc, _TCHAR* argv[])
 	Shader shader("vert010.v", "frag010.f");
 	Shader shader2("vert010_2.v", "frag010_2.f");
 
-	{
-		glEnable(GL_DEPTH_TEST);
-		glDepthFunc(GL_LESS);
-		glEnable(GL_STENCIL_TEST);
-		glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
-
-		glEnable(GL_DEPTH_TEST);
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-		glDisable(GL_CULL_FACE);
-	}
-
 	vector<const GLchar*> faces;
-	faces.push_back("../common/src/skybox/right.jpg");
-	faces.push_back("../common/src/skybox/left.jpg");
+	faces.push_back("../common/src/skybox/right.jpg");	//x+
+	faces.push_back("../common/src/skybox/left.jpg");	
 
-	faces.push_back("../common/src/skybox/top.jpg");
+	faces.push_back("../common/src/skybox/top.jpg");  //y+
 	faces.push_back("../common/src/skybox/bottom.jpg");
 
-	faces.push_back("../common/src/skybox/front.jpg");
+	faces.push_back("../common/src/skybox/front.jpg"); //Z+
 	faces.push_back("../common/src/skybox/back.jpg");
 
 	GLuint cubemapTexture = Utility::CreateCubemap(faces);
@@ -70,11 +55,12 @@ int _tmain(int argc, _TCHAR* argv[])
 	vector<TMat4> modelMats;
 	setUpScene(modelMats);
 
-	//Camera::Instance()->ConfigViewMatrix(TVec3(0, 0, -1), TVec3(), Y_AXIS);
-	Camera::Instance()->ConfigViewMatrix(TVec3(0, 10, 50), TVec3(), Y_AXIS);
+	Camera::Instance()->ConfigViewMatrix(TVec3(35, 10, -36), TVec3(), Y_AXIS);
 
 	TVec3 lightPos(50, 30, 0);
 	
+	glEnable(GL_DEPTH_TEST);
+
 	while (!glfwWindowShouldClose(window))
 	{
 		glfwPollEvents();
@@ -94,7 +80,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		shader.Use();
 		shader.setUniformMat4f("uView", glm::mat4(glm::mat3(view)));
 		shader.setUniformMat4f("uProjection", projection);
-				   
+
 		glDepthMask(GL_FALSE);
 
 		shader.setUniformTextureCube("cubemap", cubemapTexture, 0);
@@ -105,7 +91,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		//2 
 		shader2.Use();
 		shader2.setUniformMat4f("uView", view);
-		shader.setUniformMat4f("uProjection", projection);
+		shader2.setUniformMat4f("uProjection", projection);
 
 		shader2.setUniformTexture2D("uSAMP", floor, 0);
 		shader2.setUniformVec3f("uLightColor", 1, 1, 1);
