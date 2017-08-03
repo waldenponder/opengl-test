@@ -68,6 +68,7 @@ void  Camera::ConfigProjectionMatrix(float fovy, float aspect, float near, float
 	_nearClip = near; _farClip = far;
 }
 
+//世界空间到相机空间
 TMat4 Camera::GetCameraSpaceMatrix()
 {
 	TMat4 rot(1);
@@ -75,15 +76,24 @@ TMat4 Camera::GetCameraSpaceMatrix()
 	rot = glm::rotate(rot, _rotation[1], Y_AXIS);
 	rot = glm::rotate(rot, _rotation[2], Z_AXIS);
 			
+#if 1
 	auto x = ToVec3(rot  * ToVec4(X_AXIS));
 	auto y = ToVec3(rot  * ToVec4(Y_AXIS));
 	auto z = ToVec3(rot  * ToVec4(Z_AXIS));
+#else
+	//auto x = ToVec3(rot  * ToVec4(X_AXIS));
+	auto y = ToVec3(rot  * ToVec4(Y_AXIS));
+	auto z = ToVec3(rot  * glm::normalize(TVec4(0, 10, 50, 0)));
+	auto x = glm::cross(y, z);	  
+	y = glm::cross(z, x);
+#endif
 
 	TMat4 mat(ToVec4(x), ToVec4(y), ToVec4(z), TVec4(_pos.x, _pos.y, _pos.z, 1));
 
 	return mat;
 }
 
+//相机空间到世界空间
 TMat4 Camera::GetWorldSpaceMatrix()
 {
 	return glm::inverse(GetCameraSpaceMatrix());
@@ -105,7 +115,8 @@ void OnKeyDown(GLFWwindow* window, int key, int scancode, int action, int mode)
 
 	auto mat = camera->GetWorldSpaceMatrix();
 
-	if (key == GLFW_KEY_UP)
+#pragma region move
+	if (key == GLFW_KEY_UP || key == GLFW_KEY_W)
 	{
 		glm::vec3 v(0, 0, -delta);
 		v = ToVec3(mat * ToVec4(v));
@@ -113,7 +124,7 @@ void OnKeyDown(GLFWwindow* window, int key, int scancode, int action, int mode)
 		*camera->_pMoveVale += v;
 	}
 
-	else if (key == GLFW_KEY_DOWN)
+	else if (key == GLFW_KEY_DOWN || key == GLFW_KEY_S)
 	{
 		glm::vec3 v(0, 0, delta);
 		v = ToVec3(mat * ToVec4(v));
@@ -121,7 +132,7 @@ void OnKeyDown(GLFWwindow* window, int key, int scancode, int action, int mode)
 		*camera->_pMoveVale += v;
 	}
 
-	else if (key == GLFW_KEY_LEFT)
+	else if (key == GLFW_KEY_LEFT || key == GLFW_KEY_A)
 	{
 		glm::vec3 v(delta, 0, 0);
 		v = ToVec3(mat * ToVec4(v));
@@ -129,7 +140,7 @@ void OnKeyDown(GLFWwindow* window, int key, int scancode, int action, int mode)
 		*camera->_pMoveVale += v;
 	}
 
-	else if (key == GLFW_KEY_RIGHT)
+	else if (key == GLFW_KEY_RIGHT || key == GLFW_KEY_D)
 	{
 		glm::vec3 v(-delta, 0, 0);
 		v = ToVec3(mat * ToVec4(v));
@@ -152,6 +163,7 @@ void OnKeyDown(GLFWwindow* window, int key, int scancode, int action, int mode)
 
 		*camera->_pMoveVale += v;
 	}
+#pragma endregion
 
 	else if (key == GLFW_KEY_X)
 	{
@@ -181,22 +193,13 @@ void OnKeyDown(GLFWwindow* window, int key, int scancode, int action, int mode)
 
 	if (key == GLFW_KEY_X || key == GLFW_KEY_Y || key == GLFW_KEY_Z)
 	{
-		//TMat4 rot(1);
-		//rot = glm::rotate(rot, camera->_rotation[0], X_AXIS);
-		//rot = glm::rotate(rot, camera->_rotation[1], Y_AXIS);
-		//rot = glm::rotate(rot, camera->_rotation[2], Z_AXIS);
+		TMat4 rot(1);
+		rot = glm::rotate(rot, camera->_rotation[0], X_AXIS);
+		rot = glm::rotate(rot, camera->_rotation[1], Y_AXIS);
+		rot = glm::rotate(rot, camera->_rotation[2], Z_AXIS);
 
-		//auto pos = rot * ToVec4(camera->_pos);
-		//camera->_pos = ToVec3(pos);
+		auto pos = rot * ToVec4(camera->_pos);
 
-		//auto up = rot * ToVec4(camera->_up);
-		//camera->_up = ToVec3(up);
-
-		//auto lookAt = rot * ToVec4(camera->_lookAt);
-		//camera->_lookAt = ToVec3(lookAt);
-
-		//mat = glm::inverse(mat);
-
-		camera->_pos = ToVec3(mat * ToVec4(camera->_pos));
+		camera->_pos = ToVec3(mat * pos);
 	}
 }
