@@ -48,6 +48,14 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "t009-blending", "t009-blend
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "t010-sky box", "t010-sky box\t010-sky box.vcxproj", "{E42E29EE-C6E3-4033-90BD-27C972B854B7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A86D4152-F15E-4A05-AD78-4D74F70A5B82} = {A86D4152-F15E-4A05-AD78-4D74F70A5B82}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "t011-instance", "t011-instance\t011-instance.vcxproj", "{333D8E2C-A02C-4F11-A7AD-A37FA3AABF53}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A86D4152-F15E-4A05-AD78-4D74F70A5B82} = {A86D4152-F15E-4A05-AD78-4D74F70A5B82}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -99,6 +107,10 @@ Global
 		{E42E29EE-C6E3-4033-90BD-27C972B854B7}.Debug|Win32.Build.0 = Debug|Win32
 		{E42E29EE-C6E3-4033-90BD-27C972B854B7}.Release|Win32.ActiveCfg = Release|Win32
 		{E42E29EE-C6E3-4033-90BD-27C972B854B7}.Release|Win32.Build.0 = Release|Win32
+		{333D8E2C-A02C-4F11-A7AD-A37FA3AABF53}.Debug|Win32.ActiveCfg = Debug|Win32
+		{333D8E2C-A02C-4F11-A7AD-A37FA3AABF53}.Debug|Win32.Build.0 = Debug|Win32
+		{333D8E2C-A02C-4F11-A7AD-A37FA3AABF53}.Release|Win32.ActiveCfg = Release|Win32
+		{333D8E2C-A02C-4F11-A7AD-A37FA3AABF53}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

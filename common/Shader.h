@@ -9,6 +9,9 @@ public:
 	~Shader();
 
 	void Use();
+	void setUniform1i(char* name, int i);
+	void setUniform1f(char* name, int f);
+
 	void setUniformVec4f(char* name, float x, float y, float z, float w);
 	void setUniformVec3f(char* name, float x, float y, float z);
 

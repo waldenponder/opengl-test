@@ -103,6 +103,19 @@ void Shader::Use()
 	glUseProgram(program);
 }
 
+
+void Shader::setUniform1i(char* name, int i)
+{
+	GLint loc = glGetUniformLocation(program, name);
+	glUniform1i(loc, i);
+}
+
+void Shader::setUniform1f(char* name, int f)
+{
+	GLint loc = glGetUniformLocation(program, name);
+	glUniform1f(loc, f);
+}
+
 void Shader::setUniformVec4f(char* name, float x, float y, float z, float w)
 {
 	GLint loc = glGetUniformLocation(program, name);
@@ -134,11 +147,8 @@ void Shader::setUniformMat4f(char* name, glm::mat4 mat4)
 
 void Shader::setUniformTexture2D(char* name, GLuint texture, int index)
 {
-	if (index >= 0)
-	{
-		glActiveTexture(GL_TEXTURE0 + index);
-		glBindTexture(GL_TEXTURE_2D, texture);
-	}
+	glActiveTexture(GL_TEXTURE0 + index);
+	glBindTexture(GL_TEXTURE_2D, texture);
 
 	GLuint loc = glGetUniformLocation(program, name);
 	glUniform1i(loc, index);
@@ -146,11 +156,9 @@ void Shader::setUniformTexture2D(char* name, GLuint texture, int index)
 
 void Shader::setUniformTextureCube(char* name, GLuint texture, int index)
 {
-	if (index >= 0)
-	{
-		glActiveTexture(GL_TEXTURE0 + index);
-		glBindTexture(GL_TEXTURE_CUBE_MAP, texture);
-	}
+
+	glActiveTexture(GL_TEXTURE0 + index);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, texture);
 
 	GLuint loc = glGetUniformLocation(program, name);
 	glUniform1i(loc, index);
