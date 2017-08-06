@@ -274,20 +274,16 @@ namespace Utility
 	{
 		GLuint VBO;
 
-		GLfloat x1, y1; GLfloat x2, y2;
-
-		x1 = y1 = -1.0f;
-		x2 = y2 = 1.0f;
-
 		static GLfloat pts[] =
 		{
-			-0.5, 0.5, 0, 0, 1,
-			0.5, -0.5, 0, 1, 0,
-			0.5, 0.5, 0, 1, 1,
+			//pos 			 //texture  //normal
+			-0.5, 0.5, 0,    0, 1,    0, 0, 1,
+			0.5, -0.5, 0,    1, 0,	  0, 0, 1,
+			0.5, 0.5, 0,     1, 1,    0, 0, 1,
 
-			-0.5, 0.5, 0, 0, 1,
-			-0.5, -0.5, 0, 0, 0,
-			0.5, -0.5, 0, 1, 0,
+			-0.5, 0.5, 0,    0, 1,    0, 0, 1,
+			-0.5, -0.5, 0,   0, 0,    0, 0, 1,
+			0.5, -0.5, 0,    1, 0,    0, 0, 1,
 		};
 
 		glGenVertexArrays(1, &VAO);
@@ -297,11 +293,13 @@ namespace Utility
 		glBindBuffer(GL_ARRAY_BUFFER, VBO);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(pts), pts, GL_STATIC_DRAW);
 
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * FLOAT_SIZE, (void*)0);
-		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * FLOAT_SIZE, (void*)(3 * FLOAT_SIZE));
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * FLOAT_SIZE, (void*)0);
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8 * FLOAT_SIZE, (void*)(3 * FLOAT_SIZE));
+		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 8 * FLOAT_SIZE, (void*)(5 * FLOAT_SIZE));
 
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
+		glEnableVertexAttribArray(2);
 
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindVertexArray(0);

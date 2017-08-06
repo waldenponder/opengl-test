@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "../common/common.out.h"
 
+#define  INSTANCE_NUM 40000
+
 void setUpScene(OUT vector<glm::mat4>& modelMats)
 {
 	TMat4 identy(1.0);
@@ -16,23 +18,47 @@ void setUpScene2(OUT vector<glm::mat4>& modelMats)
 {
 	TMat4 identy(1.0);
 
-	auto TMP = glm::translate(identy, TVec3(20, 5, -10));
-	TMP = glm::scale(TMP, TVec3(10, 10, 10));
-	modelMats.push_back(TMP);
-
-	TMP = glm::translate(identy, TVec3(15, 3, -1));
-	TMP = glm::scale(TMP, TVec3(10, 10, 10));
-	modelMats.push_back(TMP);
-
-	TMP = glm::translate(identy, TVec3(6, 4, 8));
-	TMP = glm::scale(TMP, TVec3(10, 10, 10));
-	modelMats.push_back(TMP);
-
-	TMP = glm::translate(identy, TVec3(-8, 5, 18));
+	auto TMP = glm::translate(identy, TVec3(2, 5, -10));
 	TMP = glm::scale(TMP, TVec3(10, 10, 10));
 	modelMats.push_back(TMP);
 }
 
+void createOffsetVBO(IN const GLuint& VAO)
+{
+	srand((unsigned)time(0));
+
+	glm::vec3 translations[INSTANCE_NUM];
+	{
+		int index = 0;
+		GLfloat offset = 1.0f;
+		int val = sqrt(INSTANCE_NUM);
+
+		for (GLint y = -val; y < val; y += 3)
+		{
+			for (GLint x = -val; x < val; x += 3)
+			{
+				glm::vec3 translation;
+				translation.x = (GLfloat)x / 3.5f + offset;
+				translation.z = (GLfloat)y / 3.5f + offset;
+				translation.y = 0;
+				translations[index++] = translation;
+			}
+		}
+	}
+
+	GLuint offsetVBO;
+	glGenBuffers(1, &offsetVBO);
+	glBindVertexArray(VAO);
+	glBindBuffer(GL_ARRAY_BUFFER, offsetVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec3) * INSTANCE_NUM, &translations[0], GL_STATIC_DRAW);
+	//并通知OpenGL解析这个VBO数据的方式：
+
+	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+	glEnableVertexAttribArray(3);
+	glVertexAttribDivisor(3, 1); // 注意这里 指定1表示每个实例更新一次数据
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);
+}
 
 int _tmain(int argc, _TCHAR* argv[])
 {
@@ -43,6 +69,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	GLuint cubeVAO, planeVAO;
 	Utility::CreateCubeVAO(cubeVAO);
 	Utility::CreatePlaneVAO(planeVAO);
+
+	createOffsetVBO(planeVAO);
 
 	GLuint brick = Utility::CreateTexture("../common/src/brick.png");
 	GLuint grass = Utility::CreateTexture("../common/src/grass.png");
@@ -73,46 +101,48 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	while (!glfwWindowShouldClose(window))
 	{
+		long t = clock();
+
 		glfwPollEvents();
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glClearColor(0, 0, 0, 1);
+		glClearColor(CLEAR_COLOR);
 
 		TMat4 view = Camera::Instance()->GetViewMatrix();
 		TMat4 projection = Camera::Instance()->GetProjectionMatrix();
 
 		if (Camera::Instance()->_bNeedRotation)
 			lightPos = TMat3(glm::rotate(glm::mat4(1.0), 0.5f, Y_AXIS)) * lightPos;
-
-
+				  
 		shader.setUniformVec3f("uLightPos", lightPos);
 		shader.setUniformVec3f("uViewPos", CameraPos);
 		shader.setUniformMat4f("uView", view);
 		shader.setUniformMat4f("uProjection", projection);
-
-		glBindVertexArray(cubeVAO);
-		shader.setUniformTexture2D("uSAMP", brick, 0);
-		shader.setUniform1f("uTexCoordScale", 1000);
-
-		for (auto Mat : modelMats)
+				  
+		//地板
+		if (1)
 		{
-			shader.setUniformMat4f("uModel", Mat);
-
+			glBindVertexArray(cubeVAO);
+			shader.setUniformTexture2D("uSAMP", brick, 0);
+			shader.setUniform1f("uTexCoordScale", 1000);
+			shader.setUniformMat4f("uModel", modelMats[0]);
 			glDrawArrays(GL_TRIANGLES, 0, 36);
 		}
-
-		glBindVertexArray(planeVAO);
-		shader.setUniformTexture2D("uSAMP", grass, 1);
-		shader.setUniform1f("uTexCoordScale", 1);
-
-		for (auto Mat : modelMats2)
+			  
+		 //草
+		if (1)
 		{
-			shader.setUniformMat4f("uModel", Mat);
-
-			glDrawArrays(GL_TRIANGLES, 0, 6);
+			glBindVertexArray(planeVAO);
+			shader.setUniformTexture2D("uSAMP", grass, 1);
+			shader.setUniform1f("uTexCoordScale", 1);
+			shader.setUniformMat4f("uModel", modelMats2[0]);
+			glDrawArraysInstanced(GL_TRIANGLES, 0, 6, INSTANCE_NUM);
 		}
 
+
 		glfwSwapBuffers(window);
+
+		cout << "elipse : " << (clock() - t) << endl;
 	}
 
 	glfwTerminate();
