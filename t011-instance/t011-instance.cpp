@@ -1,7 +1,9 @@
 #include "stdafx.h"
 #include "../common/common.out.h"
 
-#define  INSTANCE_NUM 40000
+#define  instance 50
+
+#define  count 8
 
 void setUpScene(OUT vector<glm::mat4>& modelMats)
 {
@@ -25,32 +27,40 @@ void setUpScene2(OUT vector<glm::mat4>& modelMats)
 
 void createOffsetVBO(IN const GLuint& VAO)
 {
+#define  item_size 	 (sizeof(TVec3) * instance * instance * 4)
+
 	srand((unsigned)time(0));
-
-	TVec3 translations[INSTANCE_NUM];
-	{
-		int index = 0;
-		GLfloat offset = 1.0f;
-		int val = sqrt(INSTANCE_NUM);
-
-		for (GLint y = -val; y < val; y += 3)
-		{
-			for (GLint x = -val; x < val; x += 3)
-			{
-				TVec3 translation;
-				translation.x = (GLfloat)x / 3.5f + offset;
-				translation.z = (GLfloat)y / 3.5f + offset;
-				translation.y = 0;
-				translations[index++] = translation;
-			}
-		}
-	}
-
+		  
 	GLuint offsetVBO;
 	glGenBuffers(1, &offsetVBO);
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, offsetVBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(TVec3) * INSTANCE_NUM, &translations[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, 4 * item_size * count, nullptr, GL_STATIC_DRAW);
+										 
+	for (int i = 0; i < count; i++) 
+	{
+		TVec3 translations[4 * instance * instance];
+		{
+			int index = 0;
+			GLfloat offset = 1.0f;
+		
+			for (GLint y = -instance; y < instance; y += 3)
+			{
+				for (GLint x = -instance; x < instance; x += 3)
+				{
+					TVec3 translation;
+					translation.x = (i + 1) * ((GLfloat)x / 3.5f + offset);
+					translation.z = (i + 1)* ((GLfloat)y / 3.5f + offset);
+					translation.y = 0;
+					translations[index++] = translation;
+				}
+			}
+		}
+
+		glBufferSubData(GL_ARRAY_BUFFER, i * item_size, item_size, translations);
+	}
+
+
 	//并通知OpenGL解析这个VBO数据的方式：
 
 	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 0, NULL);
@@ -94,7 +104,8 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	TVec3 lightPos(50, 30, 0);
 
-	Camera::Instance()->ConfigViewMatrix(TVec3(0, 10, 50), TVec3(), Y_AXIS);
+	Camera::Instance()->ConfigViewMatrix(TVec3(0, 60, 50), TVec3(), Y_AXIS);
+	Camera::Instance()->_moveFactor = 100;
 
 	shader.Use();
 	shader.setUniformVec3f("uLightColor", 1, 1, 1);
@@ -136,13 +147,13 @@ int _tmain(int argc, _TCHAR* argv[])
 			shader.setUniformTexture2D("uSAMP", grass, 1);
 			shader.setUniform1f("uTexCoordScale", 1);
 			shader.setUniformMat4f("uModel", modelMats2[0]);
-			glDrawArraysInstanced(GL_TRIANGLES, 0, 6, INSTANCE_NUM);
+			glDrawArraysInstanced(GL_TRIANGLES, 0, 6, 4 * instance * instance * count);
 		}
 
 
 		glfwSwapBuffers(window);
 
-		cout << "elipse : " << (clock() - t) << endl;
+		cout << "elipse : " << (clock() - t) << "        count:  " << (4 * instance * instance * count) << endl;
 	}
 
 	glfwTerminate();
