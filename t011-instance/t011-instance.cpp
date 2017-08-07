@@ -27,7 +27,7 @@ void createOffsetVBO(IN const GLuint& VAO)
 {
 	srand((unsigned)time(0));
 
-	glm::vec3 translations[INSTANCE_NUM];
+	TVec3 translations[INSTANCE_NUM];
 	{
 		int index = 0;
 		GLfloat offset = 1.0f;
@@ -37,7 +37,7 @@ void createOffsetVBO(IN const GLuint& VAO)
 		{
 			for (GLint x = -val; x < val; x += 3)
 			{
-				glm::vec3 translation;
+				TVec3 translation;
 				translation.x = (GLfloat)x / 3.5f + offset;
 				translation.z = (GLfloat)y / 3.5f + offset;
 				translation.y = 0;
@@ -50,7 +50,7 @@ void createOffsetVBO(IN const GLuint& VAO)
 	glGenBuffers(1, &offsetVBO);
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, offsetVBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec3) * INSTANCE_NUM, &translations[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(TVec3) * INSTANCE_NUM, &translations[0], GL_STATIC_DRAW);
 	//并通知OpenGL解析这个VBO数据的方式：
 
 	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 0, NULL);

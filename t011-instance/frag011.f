@@ -40,4 +40,9 @@ void main()
 	vec3 result = (ambient + diffuse + specular) * color.xyz;
 	
 	fColor = vec4(result, color.a);
+
+	//if (gl_FragCoord.x > 500)
+	//    fColor = vec4(1, 1, 0, 1);
+	//else 
+	//	fColor = vec4(vec3(gl_FragCoord.z), 1);
 }
