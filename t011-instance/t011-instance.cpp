@@ -109,9 +109,9 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	shader.Use();
 	shader.setUniformVec3f("uLightColor", 1, 1, 1);
-
+		  
 	while (!glfwWindowShouldClose(window))
-	{
+	{			 
 		long t = clock();
 
 		glfwPollEvents();

@@ -137,6 +137,14 @@ int main()
 	glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &nrAttributes);
 	std::cout << "Maximum nr of vertex attributes supported: " << nrAttributes << std::endl;
 
+	GLint maxI;
+	glGetIntegerv(
+		``, &maxI);
+	cout << " GL_MAX_TEXTURE_UNITS  " << maxI << endl;
+
+	glGetIntegerv(GL_MAX_DEPTH, &maxI);
+	cout << " GL_MAX_DEPTH  " << maxI << endl;
+
 
 	while (!glfwWindowShouldClose(window))
 	{
