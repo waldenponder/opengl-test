@@ -21,7 +21,7 @@ Camera::Camera()
 	_fovy = 45;
 	_aspect = float(WINDOW_WIDTH) / float(WINDOW_HEIGHT);
 	_nearClip = 0.1;
-	_farClip = 10000;
+	_farClip = 100000;
 	_up = Y_AXIS;
 	_lookAt = TVec3();
 	_rotation = TVec3();
