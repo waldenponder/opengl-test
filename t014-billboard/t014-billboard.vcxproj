@@ -14,6 +14,7 @@
     <ProjectGuid>{916BBED3-E9FB-4C77-B8D7-5DE1B72CA28A}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>t014billboard</RootNamespace>
+    <ProjectName>-t014-billboard</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

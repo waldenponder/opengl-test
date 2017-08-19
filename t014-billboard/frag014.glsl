@@ -9,6 +9,8 @@ out vec4 fColor;
 in vec2 gTexCoor;
 in vec3 gNormal;
 in vec3 gPos;
+in vec3 gViewPos;
+in vec3 gTestColor;
 
 void main()
 {
@@ -35,5 +37,6 @@ void main()
 
 	vec3 result = (ambient + diffuse + specular) * color.xyz;
 
+	//fColor = vec4(gTestColor, 1);
 	fColor = vec4(result, color.a);
 }

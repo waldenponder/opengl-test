@@ -29,13 +29,14 @@ void setUpScene2(OUT vector<glm::mat4>& modelMats)
 {
 	TMat4 identy(1.0);
 
-	for (int i = 0; i < 20; i++)
+	for (int i = 0; i < 2; i++)
 	{
-	  for (int j = 0; j < 20; j++)
+	  for (int j = 0; j < 2; j++)
 	  {
-		  auto TMP = glm::translate(identy, TVec3(i * 8, 2, j * 8));
+		  auto TMP = glm::translate(identy, TVec3(i * 80, 2, j * 80));
 		  TMP = glm::scale(TMP, TVec3(10, 10, 10));
 		  modelMats.push_back(TMP);
+		  return;
 	  }
 	}
 }
