@@ -3,7 +3,7 @@
 #include "Utility.h"
 
 Rectangle2D::Rectangle2D(char* img /*= ""*/, GLfloat x1 /*= -1*/, GLfloat y1 /*= -1*/, GLfloat x2 /*= 1*/, GLfloat y2 /*= 1*/)
-	: _shader("../common/shader/Rectangle2D.v", "../common/shader/Rectangle2D.f")
+	: _shader("../common/shader/Rectangle2D.glsl", "../common/shader/Rectangle2D.glsl")
 {
 	Init(x1, y1, x2, y2);
 

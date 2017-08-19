@@ -14,7 +14,7 @@ void main()
   //color = vec4(average, average, average, 1.0);
 }*/
 
-const float offset = 1.0 / 300;  
+const float offset = 1.0 / 70;  
  
 void main()
 {
@@ -41,7 +41,7 @@ void main()
     {
         sampleTex[i] = vec3(texture(sampNew, Coor.st + offsets[i]));
     }
-    vec3 col = vec3(0.0); //原文为vec3 col; 叶大指出错误
+    vec3 col = vec3(0.0);
  
     for(int i = 0; i < 9; i++)
         col += sampleTex[i] * kernel[i];

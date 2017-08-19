@@ -65,7 +65,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	createVAO(VAO, VBO);
 
 	GLuint texture = Utility::CreateTexture("../common/src/floor.jpg");
-	Shader shader("vert005.v", "frag005.f");
+	Shader shader("vert005.glsl", "frag005.glsl");
 
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);

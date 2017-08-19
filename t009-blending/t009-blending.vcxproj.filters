@@ -33,18 +33,4 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="frag009.f">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="vert009.v">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="grass.f">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="grass.v">
-      <Filter>Resource Files</Filter>
-    </None>
-  </ItemGroup>
 </Project>

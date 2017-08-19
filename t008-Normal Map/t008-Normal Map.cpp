@@ -103,7 +103,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	GLuint tex = Utility::CreateTexture("../common/src/brick.png");
 	GLuint tex2 = Utility::CreateTexture("../common/src/brick_n.png");
-	Shader shader("vert008.v", "frag008.f");
+	Shader shader("vert008.glsl", "frag008.glsl");
 
 	TVec3 lightPos(0, 4, 30);
 

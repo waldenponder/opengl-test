@@ -5,8 +5,10 @@
 class COMMON_API Shader
 {
 public:
-	Shader(std::string vertPath, std::string fragPath);
+	Shader(std::string vertPath, std::string fragPath, std::string geomPath = "");
 	~Shader();
+	std::string getSource(const std::string& path);
+	void compile(const char* src, GLuint ID);
 
 	void Use();
 	void setUniform1i(char* name, int i);
@@ -22,6 +24,9 @@ public:
 	void setUniformTexture2D(char* name, GLuint texture, int index);
 	void setUniformTextureCube(char* name, GLuint texture, int index);
 
+
+
 private:
+
 	GLuint program;
 };

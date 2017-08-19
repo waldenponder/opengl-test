@@ -102,8 +102,8 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	GLuint floorTex = Utility::CreateTexture("../common/src/floor.jpg");
 	
-	Shader shader("vert006.v", "frag006.f");
-	Shader shaderDepth("vert006_2.v", "frag006_2.f");
+	Shader shader("vert006.glsl", "frag006.glsl");
+	Shader shaderDepth("vert006_2.glsl", "frag006_2.glsl");
 
 	vector<glm::mat4> modelMats;
 	setUpScene(modelMats);
@@ -119,7 +119,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		float value = 20;
 		TMat4 lightSpace;
-		TMat4 projection = glm::ortho(-value, value, -value, value, 0.1f, 600.f);
+		TMat4 projection = glm::ortho(-value, value, -value, value, 0.1f, 600.glsl);
 								 
 		if (Camera::Instance()->_bNeedRotation)
 			lightPos = TMat3(glm::rotate(glm::mat4(1.0), .4f, Y_AXIS)) * lightPos;

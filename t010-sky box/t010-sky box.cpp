@@ -36,8 +36,8 @@ int _tmain(int argc, _TCHAR* argv[])
      
 	GLuint floor = Utility::CreateTexture("../common/src/floor.jpg");
 
-	Shader shader("vert010.v", "frag010.f");
-	Shader shader2("vert010_2.v", "frag010_2.f");
+	Shader shader("vert010.glsl", "frag010.glsl");
+	Shader shader2("vert010_2.glsl", "frag010_2.glsl");
 
 	vector<const GLchar*> faces;
 	faces.push_back("../common/src/skybox/right.jpg");	//x+

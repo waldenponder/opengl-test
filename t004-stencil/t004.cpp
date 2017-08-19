@@ -34,8 +34,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	}
 
 	GLuint texture = Utility::CreateTexture("../common/src/container.jpg");
-	Shader shader("vert004.v", "frag004.f");
-	Shader shader2("vert004_2.v", "frag004_2.f");
+	Shader shader("vert004.glsl", "frag004.glsl");
+	Shader shader2("vert004_2.glsl", "frag004_2.glsl");
 
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);

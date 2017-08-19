@@ -56,7 +56,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	GLuint floor = Utility::CreateTexture("../common/src/floor.jpg");
 	GLuint grass = Utility::CreateTexture("../common/src/grass.png");
-	Shader shader("vert009.v", "frag009.f");
+	Shader shader("vert009.glsl", "frag009.glsl");
 
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);

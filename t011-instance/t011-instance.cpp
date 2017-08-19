@@ -84,7 +84,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	GLuint brick = Utility::CreateTexture("../common/src/brick.png");
 	GLuint grass = Utility::CreateTexture("../common/src/grass.png");
-	Shader shader("vert011.v", "frag011.f");
+	Shader shader("vert011.glsl", "frag011.glsl");
 
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);

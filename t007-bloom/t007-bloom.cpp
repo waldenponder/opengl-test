@@ -26,8 +26,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	Utility::CreateFBO(combineFBO, combineTex);
 
 	GLuint containerTex = Utility::CreateTexture("../common/src/container.jpg");
-	Shader shader("vert007.v", "frag007.f");
-	Shader shader2("vert007_2.v", "frag007_2.f");
+	Shader shader("vert007.glsl", "frag007.glsl");
+	Shader shader2("vert007_2.glsl", "frag007_2.glsl");
 		   	
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);

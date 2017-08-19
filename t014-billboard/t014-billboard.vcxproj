@@ -91,10 +91,13 @@
     <ClCompile Include="t014-billboard.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="frag014.f">
+    <None Include="frag014.glsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </None>
-    <None Include="vert014.v">
+    <None Include="geom014.glsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </None>
+    <None Include="vert014.glsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </None>
   </ItemGroup>

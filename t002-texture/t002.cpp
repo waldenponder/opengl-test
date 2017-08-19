@@ -48,7 +48,7 @@ int main()
 	glfwSetKeyCallback(window, key_callback);
 	srand((unsigned)time(nullptr));
 
-	Shader shader("vert002.v", "frag002.f");
+	Shader shader("vert002.glsl", "frag002.glsl");
 
 	GLuint VBO, VAO, EBO;
 	{

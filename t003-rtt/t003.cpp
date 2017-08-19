@@ -166,8 +166,8 @@ int main()
 
 	GLuint texture = Utility::CreateTexture("../common/src/container.jpg", GL_REPEAT, GL_LINEAR);
 	
-	Shader shader("vert003.v", "frag003.f");
-	Shader shaderNew("vert003new.v", "frag003new.f");
+	Shader shader("vert003.glsl", "frag003.glsl");
+	Shader shaderNew("vert003new.glsl", "frag003new.glsl");
 
 	g_Mat4 = glm::mat4(1.0);
 

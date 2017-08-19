@@ -38,6 +38,7 @@ using std::endl;
 #include "../common/Utility.h"
 #include "../common/Camera.h"
 #include "../common/Rectangle2D.h"
+#include <iomanip>
 
 #pragma comment(lib, "glut32.lib")
 #pragma comment(lib, "glew32.lib")

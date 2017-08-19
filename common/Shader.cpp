@@ -6,103 +6,95 @@
 
 using namespace std;
 
-Shader::Shader(std::string vertPath, std::string fragPath)
+Shader::Shader(std::string vertPath, std::string fragPath, std::string geomPath)
 {		
-	const char* source_vert; string str_vert;
+	string str = getSource(vertPath);
+	GLuint vertID = glCreateShader(GL_VERTEX_SHADER);
+	compile(str.c_str(), vertID);
+
+	str = getSource(fragPath);
+	GLuint fragID = glCreateShader(GL_FRAGMENT_SHADER);
+	compile(str.c_str(), fragID);
+
+	GLuint geomID = INT_MAX;
+	if (!geomPath.empty())
 	{
-		try
-		{
-			ifstream IF;
-			stringstream  fstream;
-
-			IF.open(vertPath);
-			IF.exceptions(std::ifstream::failbit | std::ifstream::badbit | std::ifstream::eofbit);
-			
-			fstream << IF.rdbuf();
-			str_vert = fstream.str();
-			source_vert = str_vert.c_str();
-		}
-		catch (std::ifstream::failure& e)
-		{
-			std::cout << " 读取shader " << vertPath << " 异常 " << e.what() << std::endl;
-		}
-	}
-
-	const char* source_frag;  string str_frag;
-	{
-		try
-		{
-			ifstream IF;
-			stringstream  fstream;
-
-			IF.open(fragPath);
-			IF.exceptions(std::ifstream::failbit | std::ifstream::badbit | std::ifstream::eofbit);
-
-			fstream << IF.rdbuf();
-			str_frag = fstream.str();
-			source_frag = str_frag.c_str();
-		}
-		catch (std::ifstream::failure& e)
-		{
-			std::cout << " 读取shader " << fragPath << " 异常 " << e.what() << std::endl;
-		}
-	}
-
-	GLint success;
-	GLchar infoLog[512];
-
-	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
-	{
-		glShaderSource(vertexShader, 1, &source_vert, NULL);
-		glCompileShader(vertexShader);
-		glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
-		if (!success)
-		{
-			glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
-			std::cout << vertPath << "  )ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
-		}
-	}
-
-	GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-	{
-		glShaderSource(fragmentShader, 1, &source_frag, NULL);
-		glCompileShader(fragmentShader);
-		glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
-		if (!success)
-		{
-			glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
-			std::cout << fragPath << "  )ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << infoLog << std::endl;
-		}
+		str = getSource(geomPath);
+		geomID = glCreateShader(GL_GEOMETRY_SHADER);
+		compile(str.c_str(), geomID);
 	}
 	
 	program = glCreateProgram();
 	{
-		glAttachShader(program, vertexShader);
-		glAttachShader(program, fragmentShader);
+		glAttachShader(program, vertID);
+		glAttachShader(program, fragID);
+
+		if (geomID != INT_MAX)
+			glAttachShader(program, geomID);
+
 		glLinkProgram(program);
-		// Check for linking errors
+		
+		GLint success;
+		GLchar infoLog[512];
+		
 		glGetProgramiv(program, GL_LINK_STATUS, &success);
-		if (!success) {
+		if (!success)
+		{
 			glGetProgramInfoLog(program, 512, NULL, infoLog);
 			std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
 		}
 	}
 
-	glDeleteShader(vertexShader);
-	glDeleteShader(fragmentShader);
+	glDeleteShader(vertID);
+	glDeleteShader(fragID);
+	glDeleteShader(geomID);
 }
-
-
 
 Shader::~Shader()
 {
+}
+
+std::string Shader::getSource(const string& path)
+{
+	string str;
+	try
+	{
+		ifstream IF;
+		stringstream  fstream;
+
+		IF.open(path);
+		IF.exceptions(std::ifstream::failbit | std::ifstream::badbit | std::ifstream::eofbit);
+
+		fstream << IF.rdbuf();
+		str = fstream.str();
+	}
+	catch (std::ifstream::failure& e)
+	{
+		std::cout << " 读取shader " << path << " 异常 " << e.what() << std::endl;
+	}
+
+	return str;
+}
+
+void Shader::compile(const char* src, GLuint ID)
+{
+	GLint success;
+	GLchar infoLog[512];
+
+	glShaderSource(ID, 1, &src, NULL);
+	glCompileShader(ID);
+	glGetShaderiv(ID, GL_COMPILE_STATUS, &success);
+	if (!success)
+	{
+		glGetShaderInfoLog(ID, 512, NULL, infoLog);
+		std::cout << src << infoLog << std::endl;
+	}
 }
 
 void Shader::Use()
 {
 	glUseProgram(program);
 }
-
 
 void Shader::setUniform1i(char* name, int i)
 {

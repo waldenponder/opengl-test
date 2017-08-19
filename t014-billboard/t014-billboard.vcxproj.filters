@@ -34,10 +34,13 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="frag014.f">
+    <None Include="frag014.glsl">
       <Filter>资源文件</Filter>
     </None>
-    <None Include="vert014.v">
+    <None Include="geom014.glsl">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="vert014.glsl">
       <Filter>资源文件</Filter>
     </None>
   </ItemGroup>
