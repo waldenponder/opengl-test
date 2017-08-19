@@ -1,4 +1,6 @@
 #version 330 core
+/*
+//·¿×Ó
 layout(points) in;
 layout(triangle_strip, max_vertices = 5) out;
 
@@ -29,4 +31,48 @@ void main()
 	EmitVertex();
 
 	EndPrimitive();
+}
+*/
+
+//±´Èû¶ûÇúÏß
+#extension GL_EXT_geometry_shader4 : enable
+layout(lines_adjacency) in;
+layout(line_strip, max_vertices = 1024) out;
+
+in Varing
+{
+	vec3 color;
+} var[];
+
+out Varing
+{
+	vec3 color;
+} varOut;
+
+int num = 30;
+
+void main()
+{
+	float dt = 1. / float(num);
+	float t = .0;
+
+	for (int i = 0; i <= num; i++, t += dt)
+	{
+		float omt = 1 - t;
+		float omt2 = omt * omt;
+		float omt3 = omt * omt2;
+
+		float t2 = t * t;
+		float t3 = t * t2;
+
+		vec4 val = omt3 * gl_PositionIn[0] + 3. * t * omt2 * gl_PositionIn[1]
+			+ 3. * t2 * omt * gl_PositionIn[2] + t3 *  gl_PositionIn[3];
+
+		gl_Position = val;
+	
+		varOut.color = var[3].color;
+
+		EmitVertex();
+	}
+
 }

@@ -1,9 +1,13 @@
 #version 330 core
 
 out vec4  color;
-in vec3 gColor;
+
+in Varing
+{
+	vec3 color;
+} var;
 
 void main()
 {
-	color = vec4(gColor, 1.0f);
+	color = vec4(var.color, 1.0f);
 }
