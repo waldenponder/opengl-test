@@ -64,26 +64,4 @@ void main()
 	gPos = vPos[2];
 	gl_Position = v3;// vec4(pos3, 1);
 	EmitVertex();
-
-	//2
-	//vec4 delta = vec4(150, 0, 0, 0);
-	//gTexCoor = vTexCoor[0];
-	//gNormal = n;
-	//gPos = vPos[0];
-	//gl_Position = v1 + delta;// vec4(pos1, 1);
-	//EmitVertex();
-
-	//gTexCoor = vTexCoor[1];
-	//gNormal = n;
-	//gPos = vPos[1];
-	//gl_Position = v2 + delta;// vec4(pos2, 1);
-	//EmitVertex();
-
-	//gTexCoor = vTexCoor[2];
-	//gNormal = n;
-	//gPos = vPos[2];
-	//gl_Position = v3 + delta;// vec4(pos3, 1);
-	//EmitVertex();
-
-	EndPrimitive();
 }
