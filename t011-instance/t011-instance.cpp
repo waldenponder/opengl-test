@@ -3,7 +3,7 @@
 
 #define  instance 50
 
-#define  count 8
+#define  count 4
 
 void setUpScene(OUT vector<glm::mat4>& modelMats)
 {
@@ -102,18 +102,16 @@ int _tmain(int argc, _TCHAR* argv[])
 	setUpScene(modelMats);
 	setUpScene2(modelMats2);
 
-	TVec3 lightPos(50, 30, 0);
+	TVec3 lightPos(50, 10, 0);
 
-	Camera::Instance()->ConfigViewMatrix(TVec3(0, 60, 50), TVec3(), Y_AXIS);
-	Camera::Instance()->_moveFactor = 100;
+	Camera::Instance()->ConfigViewMatrix(TVec3(0, 5, 50), TQuat(0, 0, 0, 1), Y_AXIS);
+	Camera::Instance()->_moveFactor = 3;
 
 	shader.Use();
 	shader.setUniformVec3f("uLightColor", 1, 1, 1);
 		  
 	while (!glfwWindowShouldClose(window))
 	{			 
-		long t = clock();
-
 		glfwPollEvents();
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -152,8 +150,6 @@ int _tmain(int argc, _TCHAR* argv[])
 
 
 		glfwSwapBuffers(window);
-
-		cout << "elipse : " << (clock() - t) << "        count:  " << (4 * instance * instance * count) << endl;
 	}
 
 	glfwTerminate();

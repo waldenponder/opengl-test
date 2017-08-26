@@ -107,7 +107,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	TVec3 lightPos(0, 4, 30);
 
-	Camera::Instance()->ConfigViewMatrix(TVec3(0, 0, -4), TVec3(), Y_AXIS);
+	Camera::Instance()->ConfigViewMatrix(TVec3(0, 0, -4), TQuat(0, 0, 0, 1), Y_AXIS);
 
 	glEnable(GL_DEPTH_TEST);
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);

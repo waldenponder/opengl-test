@@ -7,6 +7,7 @@
 
 #define   TVec3       glm::vec3
 #define   TVec4       glm::vec4
+#define   TQuat       glm::vec4
 #define   TVector     std::vector
 #define   TMat4		  glm::mat4
 #define   TMat3		  glm::mat3
@@ -14,7 +15,7 @@
 #define   Y_AXIS      TVec3(0, 1, 0)
 #define   Z_AXIS      TVec3(0, 0, 1)
 #define   CLEAR_COLOR 0.1, 0.5, 0.8, 1
-
+#define   PI          3.1415926
 #define   FLOAT_SIZE  (sizeof(GLfloat))
 
 #define PREPARE_GLFW_WINDOW(nW, nH, strName, key_callback)\

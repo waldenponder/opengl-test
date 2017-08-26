@@ -55,7 +55,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	vector<TMat4> modelMats;
 	setUpScene(modelMats);
 
-	Camera::Instance()->ConfigViewMatrix(TVec3(35, 10, -36), TVec3(), Y_AXIS);
+	Camera::Instance()->ConfigViewMatrix(TVec3(35, 10, -36), TQuat(0, 0, 0, 1), Y_AXIS);
 
 	TVec3 lightPos(50, 30, 0);
 	

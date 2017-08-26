@@ -1,7 +1,7 @@
 #pragma once
 #include "common.inner.h"
 
-#define CameraPos   (Camera::Instance()->_pos)
+#define CameraPos   (Camera::Instance()->_eye)
 
 void  COMMON_API OnKeyDown(GLFWwindow* window, int key, int scancode, int action, int mode);
 
@@ -19,14 +19,16 @@ public:
 	TMat4  GetViewMatrix();
 	TMat4  GetProjectionMatrix();
 
-	void   ConfigViewMatrix(TVec3 pos, TVec3 rotation, TVec3 up);
+	void   ConfigViewMatrix(TVec3 pos, TQuat rotation, TVec3 up);
 	void   ConfigProjectionMatrix(float fovy, float aspect, float near, float far);
 
 	void   DirtyRotation() { _dirtyRotation = true; }
+	
+	//	绕着	axis 旋转相机
+	void   MakeRotation(TVec3 axis, float angle);
 
-	TMat4  GetCameraSpaceMatrix();
-	TMat4  GetWorldSpaceMatrix();
-
+	//v旋转_rotation后的值
+	TVec3  RotationFrom(const TVec3& v);
 public:
 
 	TVec3* _pMoveVale;
@@ -35,11 +37,11 @@ public:
 	/*
 	glm::lookAt的参数
 	*/
-	TVec3  _pos;
-	//世界坐标系
-	TVec3  _rotation;
+	TVec3  _eye;
 	TVec3  _up;
-	TVec3  _lookAt;
+	TVec3  _center;
+
+	TQuat  _rotation;
 
 	bool   _dirtyRotation;
 
