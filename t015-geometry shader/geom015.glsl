@@ -37,7 +37,7 @@ void main()
 //±´Èû¶ûÇúÏß
 #extension GL_EXT_geometry_shader4 : enable
 layout(lines_adjacency) in;
-layout(line_strip, max_vertices = 1024) out;
+layout(line_strip, max_vertices = 256) out;
 
 in Varing
 {
