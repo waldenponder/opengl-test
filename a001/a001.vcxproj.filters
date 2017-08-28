@@ -29,19 +29,8 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="t014-billboard.cpp">
+    <ClCompile Include="a001.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="frag014.glsl">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="geom014.glsl">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="vert014.glsl">
-      <Filter>资源文件</Filter>
-    </None>
   </ItemGroup>
 </Project>

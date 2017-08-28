@@ -79,7 +79,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	TVec3 lightPos(50, 30, 0);
 	
-	Camera::Instance()->ConfigViewMatrix(TVec3(0, 10, 50), TVec3(), Y_AXIS);
+	Camera::Instance()->ConfigViewMatrix(TVec3(0, 10, 50), TQuat(0, 0, 0, 1), Y_AXIS);
 
 	while (!glfwWindowShouldClose(window))
 	{
