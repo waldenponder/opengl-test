@@ -31,6 +31,8 @@ Camera::Camera()
 	_eye = g_defaultPos;
 	_pMoveVale = &_eye;
 	_bNeedRotation = true;
+
+	_bTrigger = false;
 }
 
 
@@ -207,4 +209,11 @@ void OnKeyDown(GLFWwindow* window, int key, int scancode, int action, int mode)
 		camera->_eye = g_defaultPos;
 		camera->_rotation = TQuat(0, 0, 0, 1);
 	}
+
+	else if (key == GLFW_KEY_T)
+	{
+		camera->_bTrigger = true;
+	}
+
+	
 }

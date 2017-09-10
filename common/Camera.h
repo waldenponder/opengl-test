@@ -55,4 +55,5 @@ public:
 
 public:
 	bool _bNeedRotation;
+	bool _bTrigger;
 };

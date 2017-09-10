@@ -119,7 +119,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		float value = 20;
 		TMat4 lightSpace;
-		TMat4 projection = glm::ortho(-value, value, -value, value, 0.1f, 600.glsl);
+		TMat4 projection = glm::ortho(-value, value, -value, value, 0.1f, 600.f);
 								 
 		if (Camera::Instance()->_bNeedRotation)
 			lightPos = TMat3(glm::rotate(glm::mat4(1.0), .4f, Y_AXIS)) * lightPos;
