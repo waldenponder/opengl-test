@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "../common/common.out.h"
 
+unsigned g_PBO;
+int g_size = WINDOW_WIDTH * WINDOW_HEIGHT * 4;
+
 void setUpScene(OUT vector<glm::mat4>& modelMats)
 {
 	TMat4 identy(1.0);
@@ -22,6 +25,44 @@ void setUpScene(OUT vector<glm::mat4>& modelMats)
 	TMP = glm::translate(TMP, TVec3(-8, 0, -18));
 	TMP = glm::scale(TMP, TVec3(10, 10, 10));
 	modelMats.push_back(TMP);
+}
+
+void screenCapture()
+{
+	unsigned char *mpixels = new unsigned char[g_size];
+#if 0
+	glReadBuffer(GL_FRONT);
+	glReadPixels(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, mpixels);
+	glReadBuffer(GL_BACK);
+#else
+	glReadPixels(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+
+	unsigned char* PTR = (unsigned char*)glMapBuffer(GL_PIXEL_PACK_BUFFER, GL_READ_ONLY);
+	memcpy(mpixels, PTR, g_size);
+	glUnmapBuffer(GL_PIXEL_PACK_BUFFER);
+#endif
+
+	for (int i = 0; i < g_size; i += 4)
+	{
+		mpixels[i] ^= mpixels[i + 2] ^= mpixels[i] ^= mpixels[i + 2];
+	}
+	FIBITMAP* bitmap = FreeImage_Allocate(WINDOW_WIDTH, WINDOW_HEIGHT, 32, 8, 8, 8);
+
+	for (int y = 0; y < FreeImage_GetHeight(bitmap); y++)
+	{
+		BYTE *bits = FreeImage_GetScanLine(bitmap, y);
+		for (int x = 0; x < FreeImage_GetWidth(bitmap); x++)
+		{
+			bits[0] = mpixels[(y * WINDOW_WIDTH + x) * 4 + 0];
+			bits[1] = mpixels[(y * WINDOW_WIDTH + x) * 4 + 1];
+			bits[2] = mpixels[(y * WINDOW_WIDTH + x) * 4 + 2];
+			bits[3] = 255;
+			bits += 4;
+
+		}
+	}
+	bool bSuccess = FreeImage_Save(FIF_PNG, bitmap, "123321.png", PNG_DEFAULT);
+	FreeImage_Unload(bitmap);
 }
 
 int _tmain(int argc, _TCHAR* argv[])
@@ -61,8 +102,14 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	glEnable(GL_DEPTH_TEST);
 
+	glGenBuffers(1, &g_PBO);
+	glBindBuffer(GL_PIXEL_PACK_BUFFER, g_PBO);
+	glBufferData(GL_PIXEL_PACK_BUFFER, g_size, NULL, GL_STREAM_READ);
+
 	while (!glfwWindowShouldClose(window))
 	{
+		FRAME_RATE_BEGIN;
+
 		glfwPollEvents();
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -109,38 +156,12 @@ int _tmain(int argc, _TCHAR* argv[])
 		if (Camera::Instance()->_bTrigger)
 		{
 			Camera::Instance()->_bTrigger = false;
-
-
-			unsigned char *mpixels = new unsigned char[WINDOW_WIDTH * WINDOW_HEIGHT * 4];
-			glReadBuffer(GL_FRONT);
-			glReadPixels(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, mpixels);
-			glReadBuffer(GL_BACK);
-			
-			for (int i = 0; i < (int)WINDOW_WIDTH * WINDOW_HEIGHT * 4; i += 4)
-			{
-				mpixels[i] ^= mpixels[i + 2] ^= mpixels[i] ^= mpixels[i + 2];
-			}
-			FIBITMAP* bitmap = FreeImage_Allocate(WINDOW_WIDTH, WINDOW_HEIGHT, 32, 8, 8, 8);
-
-			for (int y = 0; y < FreeImage_GetHeight(bitmap); y++)
-			{
-				BYTE *bits = FreeImage_GetScanLine(bitmap, y);
-				for (int x = 0; x < FreeImage_GetWidth(bitmap); x++)
-				{
-					bits[0] = mpixels[(y * WINDOW_WIDTH + x) * 4 + 0];
-					bits[1] = mpixels[(y * WINDOW_WIDTH + x) * 4 + 1];
-					bits[2] = mpixels[(y * WINDOW_WIDTH + x) * 4 + 2];
-					bits[3] = 255;
-					bits += 4;
-
-				}
-
-			}
-			bool bSuccess = FreeImage_Save(FIF_PNG, bitmap, "123321.png", PNG_DEFAULT);
-			FreeImage_Unload(bitmap);
+			screenCapture();
 		}
 
 		glfwSwapBuffers(window);
+
+		FRAME_RATE_END;
 	}
 
 	glfwTerminate();
