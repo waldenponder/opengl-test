@@ -157,14 +157,14 @@ void OnKeyDown(GLFWwindow* window, int key, int scancode, int action, int mode)
 
 	else if (key == GLFW_KEY_LEFT || key == GLFW_KEY_A)
 	{
-		glm::vec3 v(-delta, 0, 0);
+		glm::vec3 v(delta, 0, 0);
 		v = camera->RotationFrom(v);
 		*camera->_pMoveVale += v;
 	}
 
 	else if (key == GLFW_KEY_RIGHT || key == GLFW_KEY_D)
 	{
-		glm::vec3 v(delta, 0, 0);
+		glm::vec3 v(-delta, 0, 0);
 		v = camera->RotationFrom(v);
 		*camera->_pMoveVale += v;
 	}
