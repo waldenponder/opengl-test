@@ -3,9 +3,7 @@
 out vec4 fColor;
 in vec3 vTexCoor;
 
-uniform samplerCube cubemap;
-
 void main()
 {	
-	fColor = texture(cubemap, vTexCoor);
+	fColor = vec4(0, 0, 1, 1);
 }
