@@ -176,7 +176,7 @@ int main()
 
 	//	glBlitFramebuffer(0, 0, w, h, 0, 0, w * .5, h * .5, GL_COLOR_BUFFER_BIT, GL_NEAREST);
 
-		glBlitFramebuffer(0, 0, w, h, 0, 0, w, h, GL_COLOR_BUFFER_BIT, GL_NEAREST);
+		glBlitFramebuffer(0, 0, w, h, w, h, 0, 0, GL_COLOR_BUFFER_BIT, GL_NEAREST);
 #endif								
 
 
