@@ -84,7 +84,7 @@ GLuint createFBO(int w, int  h)
 		glBindRenderbuffer(GL_RENDERBUFFER, renderBuffer[0]);  //color
 		glRenderbufferStorage(GL_RENDERBUFFER, GL_RGBA, w, h);
 
-		glBindFramebuffer(GL_RENDERBUFFER, renderBuffer[1]); //depth
+		glBindRenderbuffer(GL_RENDERBUFFER, renderBuffer[1]); //depth
 		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, w, h);
 	}
 	
@@ -92,6 +92,25 @@ GLuint createFBO(int w, int  h)
 	glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, renderBuffer[1]);
 
 	glEnable(GL_DEPTH_TEST);
+
+	GLenum status = glCheckFramebufferStatus(GL_DRAW_FRAMEBUFFER);
+	if (status == GL_FRAMEBUFFER_COMPLETE)
+	{
+		cout << "fbo 正确 " << endl;
+	}
+	else
+	{   
+		
+		/*
+		   #define GL_FRAMEBUFFER_COMPLETE 0x8CD5
+		   #define GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT 0x8CD6
+		   #define GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT 0x8CD7
+		   #define GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER 0x8CDB
+		   #define GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER 0x8CDC
+		   #define GL_FRAMEBUFFER_UNSUPPORTED 0x8CDD
+		*/
+		cout << "fbo 不正确 " << endl;
+	}
 
 	return fbo;
 }
@@ -126,10 +145,9 @@ int main()
 
 	while (!glfwWindowShouldClose(window))
 	{
+		glfwPollEvents();
 
 		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, FBO);
-
-		glfwPollEvents();
 
 		glClearColor(CLEAR_COLOR);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -149,14 +167,19 @@ int main()
 		glBindVertexArray(0);
 
 		///////////////////////////////
+#if 1
 		glBindFramebuffer(GL_READ_FRAMEBUFFER, FBO);
 		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
 
 		glClearColor(CLEAR_COLOR);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	//	glBlitFramebuffer(0, 0, w, h, 0, 0, w * .5, h * .5, GL_COLOR_BUFFER_BIT, GL_NEAREST);
+
 		glBlitFramebuffer(0, 0, w, h, 0, 0, w, h, GL_COLOR_BUFFER_BIT, GL_NEAREST);
-																				   
+#endif								
+
+
 		glfwSwapBuffers(window);
 	}
 
