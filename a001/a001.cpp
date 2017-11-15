@@ -35,7 +35,9 @@ void screenCapture()
 	glReadPixels(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, mpixels);
 	glReadBuffer(GL_BACK);
 #else
+	glReadBuffer(GL_FRONT);
 	glReadPixels(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+	//glReadBuffer(GL_BACK);
 
 	unsigned char* PTR = (unsigned char*)glMapBuffer(GL_PIXEL_PACK_BUFFER, GL_READ_ONLY);
 	memcpy(mpixels, PTR, g_size);
@@ -161,7 +163,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		glfwSwapBuffers(window);
 
-		FRAME_RATE_END;
+		//FRAME_RATE_END;
 	}
 
 	glfwTerminate();

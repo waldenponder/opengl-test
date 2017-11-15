@@ -13,6 +13,10 @@ float color1 = 0.1;
 float color2 = 0.1;
 float color3 = 0.1;
 
+int g_size = WINDOW_WIDTH * WINDOW_HEIGHT * 4;
+
+void screenCapture();
+
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
 	if (key == GLFW_KEY_1)
@@ -26,6 +30,10 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	else if (key == GLFW_KEY_3)
 	{
 		color3 = float(rand() % 255) / 255.0;
+	}
+	else if (key == GLFW_KEY_4)
+	{
+		screenCapture();
 	}
 }
 
@@ -100,7 +108,6 @@ GLuint createFBO(int w, int  h)
 	}
 	else
 	{   
-		
 		/*
 		   #define GL_FRAMEBUFFER_COMPLETE 0x8CD5
 		   #define GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT 0x8CD6
@@ -115,6 +122,45 @@ GLuint createFBO(int w, int  h)
 	return fbo;
 }
 
+void screenCapture()
+{
+	unsigned char *mpixels = new unsigned char[g_size];
+#if 0
+	glReadBuffer(GL_FRONT);
+	glReadPixels(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, mpixels);
+	glReadBuffer(GL_BACK);
+#else
+	glReadBuffer(GL_ONE);
+	glReadPixels(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+
+	unsigned char* PTR = (unsigned char*)glMapBuffer(GL_PIXEL_PACK_BUFFER, GL_READ_ONLY);
+	memcpy(mpixels, PTR, g_size);
+	glUnmapBuffer(GL_PIXEL_PACK_BUFFER);
+#endif
+
+	for (int i = 0; i < g_size; i += 4)
+	{
+		mpixels[i] ^= mpixels[i + 2] ^= mpixels[i] ^= mpixels[i + 2];
+	}
+	FIBITMAP* bitmap = FreeImage_Allocate(WINDOW_WIDTH, WINDOW_HEIGHT, 32, 8, 8, 8);
+
+	for (int y = 0; y < FreeImage_GetHeight(bitmap); y++)
+	{
+		BYTE *bits = FreeImage_GetScanLine(bitmap, y);
+		for (int x = 0; x < FreeImage_GetWidth(bitmap); x++)
+		{
+			bits[0] = mpixels[(y * WINDOW_WIDTH + x) * 4 + 0];
+			bits[1] = mpixels[(y * WINDOW_WIDTH + x) * 4 + 1];
+			bits[2] = mpixels[(y * WINDOW_WIDTH + x) * 4 + 2];
+			bits[3] = 255;
+			bits += 4;
+
+		}
+	}
+	bool bSuccess = FreeImage_Save(FIF_PNG, bitmap, "ABC.png", PNG_DEFAULT);
+	FreeImage_Unload(bitmap);
+}
+
 int main()
 {
 	glfwInit();
@@ -123,7 +169,7 @@ int main()
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-	GLFWwindow* window = glfwCreateWindow(1200, 900, "learn opengl", nullptr, nullptr);
+	GLFWwindow* window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "learn opengl", nullptr, nullptr);
 	glfwMakeContextCurrent(window);
 
 	glewInit();
@@ -178,7 +224,6 @@ int main()
 
 		glBlitFramebuffer(0, 0, w, h, w, h, 0, 0, GL_COLOR_BUFFER_BIT, GL_NEAREST);
 #endif								
-
 
 		glfwSwapBuffers(window);
 	}
