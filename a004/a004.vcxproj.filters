@@ -29,8 +29,22 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="t004.cpp">
+    <ClCompile Include="a004.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="brickFrag.glsl">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="brickVert.glsl">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="stripeFrag.glsl">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="stripeVert.glsl">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
 </Project>
