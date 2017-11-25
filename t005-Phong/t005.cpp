@@ -82,7 +82,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		glfwPollEvents();
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glClearColor(0, 0, 0, 1);
+		glClearColor(CLEAR_COLOR);
 
 		glEnable(GL_CULL_FACE);
 		glFrontFace(GL_CCW);

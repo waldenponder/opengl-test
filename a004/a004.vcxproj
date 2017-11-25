@@ -95,6 +95,8 @@
     <None Include="brickVert.glsl" />
     <None Include="stripeFrag.glsl" />
     <None Include="stripeVert.glsl" />
+    <None Include="woodFrag.glsl" />
+    <None Include="woodVert.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

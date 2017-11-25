@@ -46,5 +46,11 @@
     <None Include="stripeVert.glsl">
       <Filter>资源文件</Filter>
     </None>
+    <None Include="woodFrag.glsl">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="woodVert.glsl">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
 </Project>

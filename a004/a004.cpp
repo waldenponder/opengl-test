@@ -5,6 +5,17 @@
 
 #include "stdafx.h"
 #include "../common/common.out.h"
+Shader* g_shader = nullptr;
+
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
+{
+	if (key == GLFW_KEY_SPACE)
+	{
+		if (g_shader) delete g_shader;
+
+		g_shader = new Shader("woodVert.glsl", "woodFrag.glsl");
+	}
+}
 
 int _tmain(int argc, _TCHAR* argv[])
 {
@@ -13,8 +24,10 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	GLFWwindow* window;
 	PREPARE_GLFW_WINDOW(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME, Utility::DefaultKeyCallback);
-	g_Mat4 = glm::mat4(1.0);
+	//glfwSetKeyCallback(window, key_callback);
 
+	g_Mat4 = glm::mat4(1.0);
+	
 	GLuint VAO, VBO;
 	{
 		glGenVertexArrays(1, &VAO);
@@ -34,23 +47,27 @@ int _tmain(int argc, _TCHAR* argv[])
 	}
 
 	GLuint texture = Utility::CreateTexture("../common/src/container.jpg");
-	Shader shader2("brickVert.glsl", "brickFrag.glsl");
-	Shader shader("stripeVert.glsl", "stripeFrag.glsl");
+	//Shader shader("brickVert.glsl", "brickFrag.glsl");
+	//Shader shader("stripeVert.glsl", "stripeFrag.glsl");
+	//Shader shader("woodVert.glsl", "woodFrag.glsl");
 
 	glEnable(GL_DEPTH_TEST);
 	glBindVertexArray(VAO);
 
+
 	while (!glfwWindowShouldClose(window))
 	{
+		g_shader = new Shader("woodVert.glsl", "woodFrag.glsl");
+
 		glfwPollEvents();
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 		glClearColor(.2, .3, .6, 1);
 
 		glm::mat4 Mat1 = g_Mat4;
-		shader.Use();
-		shader.setUniformMat4f("vert_mat", Mat1);
-		shader.setUniformTexture2D("SAMP", texture, 0);
+		g_shader->Use();
+		g_shader->setUniformMat4f("vert_mat", Mat1);
+		g_shader->setUniformTexture2D("SAMP", texture, 0);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		glfwSwapBuffers(window);

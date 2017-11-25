@@ -95,6 +95,8 @@
     <None Include="frag005.f">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </None>
+    <None Include="frag005.glsl" />
+    <None Include="vert005.glsl" />
     <None Include="vert005.v">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </None>
