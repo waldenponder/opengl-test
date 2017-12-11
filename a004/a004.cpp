@@ -57,7 +57,10 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	while (!glfwWindowShouldClose(window))
 	{
-		g_shader = new Shader("woodVert.glsl", "woodFrag.glsl");
+		g_shader =
+			//new Shader("woodVert.glsl", "woodFrag.glsl");
+			//new Shader("stripeVert.glsl", "stripeFrag.glsl");
+			new Shader("brickVert.glsl", "brickFrag.glsl");
 
 		glfwPollEvents();
 
