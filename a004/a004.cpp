@@ -1,8 +1,3 @@
-
-/*
-选中效果
-*/
-
 #include "stdafx.h"
 #include "../common/common.out.h"
 Shader* g_shader = nullptr;

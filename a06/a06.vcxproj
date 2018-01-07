@@ -11,10 +11,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{41989480-FA80-4AFE-9838-D54D222F941B}</ProjectGuid>
+    <ProjectGuid>{83A54C2E-CB4B-4253-9CAC-594C26BE9AA7}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>a004</RootNamespace>
-    <ProjectName>a004-simple noises</ProjectName>
+    <RootNamespace>a06</RootNamespace>
+    <ProjectName>a06-water</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -57,7 +57,6 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>../common/lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -85,19 +84,11 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="a004.cpp" />
+    <ClCompile Include="a06.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="brickFrag.glsl" />
-    <None Include="brickVert.glsl" />
-    <None Include="stripeFrag.glsl" />
-    <None Include="stripeVert.glsl" />
-    <None Include="woodFrag.glsl" />
-    <None Include="woodVert.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
