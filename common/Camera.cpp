@@ -65,39 +65,6 @@ void  Camera::ConfigProjectionMatrix(float fovy, float aspect, float near, float
 	_nearClip = near; _farClip = far;
 }
 
-#if 0
-//世界空间到相机空间
-TMat4 Camera::GetCameraSpaceMatrix()
-{
-	TMat4 rot(1);
-	rot = glm::rotate(rot, _rotation[0], X_AXIS);
-	rot = glm::rotate(rot, _rotation[1], Y_AXIS);
-	rot = glm::rotate(rot, _rotation[2], Z_AXIS);
-			
-#if 1
-	auto x = ToVec3(rot  * ToVec4(X_AXIS));
-	auto y = ToVec3(rot  * ToVec4(Y_AXIS));
-	auto z = ToVec3(rot  * ToVec4(Z_AXIS));
-#else
-	//auto x = ToVec3(rot  * ToVec4(X_AXIS));
-	auto y = ToVec3(rot  * ToVec4(Y_AXIS));
-	auto z = ToVec3(rot  * glm::normalize(TVec4(0, 10, 50, 0)));
-	auto x = glm::cross(y, z);	  
-	y = glm::cross(z, x);
-#endif
-
-	TMat4 mat(ToVec4(x), ToVec4(y), ToVec4(z), TVec4(_eye.x, _eye.y, _eye.z, 1));
-
-	return mat;
-}
-
-//相机空间到世界空间
-TMat4 Camera::GetWorldSpaceMatrix()
-{
-	return glm::inverse(GetCameraSpaceMatrix());
-}
-#endif
-
 void Camera::MakeRotation(TVec3 axis, float angle)
 {
 	float s = sin(angle / 360.f * PI);

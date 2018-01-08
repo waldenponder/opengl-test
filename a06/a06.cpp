@@ -16,8 +16,9 @@
 */
 #define TEXTURE_SIZE 1024
 
-static GLuint g_verticesVBO;
-static GLuint g_indicesVBO;
+GLuint g_verticesVBO;
+GLuint g_indicesVBO;
+GLuint g_cubeMape;
 
 void init()
 {
@@ -74,23 +75,29 @@ void init()
 	free(indices);
 }
 
+void initTexture()
+{
+	vector<const char*> faceVec;
+	faceVec.push_back("img/water_pos_x.tga"); faceVec.push_back("img/water_neg_x.tga");
+	faceVec.push_back("img/water_pos_y.tga"); faceVec.push_back("img/water_neg_y.tga");
+	faceVec.push_back("img/water_pos_z.tga"); faceVec.push_back("img/water_neg_z.tga");
+	g_cubeMape = Utility::CreateCubemap(faceVec);
+}
 
-void initWaterShader(Shader& waterShader)
+void setWaterShader(Shader& waterShader)
 {
 	waterShader.Use();
-
 	waterShader.setUniform1f("u_waterPlaneLength", WATER_PLANE_LENGTH);
-
-	vector<const char*> faceVec;
-	faceVec.push_back("img/water_pos_x.tga");faceVec.push_back("img/water_neg_x.tga");
-	faceVec.push_back("img/water_pos_y.tga");faceVec.push_back("img/water_neg_y.tga");
-	faceVec.push_back("img/water_pos_z.tga"); faceVec.push_back("img/water_neg_z.tga");
-	GLuint cubeMape = Utility::CreateCubemap(faceVec);
-
+			   
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_CUBE_MAP, cubeMape);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, g_cubeMape);
 	waterShader.setUniform1i("u_cubemap", 0);
+}
 
+void setBackgroundShader(Shader& bgShader)
+{
+	bgShader.Use();
+	
 
 
 }
@@ -108,7 +115,10 @@ int _tmain(int argc, _TCHAR* argv[])
 	glEnable(GL_DEPTH_TEST);
 
 	Shader waterShader("shader/Water.vert.glsl", "shader/Water.frag.glsl");
-	initWaterShader(waterShader);
+	setWaterShader(waterShader);
+
+	Shader backgroundShader("shader/Background.vert.glsl", "shader/Background.frag.glsl");
+	setBackgroundShader(backgroundShader);
 
 	while (!glfwWindowShouldClose(window))
 	{

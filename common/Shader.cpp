@@ -6,8 +6,19 @@
 
 using namespace std;
 
+Shader::Shader()
+{
+
+}
+
 Shader::Shader(std::string vertPath, std::string fragPath, std::string geomPath)
 {		
+	setSource(vertPath, fragPath, geomPath);
+}
+
+
+void Shader::setSource(std::string vertPath, std::string fragPath, std::string geomPath /*= ""*/)
+{
 	string str = getSource(vertPath);
 	GLuint vertID = glCreateShader(GL_VERTEX_SHADER);
 	compile(str.c_str(), vertID);
@@ -23,7 +34,7 @@ Shader::Shader(std::string vertPath, std::string fragPath, std::string geomPath)
 		geomID = glCreateShader(GL_GEOMETRY_SHADER);
 		compile(str.c_str(), geomID);
 	}
-	
+
 	program = glCreateProgram();
 	{
 		glAttachShader(program, vertID);
@@ -33,10 +44,10 @@ Shader::Shader(std::string vertPath, std::string fragPath, std::string geomPath)
 			glAttachShader(program, geomID);
 
 		glLinkProgram(program);
-		
+
 		GLint success;
 		GLchar infoLog[512];
-		
+
 		glGetProgramiv(program, GL_LINK_STATUS, &success);
 		if (!success)
 		{
@@ -49,6 +60,7 @@ Shader::Shader(std::string vertPath, std::string fragPath, std::string geomPath)
 	glDeleteShader(fragID);
 	glDeleteShader(geomID);
 }
+
 
 Shader::~Shader()
 {
