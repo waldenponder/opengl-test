@@ -38,6 +38,9 @@
 #include "include/glm/gtc/matrix_transform.hpp"
 #include "include/glm/gtc/type_ptr.hpp"
 
+#include "Matrix.h"
+#include "Utility.h"
+
 using std::vector;
 using std::map;
 using std::list;

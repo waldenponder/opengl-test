@@ -4,7 +4,7 @@
 
 Object::Object()
 {
-	Camera::Instance()->ConfigViewMatrix(TVec3(0, 10, 50), TQuat(0, 0, 0, 1), Y_AXIS);
+	Camera::Instance()->ConfigViewMatrix(TVec3(), TQuat(0, 0, 0, 1), Y_AXIS);
 }
 
 
@@ -27,12 +27,12 @@ void Object::render()
 
 }
 
-TMat4& Object::projectMat()
+TMat4 Object::projectMat()
 {
 	return Camera::Instance()->GetProjectionMatrix();
 }
 
-TMat4& Object::viewMat()
+TMat4 Object::viewMat()
 {
 	return Camera::Instance()->GetViewMatrix();
 }

@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="GLUS">
+      <UniqueIdentifier>{12bf2860-b70d-4776-b657-96eb4cac42f1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -45,6 +48,21 @@
     <ClInclude Include="Rectangle2D.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Vector.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Point.h">
+      <Filter>GLUS</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix.h">
+      <Filter>GLUS</Filter>
+    </ClInclude>
+    <ClInclude Include="Quaternion.h">
+      <Filter>GLUS</Filter>
+    </ClInclude>
+    <ClInclude Include="Shape.h">
+      <Filter>GLUS</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -61,6 +79,21 @@
     </ClCompile>
     <ClCompile Include="Rectangle2D.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Point.cpp">
+      <Filter>GLUS</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix.cpp">
+      <Filter>GLUS</Filter>
+    </ClCompile>
+    <ClCompile Include="Shape.cpp">
+      <Filter>GLUS</Filter>
+    </ClCompile>
+    <ClCompile Include="Quaternion.cpp">
+      <Filter>GLUS</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

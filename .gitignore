@@ -59,3 +59,7 @@
 *.tlog
 *.idb
 *.pdb
+.vs/oglTest/v15/Solution.VC.db-wal
+.vs/oglTest/v15/Solution.VC.db-shm
+.vs/oglTest/v15/Solution.VC.db
+.vs/oglTest/v15/Browse.VC.db

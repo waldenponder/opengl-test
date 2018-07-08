@@ -45,3 +45,13 @@
 
 #define   FRAME_RATE_BEGIN  long t_frame_rate_begin = clock();
 #define   FRAME_RATE_END    std::cout << "fps : " << std::setprecision(3) << 1000.0 / float(clock() - t_frame_rate_begin)<< std::endl;
+
+
+#define GLUS_MAX_VERTICES 65536
+#define GLUS_VERTICES_FACTOR 4
+#define GLUS_VERTICES_DIVISOR 4
+
+#define GLUS_MAX_STRING 	256
+
+#define GLUS_MAX_FILENAME	2048
+#define GLUS_MAX_INDICES  (GLUS_MAX_VERTICES*GLUS_VERTICES_FACTOR)

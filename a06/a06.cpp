@@ -1,5 +1,8 @@
 #include "stdafx.h"
 #include "../common/common.out.h"
+#include "Background.h"
+
+#if 0
 
 /**
 * The number of waves. Also has to be changed in the shader.
@@ -102,41 +105,30 @@ void setBackgroundShader(Shader& bgShader)
 
 }
 
+#endif
 
 int _tmain(int argc, _TCHAR* argv[])
 {
 	GLFWwindow* window;
-	PREPARE_GLFW_WINDOW(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME, Utility::DefaultKeyCallback);
-
-	g_Mat4 = glm::mat4(1.0);
-
-	GLuint texture = Utility::CreateTexture("../common/src/container.jpg");
+	PREPARE_GLFW_WINDOW(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME, OnKeyDown);
 
 	glEnable(GL_DEPTH_TEST);
 
-	Shader waterShader("shader/Water.vert.glsl", "shader/Water.frag.glsl");
-	setWaterShader(waterShader);
-
-	Shader backgroundShader("shader/Background.vert.glsl", "shader/Background.frag.glsl");
-	setBackgroundShader(backgroundShader);
-
+	Background backGround;
+	
 	while (!glfwWindowShouldClose(window))
 	{
 		glfwPollEvents();
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-		glClearColor(.2, .3, .6, 1);
-
-		glm::mat4 Mat1 = g_Mat4;
-		waterShader.Use();
-		waterShader.setUniformMat4f("vert_mat", Mat1);
-		waterShader.setUniformTexture2D("SAMP", texture, 0);
-		glDrawArrays(GL_TRIANGLES, 0, 36);
+		glClearColor(CLEAR_COLOR);
+					
+		backGround.render();
 
 		glfwSwapBuffers(window);
 	}
 
-	glfwSwapBuffers(window);
+	glfwTerminate();
 
 	return 0;
 }

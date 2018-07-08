@@ -5,7 +5,6 @@
 
 void  COMMON_API OnKeyDown(GLFWwindow* window, int key, int scancode, int action, int mode);
 
-//TODO: 变换还是有问题
 class COMMON_API Camera
 {
 public:

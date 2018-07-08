@@ -1,4 +1,4 @@
-#version 150
+#version 330 core
 
 const float Eta = 0.15; // Water
 

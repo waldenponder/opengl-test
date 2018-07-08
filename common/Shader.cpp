@@ -35,23 +35,23 @@ void Shader::setSource(std::string vertPath, std::string fragPath, std::string g
 		compile(str.c_str(), geomID);
 	}
 
-	program = glCreateProgram();
+	_program = glCreateProgram();
 	{
-		glAttachShader(program, vertID);
-		glAttachShader(program, fragID);
+		glAttachShader(_program, vertID);
+		glAttachShader(_program, fragID);
 
 		if (geomID != INT_MAX)
-			glAttachShader(program, geomID);
+			glAttachShader(_program, geomID);
 
-		glLinkProgram(program);
+		glLinkProgram(_program);
 
 		GLint success;
 		GLchar infoLog[512];
 
-		glGetProgramiv(program, GL_LINK_STATUS, &success);
+		glGetProgramiv(_program, GL_LINK_STATUS, &success);
 		if (!success)
 		{
-			glGetProgramInfoLog(program, 512, NULL, infoLog);
+			glGetProgramInfoLog(_program, 512, NULL, infoLog);
 			std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
 		}
 	}
@@ -105,24 +105,24 @@ void Shader::compile(const char* src, GLuint ID)
 
 void Shader::Use()
 {
-	glUseProgram(program);
+	glUseProgram(_program);
 }
 
 void Shader::setUniform1i(char* name, int i)
 {
-	GLint loc = glGetUniformLocation(program, name);
+	GLint loc = glGetUniformLocation(_program, name);
 	glUniform1i(loc, i);
 }
 
 void Shader::setUniform1f(char* name, int f)
 {
-	GLint loc = glGetUniformLocation(program, name);
+	GLint loc = glGetUniformLocation(_program, name);
 	glUniform1f(loc, f);
 }
 
 void Shader::setUniformVec4f(char* name, float x, float y, float z, float w)
 {
-	GLint loc = glGetUniformLocation(program, name);
+	GLint loc = glGetUniformLocation(_program, name);
 	glUniform4f(loc, x, y, z, w);
 }
 
@@ -134,7 +134,7 @@ void Shader::setUniformVec4f(char* name, TVec4 vec4)
 
 void Shader::setUniformVec3f(char* name, float x, float y, float z)
 {
-	GLint loc = glGetUniformLocation(program, name);
+	GLint loc = glGetUniformLocation(_program, name);
 	glUniform3f(loc, x, y, z);
 }
 
@@ -145,7 +145,7 @@ void Shader::setUniformVec3f(char* name, TVec3 vec3)
 
 void Shader::setUniformMat4f(char* name, glm::mat4 mat4)
 {
-	GLint loc = glGetUniformLocation(program, name);
+	GLint loc = glGetUniformLocation(_program, name);
 	glUniformMatrix4fv(loc, 1, GL_FALSE, glm::value_ptr(mat4));
 }
 
@@ -154,7 +154,7 @@ void Shader::setUniformTexture2D(char* name, GLuint texture, int index)
 	glActiveTexture(GL_TEXTURE0 + index);
 	glBindTexture(GL_TEXTURE_2D, texture);
 
-	GLuint loc = glGetUniformLocation(program, name);
+	GLuint loc = glGetUniformLocation(_program, name);
 	glUniform1i(loc, index);
 }
 
@@ -164,6 +164,6 @@ void Shader::setUniformTextureCube(char* name, GLuint texture, int index)
 	glActiveTexture(GL_TEXTURE0 + index);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, texture);
 
-	GLuint loc = glGetUniformLocation(program, name);
+	GLuint loc = glGetUniformLocation(_program, name);
 	glUniform1i(loc, index);
 }

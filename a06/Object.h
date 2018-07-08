@@ -11,8 +11,8 @@ protected:
 	virtual void    initShader();
 	virtual void    initVAO();
 
-	TMat4& 			projectMat();
-	TMat4& 			viewMat();
+	TMat4 			projectMat();
+	TMat4 			viewMat();
 
 public:
 	virtual void    render();

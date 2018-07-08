@@ -1,5 +1,6 @@
 ﻿#include "stdafx.h"
 #include "Utility.h"
+#include "stdlib.h"
 #include <string.h>
 
 COMMON_API glm::mat4 g_Mat4;
@@ -328,6 +329,39 @@ namespace Utility
 
 		glBindVertexArray(0);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
+	}
+
+	void* MemoryMalloc(size_t size)
+	{
+		return malloc(size);
+	}
+
+	void MemoryFree(void* pointer)
+	{
+		free(pointer);
+	}
+
+	GLfloat MathRadToDegf(const GLfloat radians)
+	{
+		return radians * 360.0f / (2.0f * PI);
+	}
+
+	GLfloat MathDegToRadf(const GLfloat degrees)
+	{
+		return degrees * 2.0f * PI / 360.0f;
+	}
+
+	GLfloat MathClampf(const GLfloat value, const GLfloat min, const GLfloat max)
+	{
+		if (value < min)
+		{
+			return min;
+		}
+		if (value > max)
+		{
+			return max;
+		}
+		return value;
 	}
 
 }

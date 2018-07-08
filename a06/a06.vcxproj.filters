@@ -45,4 +45,24 @@
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="shader\Background.frag.glsl">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="shader\Background.vert.glsl">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="shader\Water.frag.glsl">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="shader\Water.vert.glsl">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="shader\WaterTexture.frag.glsl">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="shader\WaterTexture.vert.glsl">
+      <Filter>资源文件</Filter>
+    </None>
+  </ItemGroup>
 </Project>

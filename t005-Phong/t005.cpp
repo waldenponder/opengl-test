@@ -40,12 +40,12 @@ void createVAO(OUT GLuint& VAO, OUT GLuint& VBO)
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(cubePts), cubePts, GL_STATIC_DRAW);
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * FLOAT_SIZE, (void*)0);
+	glVertexAttribPointer(0, 3, GLfloat, GL_FALSE, 8 * FLOAT_SIZE, (void*)0);
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8 * FLOAT_SIZE, (void*)(3 * FLOAT_SIZE));
+	glVertexAttribPointer(1, 2, GLfloat, GL_FALSE, 8 * FLOAT_SIZE, (void*)(3 * FLOAT_SIZE));
 	glEnableVertexAttribArray(1);
 
-	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 8 * FLOAT_SIZE, (void*)(5 * FLOAT_SIZE));
+	glVertexAttribPointer(2, 3, GLfloat, GL_FALSE, 8 * FLOAT_SIZE, (void*)(5 * FLOAT_SIZE));
 	glEnableVertexAttribArray(2);
 
 	glBindVertexArray(0);

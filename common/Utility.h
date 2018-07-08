@@ -4,6 +4,12 @@
 
 COMMON_API extern glm::mat4 g_Mat4;
 
+struct COMMON_API Complex
+{
+	GLfloat real;
+	GLfloat imaginary;
+};
+
 namespace Utility
 {
 	COMMON_API GLuint  CreateTexture(char* path, GLuint wrapModel = GL_REPEAT, GLuint filterModel = GL_LINEAR);
@@ -26,4 +32,14 @@ namespace Utility
 	COMMON_API void CreatePlaneVAO(OUT GLuint& VAO);
 
 	COMMON_API void CreateCubeVAO(OUT GLuint& VAO);
+
+	COMMON_API void* MemoryMalloc(size_t size);
+
+	COMMON_API void MemoryFree(void* pointer);
+
+	COMMON_API GLfloat MathRadToDegf(const GLfloat radians);
+
+	COMMON_API GLfloat MathDegToRadf(const GLfloat degrees);
+
+	COMMON_API GLfloat MathClampf(const GLfloat value, const GLfloat min, const GLfloat max);
 }

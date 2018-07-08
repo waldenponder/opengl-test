@@ -39,6 +39,10 @@ using std::endl;
 #include "../common/Utility.h"
 #include "../common/Camera.h"
 #include "../common/Rectangle2D.h"
+#include "../common/Shape.h"
+#include "../common/Vector.h"
+#include "../common/Point.h"
+
 #include <iomanip>
 
 #pragma comment(lib, "glut32.lib")
@@ -52,3 +56,4 @@ using std::endl;
 #endif
 
 #pragma comment(lib, "FreeImaged.lib")
+

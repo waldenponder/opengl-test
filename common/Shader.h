@@ -31,5 +31,5 @@ private:
 
 private:
 
-	GLuint program;
+	GLuint _program;
 };
