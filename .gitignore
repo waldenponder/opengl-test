@@ -70,3 +70,4 @@ osg_test/.vs/osg_test/v15/Solution.VC.db
 *.exp
 common/lib/common.lib
 common/lib/common.exp
+/Debug/common.dll
