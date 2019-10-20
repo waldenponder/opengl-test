@@ -58,7 +58,6 @@
 *.tlog
 *.tlog
 *.idb
-*.pdb
 .vs/oglTest/v15/Solution.VC.db-wal
 .vs/oglTest/v15/Solution.VC.db-shm
 .vs/oglTest/v15/Solution.VC.db
@@ -67,3 +66,7 @@ osg_test/.vs/osg_test/v15/Browse.VC.opendb
 osg_test/.vs/osg_test/v15/Browse.VC.db
 osg_test/.vs/osg_test/v15/Solution.VC.db
 /.vs/oglTest/v15
+*.user
+*.exp
+common/lib/common.lib
+common/lib/common.exp
