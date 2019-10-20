@@ -59,10 +59,10 @@ void Camera::ConfigViewMatrix(TVec3 pos, TQuat rotation, TVec3 up)
 	_up = up;
 }
 
-void  Camera::ConfigProjectionMatrix(float fovy, float aspect, float near, float far)
+void  Camera::ConfigProjectionMatrix(float fovy, float aspect, float near1, float far1)
 {
 	_fovy = fovy; _aspect = aspect; 
-	_nearClip = near; _farClip = far;
+	_nearClip = near1; _farClip = far1;
 }
 
 void Camera::MakeRotation(TVec3 axis, float angle)

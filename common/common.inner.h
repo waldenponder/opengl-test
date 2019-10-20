@@ -13,26 +13,14 @@
 #include <map>
 #include <list>
 
-#if 1
-#define use_glfw3
-
-#include "include/gl/glew.h"
-#ifndef use_glfw3
-#include "include/gl/glfw.h"
-#else
-#include "include/glfw/glfw3.h"
-#endif
+#include "include/GL/glew.h"
 #include "include/glut/glut.h"
-#endif
+#include "include/glfw/glfw3.h"
 
-#pragma comment(lib, "glut32.lib")
-#pragma comment(lib, "glew32.lib")
+#pragma comment(lib, "glew32d.lib")
 #pragma comment(lib, "FreeImaged.lib")
-#ifndef use_glfw3
-#pragma comment(lib, "GLFW.lib")
-#else
 #pragma comment(lib, "glfw3.lib")
-#endif
+#pragma comment(lib, "freeglutd.lib")
 
 #include "include/glm/glm.hpp"
 #include "include/glm/gtc/matrix_transform.hpp"
