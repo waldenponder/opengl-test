@@ -1595,7 +1595,7 @@ GLboolean  MatrixNxNMultiplyVectorNc(Complex* result, const Complex* matrix, con
 	return GL_TRUE;
 }
 
-COMMON_API GLvoid Matrix4x4Multiplyf(GLfloat matrix[16], const GLfloat matrix0[16], const GLfloat matrix1[16])
+GLvoid Matrix4x4Multiplyf(GLfloat matrix[16], const GLfloat matrix0[16], const GLfloat matrix1[16])
 {
 	{
 		GLint i;
@@ -1624,7 +1624,7 @@ COMMON_API GLvoid Matrix4x4Multiplyf(GLfloat matrix[16], const GLfloat matrix0[1
 	}
 }
 
-COMMON_API GLvoid Matrix2x2Multiplyf(GLfloat matrix[4], const GLfloat matrix0[4], const GLfloat matrix1[4])
+GLvoid Matrix2x2Multiplyf(GLfloat matrix[4], const GLfloat matrix0[4], const GLfloat matrix1[4])
 {
 	GLint i;
 
@@ -1651,7 +1651,7 @@ COMMON_API GLvoid Matrix2x2Multiplyf(GLfloat matrix[4], const GLfloat matrix0[4]
 	}
 }
 
-COMMON_API GLvoid Matrix3x3Multiplyf(GLfloat matrix[9], const GLfloat matrix0[9], const GLfloat matrix1[9])
+GLvoid Matrix3x3Multiplyf(GLfloat matrix[9], const GLfloat matrix0[9], const GLfloat matrix1[9])
 {
 	GLint i;
 

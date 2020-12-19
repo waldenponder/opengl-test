@@ -123,7 +123,7 @@ void Shader::setUniform1f(char* name, int f)
 void Shader::setUniformVec4f(char* name, float x, float y, float z, float w)
 {
 	GLint loc = glGetUniformLocation(_program, name);
-	glUniform4f(loc, x, y, z, w);
+	glUniform4f(loc, x, y, z, w); 
 }
 
 void Shader::setUniformVec4f(char* name, TVec4 vec4)

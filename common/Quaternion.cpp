@@ -191,7 +191,7 @@ GLvoid  QuaternionRotateRzRxRyf(GLfloat quaternion[4], const GLfloat anglez, con
 	QuaternionMultiplyQuaternionf(quaternion, quaternion, rotY);
 }
 
-COMMON_API GLvoid  QuaternionRotateRzRyRxf(GLfloat quaternion[4], const GLfloat anglez, const GLfloat angley, const GLfloat anglex)
+GLvoid  QuaternionRotateRzRyRxf(GLfloat quaternion[4], const GLfloat anglez, const GLfloat angley, const GLfloat anglex)
 {
 	GLfloat rotZ[4];
 	GLfloat rotY[4];

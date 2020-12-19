@@ -29,8 +29,22 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\t016-find_hided_line\t016.cpp">
+    <ClCompile Include="t016.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="vert003.v">
+      <Filter>资源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="frag003.f">
+      <Filter>资源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="frag003new.f">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="vert003new.v">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
 </Project>
