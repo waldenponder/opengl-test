@@ -57,7 +57,7 @@ void screenCapture()
 
 	for (int i = 0; i < g_size; i += 4)
 	{
-		 mpixels[i] ^= mpixels[i + 2] ^= mpixels[i] ^= mpixels[i + 2];
+		mpixels[i] ^= mpixels[i + 2] ^= mpixels[i] ^= mpixels[i + 2];
 	}
 	FIBITMAP* bitmap = FreeImage_Allocate(WINDOW_WIDTH, WINDOW_HEIGHT, 32, 8, 8, 8);
 
@@ -81,7 +81,6 @@ void screenCapture()
 			}
 			bits[3] = 255;
 			bits += 4;
-
 		}
 	}
 	bool bSuccess = FreeImage_Save(FIF_PNG, bitmap, "E:\\aabbcc3.png", PNG_DEFAULT);
@@ -89,22 +88,30 @@ void screenCapture()
 }
 //http://cn.voidcc.com/question/p-xqbbkaxn-ev.html
 
+union ColorID
+{
+	explicit ColorID(unsigned int id_) : id(id_) {}
+	ColorID(unsigned char r_, unsigned char g_, unsigned char b_, unsigned char a_)
+		: r(r_), g(g_), b(b_), a(a_)
+	{
+	}
 
-union ColorID {
 	struct {
 		unsigned char r, g, b, a;
 	};
-	int id;
+	unsigned int id;
 };
 
 void main()
 {
-	ColorID color;
-	color.id = 1230000;
+	ColorID color(1230000);
 	int r = color.r;
 	int g = color.g;
 	int b = color.b;
 	int a = color.a;
+
+	ColorID c2(r, g, b, a);
+	unsigned int dd = c2.id;
 
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -129,7 +136,7 @@ void main()
 	// Renderbuffer关联到FrameBuffer
 	glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, renderbuffer);
 	//-------------------------------------------------
-	
+
 	glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 	// 渲染到Framebuffer
 	glClearColor(0.0, 0.0, 0.0, 1.0);
@@ -144,7 +151,7 @@ void main()
 		glBindVertexArray(VAO);
 
 		glm::mat4 Mat1 = g_Mat4;
-			   
+
 		shader.Use();
 		shader.setUniformMat4f("vert_mat", Mat1);
 		shader.setUniformVec4f("u_color", 230.0 / 255., 2. / 255., 150. / 255., 180. / 255.);
