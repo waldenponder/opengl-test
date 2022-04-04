@@ -17,10 +17,17 @@
 #include "include/glut/glut.h"
 #include "include/glfw/glfw3.h"
 
+#ifdef _DEBUG
 #pragma comment(lib, "glew32d.lib")
 #pragma comment(lib, "FreeImaged.lib")
 #pragma comment(lib, "glfw3.lib")
 #pragma comment(lib, "freeglutd.lib")
+#else
+#pragma comment(lib, "glew32.lib")
+#pragma comment(lib, "FreeImage.lib")
+#pragma comment(lib, "glfw3.lib")
+#pragma comment(lib, "freeglut.lib")
+#endif
 
 #include "include/glm/glm.hpp"
 #include "include/glm/gtc/matrix_transform.hpp"

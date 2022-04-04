@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "../common/common.out.h"
 
 #define ROTATE 0

@@ -154,7 +154,7 @@ void main()
 
 		shader.Use();
 		shader.setUniformMat4f("vert_mat", Mat1);
-		shader.setUniformVec4f("u_color", 230.0 / 255., 2. / 255., 150. / 255., 180. / 255.);
+		shader.setUniformVec4f("u_color", 230.0 / 255., 244. / 255., 10. / 255., 180. / 255.);
 
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 	}

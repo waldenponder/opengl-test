@@ -38,7 +38,12 @@ using std::endl;
 
 #include <iomanip>
 
+#ifdef _DEBUG
 #pragma comment(lib, "common.lib")
 #pragma comment(lib, "glfw3.lib")
 #pragma comment(lib, "FreeImaged.lib")
-
+#else
+#pragma comment(lib, "common.lib")
+#pragma comment(lib, "glfw3.lib")
+#pragma comment(lib, "FreeImage.lib")
+#endif

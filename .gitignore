@@ -71,3 +71,12 @@ osg_test/.vs/osg_test/v15/Solution.VC.db
 common/lib/common.lib
 common/lib/common.exp
 /Debug/common.dll
+/a003/x64/Release/*.txt
+/Release/*.iobj
+*.txt
+*.db
+*.suo
+*.ipdb
+/.vs/oglTest/v16/Browse.VC.opendb
+/.vs/oglTest/v16/Solution.VC.db-shm
+/.vs/oglTest/v16/Solution.VC.db-wal
