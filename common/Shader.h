@@ -6,6 +6,8 @@ class COMMON_API Shader
 {
 public:
 	Shader();
+	Shader(GLuint program) : _program(program) {}
+	
 	Shader(std::string vertPath, std::string fragPath, std::string geomPath = "");
 	~Shader();
 
